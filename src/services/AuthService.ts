@@ -52,7 +52,7 @@ export class AuthService {
     try {
       const res = await createUserWithEmailAndPassword(auth, email, password);
       const user = res.user;
-      await addDoc(collection(db, 'users'), {
+      await addDoc(collection(db, PATH_TO_USERS_COLLECTION), {
         uid: user.uid,
         email,
       });
