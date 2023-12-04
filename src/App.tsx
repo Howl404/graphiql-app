@@ -1,12 +1,3 @@
-import './App.css'
-
-function App() {
-
-  return (
-    <>
-      <h1>Vite + React</h1>
-    </>
-  )
+export default function App() {
+  return <h1>GraphiQL</h1>;
 }
-
-export default App
