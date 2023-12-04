@@ -20,11 +20,20 @@
     "jest": true,
     "node": true
   },
-  "plugins": ["@typescript-eslint", "react", "react-hooks", "import"],
+  "plugins": [
+    "@typescript-eslint",
+    "react",
+    "react-hooks",
+    "import"
+  ],
   "rules": {
+    "no-console": "warn",
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
-    "comma-dangle": ["error", "only-multiline"],
+    "comma-dangle": [
+      "error",
+      "only-multiline"
+    ],
     "react/prop-types": "off",
     "react/display-name": "off",
     "@typescript-eslint/interface-name-prefix": "off",
@@ -39,7 +48,11 @@
     "import/order": [
       "error",
       {
-        "groups": ["builtin", "external", "internal"],
+        "groups": [
+          "builtin",
+          "external",
+          "internal"
+        ],
         "pathGroups": [
           {
             "pattern": "utils/**",
@@ -67,7 +80,9 @@
             "position": "after"
           }
         ],
-        "pathGroupsExcludedImportTypes": ["builtin"],
+        "pathGroupsExcludedImportTypes": [
+          "builtin"
+        ],
         "newlines-between": "always",
         "alphabetize": {
           "order": "asc",
