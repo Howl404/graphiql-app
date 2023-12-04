@@ -1,7 +1,7 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 
-import PrivateRoutes from './routes/privateRoutes';
-import PublicRoutes from './routes/publicRoutes';
+import PrivateRoutes from './routes/PrivateRoutes';
+import PublicRoutes from './routes/PublicRoutes';
 
 function checkAuth() {
   return true;
