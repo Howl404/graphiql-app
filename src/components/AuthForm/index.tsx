@@ -1,6 +1,7 @@
 import { Alert, Button, Snackbar, TextField } from '@mui/material';
 import { useState } from 'react';
 import { useForm, SubmitHandler, Controller } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 import { AuthMode } from 'src/enums';
 import { AuthService } from 'src/services/AuthService';
 import { AuthFormInputs } from 'src/types';
@@ -15,6 +16,7 @@ import InputPassword from '../common/InputPassword';
 export default function AuthForm() {
   const [mode, setMode] = useState<'signin' | 'signup'>('signin');
   const [formError, setFormError] = useState<string | null>(null);
+  const navigate = useNavigate();
 
   const {
     control,
@@ -38,7 +40,7 @@ export default function AuthForm() {
       mode === 'signin'
         ? await AuthService.logInWithEmailAndPassword(email, password)
         : await AuthService.registerWithEmailAndPassword(email, password);
-    response.ok ? console.log('router redirect') : setFormError(response.error);
+    response.ok ? navigate('/') : setFormError(response.error);
   };
 
   return (

@@ -1,3 +1,4 @@
+import AuthForm from 'src/components/AuthForm';
 import { Paths } from 'src/enums';
 import { auth } from 'src/firebase';
 
@@ -22,7 +23,7 @@ export default function Routes() {
         path: Paths.Auth,
         element: (
           <ConditionalRoute predicate={!auth.currentUser} path={Paths.Main}>
-            <h1>Auth page</h1>
+            <AuthForm />
           </ConditionalRoute>
         ),
       },
