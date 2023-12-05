@@ -1,7 +1,7 @@
-import AuthForm from 'src/components/AuthForm';
 import { Paths } from 'src/enums';
 import { auth } from 'src/firebase';
 
+import AuthForm from 'components/AuthForm';
 import Layout from 'components/Layout';
 
 import ConditionalRoute from './ConditionalRoute';

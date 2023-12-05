@@ -10,11 +10,12 @@ import {
   passwordValidation,
 } from 'src/utils/password-validation';
 
+import InputPassword from 'components/common/InputPassword';
+
 import style from './style.module.scss';
-import InputPassword from '../common/InputPassword';
 
 export default function AuthForm() {
-  const [mode, setMode] = useState<'signin' | 'signup'>('signin');
+  const [mode, setMode] = useState<AuthMode.SignIn | AuthMode.SignUp>('SignIn');
   const [formError, setFormError] = useState<string | null>(null);
   const navigate = useNavigate();
 
@@ -37,7 +38,7 @@ export default function AuthForm() {
     password,
   }) => {
     const response =
-      mode === 'signin'
+      mode === 'SignIn'
         ? await AuthService.logInWithEmailAndPassword(email, password)
         : await AuthService.registerWithEmailAndPassword(email, password);
     response.ok ? navigate(Paths.Main) : setFormError(response.error);
@@ -48,21 +49,21 @@ export default function AuthForm() {
       <div className={style['auth-switch']}>
         <Button
           onClick={() => {
-            setMode('signin');
+            setMode('SignIn');
           }}
           size="large"
-          variant={mode === 'signin' ? 'outlined' : 'text'}
+          variant={mode === 'SignIn' ? 'outlined' : 'text'}
         >
-          {AuthMode.signin}
+          {AuthMode.SignIn}
         </Button>
         <Button
           onClick={() => {
-            setMode('signup');
+            setMode('SignUp');
           }}
           size="large"
-          variant={mode === 'signup' ? 'outlined' : 'text'}
+          variant={mode === 'SignUp' ? 'outlined' : 'text'}
         >
-          {AuthMode.signup}
+          {AuthMode.SignUp}
         </Button>
       </div>
       <form className={style['auth-form']} onSubmit={handleSubmit(onSubmit)}>
@@ -82,7 +83,7 @@ export default function AuthForm() {
               id="email"
               label="E-mail"
               variant="outlined"
-              error={errors.email ? true : false}
+              error={!!errors.email}
               helperText={errors.email?.message}
             />
           )}
@@ -103,7 +104,7 @@ export default function AuthForm() {
             />
           )}
         />
-        {mode === 'signup' && (
+        {mode === 'SignUp' && (
           <Controller
             name="confirmPassword"
             control={control}
