@@ -1,16 +1,9 @@
-import { Navigate } from 'react-router-dom';
 import Layout from 'src/components/Layout/Layout';
 import { auth } from 'src/firebase';
 
-import ProtectedRoute from './ProtectedRoute/ProtectedRoute';
+import ConditionalRoute from './ConditionalRoute/ConditionalRoute';
 
 export default function Routes() {
-  const AuthComponent = !!auth.currentUser ? (
-    <Navigate to="/auth" replace />
-  ) : (
-    <h1>Auth page</h1>
-  );
-
   return {
     element: <Layout />,
     children: [
@@ -18,14 +11,18 @@ export default function Routes() {
       {
         path: '/editor',
         element: (
-          <ProtectedRoute isAuth={!!auth.currentUser}>
+          <ConditionalRoute predicate={!!auth.currentUser} path="/auth">
             <h1>Editor</h1>
-          </ProtectedRoute>
+          </ConditionalRoute>
         ),
       },
       {
         path: '/auth',
-        element: AuthComponent,
+        element: (
+          <ConditionalRoute predicate={!auth.currentUser} path="/">
+            <h1>Auth page</h1>
+          </ConditionalRoute>
+        ),
       },
       { path: '*', element: <h1>404 page</h1> },
     ],
