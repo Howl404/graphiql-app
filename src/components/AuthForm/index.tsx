@@ -45,8 +45,8 @@ export default function AuthForm() {
   };
 
   return (
-    <div className={style['auth-container']}>
-      <div className={style['auth-switch']}>
+    <div className={style.authContainer}>
+      <div className={style.authSwitch}>
         <Button
           onClick={() => {
             setMode('SignIn');
@@ -66,7 +66,7 @@ export default function AuthForm() {
           {AuthMode.SignUp}
         </Button>
       </div>
-      <form className={style['auth-form']} onSubmit={handleSubmit(onSubmit)}>
+      <form className={style.authForm} onSubmit={handleSubmit(onSubmit)}>
         <Controller
           name="email"
           control={control}
