@@ -1,3 +1,5 @@
+import AppRouter from './router/AppRouter';
+
 export default function App() {
-  return <h1>GraphiQL</h1>;
+  return <AppRouter />;
 }
