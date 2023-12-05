@@ -1,5 +1,4 @@
-import { Visibility, VisibilityOff } from '@mui/icons-material';
-import { Button, IconButton, InputAdornment, TextField } from '@mui/material';
+import { Button, TextField } from '@mui/material';
 import { useState } from 'react';
 import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 import { AuthService } from 'src/services/AuthService';
@@ -10,10 +9,10 @@ import {
 } from 'src/utils/password-validation';
 
 import style from './style.module.scss';
+import InputPassword from '../common/InputPassword';
 
 export default function AuthForm() {
   const [mode, setMode] = useState('signin');
-  const [showPassword, setShowPassword] = useState(false);
 
   const {
     control,
@@ -28,10 +27,6 @@ export default function AuthForm() {
       confirmPassword: '',
     },
   });
-
-  const handlePasswordVisibility = () => {
-    setShowPassword(!showPassword);
-  };
 
   const onSubmit: SubmitHandler<AuthFormInputs> = ({ email, password }) => {
     mode === 'signin'
@@ -87,22 +82,11 @@ export default function AuthForm() {
             validate: passwordValidation,
           }}
           render={({ field }) => (
-            <TextField
-              {...field}
+            <InputPassword
+              field={field}
+              error={errors.password}
               id="password"
-              type={showPassword ? 'text' : 'password'}
               label="Password"
-              error={errors.password ? true : false}
-              helperText={errors.password?.message}
-              InputProps={{
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <IconButton onClick={handlePasswordVisibility}>
-                      {showPassword ? <Visibility /> : <VisibilityOff />}
-                    </IconButton>
-                  </InputAdornment>
-                ),
-              }}
             />
           )}
         />
@@ -111,26 +95,15 @@ export default function AuthForm() {
             name="confirmPassword"
             control={control}
             rules={{
-              required: 'Password is required',
+              required: 'Confirmation of password is required',
               validate: confirmPasswordValidation,
             }}
             render={({ field }) => (
-              <TextField
-                {...field}
+              <InputPassword
+                field={field}
+                error={errors.confirmPassword}
                 id="confirm-password"
-                type={showPassword ? 'text' : 'password'}
                 label="Confirm password"
-                error={errors.confirmPassword ? true : false}
-                helperText={errors.confirmPassword?.message}
-                InputProps={{
-                  endAdornment: (
-                    <InputAdornment position="end">
-                      <IconButton onClick={handlePasswordVisibility}>
-                        {showPassword ? <Visibility /> : <VisibilityOff />}
-                      </IconButton>
-                    </InputAdornment>
-                  ),
-                }}
               />
             )}
           />
