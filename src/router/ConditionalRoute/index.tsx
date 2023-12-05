@@ -12,7 +12,7 @@ export default function ConditionalRoute({
   children,
 }: ConditionalRouteProps) {
   if (!predicate) {
-    return <Navigate to={`${path}`} replace />;
+    return <Navigate to={path} replace />;
   }
   return children;
 }

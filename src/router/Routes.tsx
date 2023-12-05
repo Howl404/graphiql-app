@@ -13,7 +13,7 @@ export default function Routes() {
       {
         path: Paths.Editor,
         element: (
-          <ConditionalRoute predicate={!!auth.currentUser} path="/auth">
+          <ConditionalRoute predicate={!!auth.currentUser} path={Paths.Auth}>
             <h1>Editor</h1>
           </ConditionalRoute>
         ),
@@ -21,12 +21,12 @@ export default function Routes() {
       {
         path: Paths.Auth,
         element: (
-          <ConditionalRoute predicate={!auth.currentUser} path="/">
+          <ConditionalRoute predicate={!auth.currentUser} path={Paths.Main}>
             <h1>Auth page</h1>
           </ConditionalRoute>
         ),
       },
-      { path: Paths.Other, element: <h1>404 page</h1> },
+      { path: Paths.NotFound, element: <h1>404 page</h1> },
     ],
   };
 }
