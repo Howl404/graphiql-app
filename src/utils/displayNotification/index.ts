@@ -13,7 +13,7 @@ export default function displayNotification(
     duration,
     close: true,
     gravity: 'top',
-    position: 'right',
+    position: 'center',
     stopOnFocus: true,
     onClick,
     className: `toastify-${type}`,
