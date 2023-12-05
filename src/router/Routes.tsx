@@ -1,7 +1,7 @@
 import Layout from 'src/components/Layout/Layout';
 import { auth } from 'src/firebase';
 
-import ConditionalRoute from './ConditionalRoute/ConditionalRoute';
+import ConditionalRoute from './ConditionalRoute';
 
 export default function Routes() {
   return {
