@@ -2,7 +2,7 @@ import { Alert, Button, Snackbar, TextField } from '@mui/material';
 import { useState } from 'react';
 import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import { AuthMode } from 'src/enums';
+import { AuthMode, Paths } from 'src/enums';
 import { AuthService } from 'src/services/AuthService';
 import { AuthFormInputs } from 'src/types';
 import {
@@ -40,7 +40,7 @@ export default function AuthForm() {
       mode === 'signin'
         ? await AuthService.logInWithEmailAndPassword(email, password)
         : await AuthService.registerWithEmailAndPassword(email, password);
-    response.ok ? navigate('/') : setFormError(response.error);
+    response.ok ? navigate(Paths.Main) : setFormError(response.error);
   };
 
   return (
