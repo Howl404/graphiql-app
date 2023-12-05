@@ -1,17 +1,9 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 
-import PrivateRoutes from './routes/PrivateRoutes';
-import PublicRoutes from './routes/PublicRoutes';
-
-function checkAuth() {
-  return true;
-}
+import Routes from './Routes';
 
 export default function AppRouter() {
-  const router = createBrowserRouter([
-    checkAuth() ? PrivateRoutes() : {},
-    ...PublicRoutes(),
-  ]);
+  const router = createBrowserRouter([Routes()]);
 
   return <RouterProvider router={router} />;
 }
