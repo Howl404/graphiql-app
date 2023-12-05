@@ -1,6 +1,7 @@
 import { Alert, Button, Snackbar, TextField } from '@mui/material';
 import { useState } from 'react';
 import { useForm, SubmitHandler, Controller } from 'react-hook-form';
+import { AuthMode } from 'src/enums';
 import { AuthService } from 'src/services/AuthService';
 import { AuthFormInputs } from 'src/types';
 import {
@@ -12,7 +13,7 @@ import style from './style.module.scss';
 import InputPassword from '../common/InputPassword';
 
 export default function AuthForm() {
-  const [mode, setMode] = useState('signin');
+  const [mode, setMode] = useState<'signin' | 'signup'>('signin');
   const [formError, setFormError] = useState<string | null>(null);
 
   const {
@@ -50,7 +51,7 @@ export default function AuthForm() {
           size="large"
           variant={mode === 'signin' ? 'outlined' : 'text'}
         >
-          Sign In
+          {AuthMode.signin}
         </Button>
         <Button
           onClick={() => {
@@ -59,7 +60,7 @@ export default function AuthForm() {
           size="large"
           variant={mode === 'signup' ? 'outlined' : 'text'}
         >
-          Sign Up
+          {AuthMode.signup}
         </Button>
       </div>
       <form className={style['auth-form']} onSubmit={handleSubmit(onSubmit)}>
@@ -119,8 +120,11 @@ export default function AuthForm() {
           />
         )}
         <Button type="submit" variant="contained">
-          {mode === 'signin' ? 'Sign in' : 'Sign up'}
+          {AuthMode[mode]}
         </Button>
+
+        {/* TODO: Change mui snackbar to toastify */}
+
         <Snackbar
           open={formError !== null}
           autoHideDuration={5000}
