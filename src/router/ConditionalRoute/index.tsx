@@ -1,11 +1,10 @@
-import { ReactNode } from 'react';
+import { PropsWithChildren } from 'react';
 import { Navigate } from 'react-router-dom';
 
-export interface ConditionalRouteProps {
+export type ConditionalRouteProps = {
   predicate: boolean;
   path: string;
-  children: ReactNode;
-}
+} & PropsWithChildren;
 
 export default function ConditionalRoute({
   predicate,

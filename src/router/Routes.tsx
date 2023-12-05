@@ -1,5 +1,7 @@
-import Layout from 'src/components/Layout/Layout';
+import { Paths } from 'src/enums';
 import { auth } from 'src/firebase';
+
+import Layout from 'components/Layout';
 
 import ConditionalRoute from './ConditionalRoute';
 
@@ -7,9 +9,9 @@ export default function Routes() {
   return {
     element: <Layout />,
     children: [
-      { path: '/', element: <h1>MAIN PAGE</h1> },
+      { path: Paths.Main, element: <h1>MAIN PAGE</h1> },
       {
-        path: '/editor',
+        path: Paths.Editor,
         element: (
           <ConditionalRoute predicate={!!auth.currentUser} path="/auth">
             <h1>Editor</h1>
@@ -17,14 +19,14 @@ export default function Routes() {
         ),
       },
       {
-        path: '/auth',
+        path: Paths.Auth,
         element: (
           <ConditionalRoute predicate={!auth.currentUser} path="/">
             <h1>Auth page</h1>
           </ConditionalRoute>
         ),
       },
-      { path: '*', element: <h1>404 page</h1> },
+      { path: Paths.Other, element: <h1>404 page</h1> },
     ],
   };
 }
