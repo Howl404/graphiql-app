@@ -15,7 +15,7 @@ import InputPassword from 'components/common/InputPassword';
 import style from './style.module.scss';
 
 export default function AuthForm() {
-  const [mode, setMode] = useState<keyof typeof AuthMode>('SignIn');
+  const [mode, setMode] = useState<AuthMode.SignIn | AuthMode.SignUp>('SignIn');
   const [formError, setFormError] = useState<string | null>(null);
   const navigate = useNavigate();
 
