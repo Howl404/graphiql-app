@@ -5,6 +5,6 @@ export enum Paths {
   NotFound = '*',
 }
 export enum AuthMode {
-  'signin' = 'Sign In',
-  'signup' = 'Sign Up',
+  'SignIn' = 'Sign In',
+  'SignUp' = 'Sign Up',
 }
