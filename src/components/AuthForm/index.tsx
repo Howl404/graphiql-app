@@ -1,4 +1,4 @@
-import { Button, TextField } from '@mui/material';
+import { Alert, Button, Snackbar, TextField } from '@mui/material';
 import { useState } from 'react';
 import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 import { AuthService } from 'src/services/AuthService';
@@ -13,6 +13,7 @@ import InputPassword from '../common/InputPassword';
 
 export default function AuthForm() {
   const [mode, setMode] = useState('signin');
+  const [formError, setFormError] = useState<string | null>(null);
 
   const {
     control,
@@ -28,10 +29,15 @@ export default function AuthForm() {
     },
   });
 
-  const onSubmit: SubmitHandler<AuthFormInputs> = ({ email, password }) => {
-    mode === 'signin'
-      ? AuthService.logInWithEmailAndPassword(email, password)
-      : AuthService.registerWithEmailAndPassword(email, password);
+  const onSubmit: SubmitHandler<AuthFormInputs> = async ({
+    email,
+    password,
+  }) => {
+    const response =
+      mode === 'signin'
+        ? await AuthService.logInWithEmailAndPassword(email, password)
+        : await AuthService.registerWithEmailAndPassword(email, password);
+    response.ok ? console.log('router redirect') : setFormError(response.error);
   };
 
   return (
@@ -41,6 +47,8 @@ export default function AuthForm() {
           onClick={() => {
             setMode('signin');
           }}
+          size="large"
+          variant={mode === 'signin' ? 'outlined' : 'text'}
         >
           Sign In
         </Button>
@@ -48,6 +56,8 @@ export default function AuthForm() {
           onClick={() => {
             setMode('signup');
           }}
+          size="large"
+          variant={mode === 'signup' ? 'outlined' : 'text'}
         >
           Sign Up
         </Button>
@@ -111,6 +121,17 @@ export default function AuthForm() {
         <Button type="submit" variant="contained">
           {mode === 'signin' ? 'Sign in' : 'Sign up'}
         </Button>
+        <Snackbar
+          open={formError !== null}
+          autoHideDuration={5000}
+          onClose={() => setFormError(null)}
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'center',
+          }}
+        >
+          <Alert severity="error">{formError}</Alert>
+        </Snackbar>
       </form>
     </div>
   );
