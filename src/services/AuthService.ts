@@ -7,6 +7,7 @@ import {
 } from 'firebase/auth';
 import { addDoc, collection, getDocs, query, where } from 'firebase/firestore';
 import { auth, db } from 'src/firebase.ts';
+import { authErrorHandler } from 'src/utils/auth-error-handler';
 
 const PATH_TO_USERS_COLLECTION = 'users';
 
@@ -40,8 +41,9 @@ export class AuthService {
   ) {
     try {
       await signInWithEmailAndPassword(auth, email, password);
+      return { ok: true, error: null };
     } catch (err) {
-      console.error(err);
+      return authErrorHandler(err);
     }
   }
 
@@ -56,8 +58,9 @@ export class AuthService {
         uid: user.uid,
         email,
       });
+      return { ok: true, error: null };
     } catch (err) {
-      console.error(err);
+      return authErrorHandler(err);
     }
   }
 
