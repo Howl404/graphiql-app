@@ -1,5 +1,6 @@
-import { Paths } from 'src/enums';
 import { auth } from 'src/firebase';
+
+import { Paths } from 'src/enums';
 
 import AuthForm from 'components/AuthForm';
 import Layout from 'components/Layout';
