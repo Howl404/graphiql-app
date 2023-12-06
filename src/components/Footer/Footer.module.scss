@@ -1,0 +1,36 @@
+.wrapper {
+  min-height: 120px;
+  background-color: var(--bg-color);
+  border-top: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px;
+
+  .github-list,
+  .rs-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .rs-list {
+    align-items: center;
+  }
+
+  .link {
+    display: flex;
+    gap: 10px;
+    color: var(--text-color);
+    font-size: 12px;
+    text-decoration: none;
+    transition: all 0.3s;
+
+    &:hover {
+      color: var(--graphql-color);
+    }
+  }
+}
