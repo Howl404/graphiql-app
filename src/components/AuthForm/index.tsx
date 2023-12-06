@@ -1,14 +1,18 @@
 import { Alert, Button, Snackbar, TextField } from '@mui/material';
 import { useState } from 'react';
-import { useForm, SubmitHandler, Controller } from 'react-hook-form';
+import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
+
 import { AuthMode, Paths } from 'src/enums';
-import { AuthService } from 'src/services/AuthService';
+
 import { AuthFormInputs } from 'src/types';
+
 import {
   confirmPasswordValidation,
   passwordValidation,
-} from 'src/utils/password-validation';
+} from 'utils/password-validation';
+
+import { AuthService } from 'services/AuthService';
 
 import InputPassword from 'components/common/InputPassword';
 

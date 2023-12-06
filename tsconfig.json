@@ -1,7 +1,11 @@
 {
   "compilerOptions": {
     "target": "ESNext",
-    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "lib": [
+      "DOM",
+      "DOM.Iterable",
+      "ESNext"
+    ],
     "allowJs": false,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -19,12 +23,32 @@
     "jsx": "react-jsx",
     "baseUrl": "./",
     "paths": {
-      "src/*": ["./src/*"],
-      "components/*": ["./src/components/*"],
-      "pages/*": ["./src/pages/*"],
-      "hooks/*": ["./src/hooks/*"]
+      "src/*": [
+        "./src/*"
+      ],
+      "components/*": [
+        "./src/components/*"
+      ],
+      "pages/*": [
+        "./src/pages/*"
+      ],
+      "hooks/*": [
+        "./src/hooks/*"
+      ],
+      "utils/*": [
+        "./src/utils/*"
+      ],
+      "services/*": [
+        "./src/services/*"
+      ]
     }
   },
-  "include": ["src"],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  "include": [
+    "src"
+  ],
+  "references": [
+    {
+      "path": "./tsconfig.node.json"
+    }
+  ]
 }
