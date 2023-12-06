@@ -15,9 +15,9 @@ import { AuthService } from 'src/services/AuthService';
 import styles from './Header.module.scss';
 import ToggleButtons from '../UI/Toggle';
 
-interface Props {
+type Props = {
   children: React.ReactElement;
-}
+};
 
 function ElevationScroll(props: Props) {
   const { children } = props;

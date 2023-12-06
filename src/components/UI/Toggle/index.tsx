@@ -34,7 +34,6 @@ export default function ToggleButtons({
       <ToggleButton
         size="small"
         value={firstOption}
-        // onClick={() => handleClick(firstOption)}
         disabled={lang === firstOption}
         aria-label={firstOption}
       >
@@ -43,7 +42,6 @@ export default function ToggleButtons({
       <ToggleButton
         size="small"
         value={secondOption}
-        // onClick={() => handleClick(secondOption)}
         disabled={lang === secondOption}
         aria-label={secondOption}
       >
