@@ -4,3 +4,7 @@ export enum Paths {
   Editor = '/editor',
   NotFound = '*',
 }
+export enum AuthMode {
+  'SignIn' = 'Sign In',
+  'SignUp' = 'Sign Up',
+}

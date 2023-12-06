@@ -1,0 +1,18 @@
+.authContainer {
+  margin: auto;
+  width: fit-content;
+  padding: 20px;
+}
+
+.authSwitch {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 25px;
+}
+
+.authForm {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  width: fit-content;
+}
