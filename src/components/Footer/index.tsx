@@ -3,7 +3,7 @@ import styles from './Footer.module.scss';
 export default function Footer() {
   return (
     <div className={styles.wrapper}>
-      <ul className={styles['github-list']}>
+      <ul className={styles.githubList}>
         <a
           className={styles.link}
           href="https://github.com/Howl404"
@@ -32,7 +32,7 @@ export default function Footer() {
           <li>Irina Akhanteva</li>
         </a>
       </ul>
-      <ul className={styles['rs-list']}>
+      <ul className={styles.rsList}>
         <li>2023</li>
         <a
           className={styles.link}

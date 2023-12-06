@@ -57,15 +57,15 @@ export default function Header(props: Props) {
             <Typography sx={{ width: '100%' }} variant="h6" component="div">
               <div className={styles.wrapper}>
                 <div
-                  className={styles['logo-wrapper']}
+                  className={styles.logoWrapper}
                   onClick={() => {
                     navigate('/');
                   }}
                 >
                   <img src="./graphql-icon.svg" alt="" width={30} height={30} />
-                  <div className={styles['logo-text']}>Graphql Sandbox</div>
+                  <div className={styles.logoText}>Graphql Sandbox</div>
                 </div>
-                <div className={styles['actions']}>
+                <div className={styles.actions}>
                   <ToggleButtons
                     optionsName="language"
                     firstOption="EN"
@@ -73,7 +73,7 @@ export default function Header(props: Props) {
                   />
                   {isAuth ? (
                     <Button
-                      className={styles['signin-btn']}
+                      className={styles.signinBtn}
                       onClick={() => {
                         AuthService.signOutUser();
                       }}
@@ -82,7 +82,7 @@ export default function Header(props: Props) {
                     </Button>
                   ) : (
                     <Button
-                      className={styles['signin-btn']}
+                      className={styles.signinBtn}
                       onClick={() => {
                         navigate(Paths.Auth);
                       }}

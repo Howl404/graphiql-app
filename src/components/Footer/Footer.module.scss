@@ -7,8 +7,8 @@
   justify-content: space-between;
   padding: 24px;
 
-  .github-list,
-  .rs-list {
+  .githubList,
+  .rsList {
     list-style: none;
     padding: 0;
     display: flex;
@@ -17,7 +17,7 @@
     gap: 10px;
   }
 
-  .rs-list {
+  .rsList {
     align-items: center;
   }
 

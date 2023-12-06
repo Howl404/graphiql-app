@@ -5,13 +5,13 @@
   justify-content: space-between;
   cursor: pointer;
 
-  .logo-wrapper {
+  .logoWrapper {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 10px;
 
-    .logo-text {
+    .logoText {
       color: var(--graphql-color);
       font-weight: 600;
       max-width: 70px;
@@ -24,7 +24,7 @@
     display: flex;
     gap: 10px;
 
-    .signin-btn {
+    .signinBtn {
       color: var(--text-color);
     }
   }
