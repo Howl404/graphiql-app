@@ -1,32 +1,32 @@
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
-import { useState } from 'react';
+import { useContext } from 'react';
+import { LangContext } from 'src/context/LangContext';
 
 type ToggleProps = {
-  handleClick: (value: string) => void;
   optionsName: string;
   firstOption: string;
   secondOption: string;
 };
 
 export default function ToggleButtons({
-  handleClick,
   optionsName,
   firstOption,
   secondOption,
 }: ToggleProps) {
-  const [value, setValue] = useState<string>(firstOption);
+  const { lang, setLang } = useContext(LangContext);
 
   const handleOption = (
     event: React.MouseEvent<HTMLElement>,
-    newValue: string
+    newLang: string
   ) => {
-    setValue(newValue);
+    setLang(newLang);
+    localStorage.setItem('lang', newLang);
   };
 
   return (
     <ToggleButtonGroup
-      value={value}
+      value={lang}
       exclusive
       onChange={handleOption}
       aria-label={optionsName}
@@ -34,8 +34,8 @@ export default function ToggleButtons({
       <ToggleButton
         size="small"
         value={firstOption}
-        onClick={() => handleClick(firstOption)}
-        disabled={value === firstOption}
+        // onClick={() => handleClick(firstOption)}
+        disabled={lang === firstOption}
         aria-label={firstOption}
       >
         {firstOption}
@@ -43,8 +43,8 @@ export default function ToggleButtons({
       <ToggleButton
         size="small"
         value={secondOption}
-        onClick={() => handleClick(secondOption)}
-        disabled={value === secondOption}
+        // onClick={() => handleClick(secondOption)}
+        disabled={lang === secondOption}
         aria-label={secondOption}
       >
         {secondOption}

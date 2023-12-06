@@ -8,7 +8,6 @@ import Typography from '@mui/material/Typography';
 import useScrollTrigger from '@mui/material/useScrollTrigger';
 import * as React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { LangContext } from 'src/context/LangContext';
 import { Paths } from 'src/enums';
 import { auth } from 'src/firebase';
 import { AuthService } from 'src/services/AuthService';
@@ -48,12 +47,6 @@ export default function Header(props: Props) {
   const { children } = props;
   const navigate = useNavigate();
   const isAuth = !!auth.currentUser;
-  const { setLang } = React.useContext(LangContext);
-
-  const handleLangClick = (value: string) => {
-    setLang(value);
-    localStorage.setItem('lang', value);
-  };
 
   return (
     <>
@@ -74,7 +67,6 @@ export default function Header(props: Props) {
                 </div>
                 <div className={styles['actions']}>
                   <ToggleButtons
-                    handleClick={handleLangClick}
                     optionsName="language"
                     firstOption="EN"
                     secondOption="RU"
