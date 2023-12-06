@@ -1,6 +1,28 @@
+:root {
+  --bg-color: #070310;
+  --header-color: #17192f;
+  --graphql-color: #e10098;
+  --text-color: #c4c8e4;
+  --border-color: #232a2f;
+}
+
+#root {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
 body {
   margin: 0;
 }
 .MuiFormHelperText-root {
   height: 0;
+}
+
+button.MuiToggleButton-root {
+  color: var(--text-color);
+}
+
+button.MuiToggleButton-root.Mui-selected {
+  color: var(--graphql-color) !important;
+  border-color: var(--graphql-color) !important;
 }
