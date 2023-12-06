@@ -1,6 +1,5 @@
 import { Button } from '@mui/material';
 import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import CssBaseline from '@mui/material/CssBaseline';
 import Toolbar from '@mui/material/Toolbar';
@@ -17,7 +16,7 @@ import ToggleButtons from 'components/UI/Toggle';
 import styles from './Header.module.scss';
 
 type Props = {
-  children: ReactElement;
+  children?: ReactElement;
 };
 
 function ElevationScroll(props: Props) {
@@ -27,7 +26,7 @@ function ElevationScroll(props: Props) {
     threshold: 0,
   });
 
-  return cloneElement(children, {
+  return cloneElement(children!, {
     sx: trigger
       ? {
           bgcolor: 'var(--primary-dark)',
@@ -45,7 +44,6 @@ function ElevationScroll(props: Props) {
 }
 
 export default function Header(props: Props) {
-  const { children }: PropsWithChildren = props;
   const navigate = useNavigate();
   const isAuth = !!auth.currentUser;
 
@@ -98,9 +96,7 @@ export default function Header(props: Props) {
         </AppBar>
       </ElevationScroll>
       <Toolbar />
-      <Container sx={{ minHeight: 'calc(100vh - 205px)', padding: '24px' }}>
-        <Box sx={{ my: 2 }}>{children}</Box>
-      </Container>
+      <Container></Container>
     </>
   );
 }
