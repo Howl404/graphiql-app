@@ -6,30 +6,31 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import useScrollTrigger from '@mui/material/useScrollTrigger';
-import * as React from 'react';
+import { PropsWithChildren, ReactElement, cloneElement } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Paths } from 'src/enums';
+import { AuthMode, Paths } from 'src/enums';
 import { auth } from 'src/firebase';
 import { AuthService } from 'src/services/AuthService';
 
+import ToggleButtons from 'components/UI/Toggle';
+
 import styles from './Header.module.scss';
-import ToggleButtons from '../UI/Toggle';
 
 type Props = {
-  children: React.ReactElement;
+  children: ReactElement;
 };
 
 function ElevationScroll(props: Props) {
-  const { children } = props;
+  const { children }: PropsWithChildren = props;
   const trigger = useScrollTrigger({
     disableHysteresis: true,
     threshold: 0,
   });
 
-  return React.cloneElement(children, {
+  return cloneElement(children, {
     sx: trigger
       ? {
-          bgcolor: 'var(--bg-color)',
+          bgcolor: 'var(--primary-dark)',
           transitionDuration: '500ms',
           transitionProperty: 'padding-top, padding-bottom, background-color',
           transitionTimingFunction: 'ease-in-out',
@@ -37,14 +38,14 @@ function ElevationScroll(props: Props) {
       : {
           pt: 1.1,
           pb: 1.1,
-          bgcolor: 'var(--header-color)',
+          bgcolor: 'var(--header)',
         },
     elevation: trigger ? 4 : 0,
   });
 }
 
 export default function Header(props: Props) {
-  const { children } = props;
+  const { children }: PropsWithChildren = props;
   const navigate = useNavigate();
   const isAuth = !!auth.currentUser;
 
@@ -59,7 +60,7 @@ export default function Header(props: Props) {
                 <div
                   className={styles.logoWrapper}
                   onClick={() => {
-                    navigate('/');
+                    navigate(Paths.Main);
                   }}
                 >
                   <img src="./graphql-icon.svg" alt="" width={30} height={30} />
@@ -78,7 +79,7 @@ export default function Header(props: Props) {
                         AuthService.signOutUser();
                       }}
                     >
-                      Sign out
+                      {AuthMode.SignOut}
                     </Button>
                   ) : (
                     <Button
@@ -87,7 +88,7 @@ export default function Header(props: Props) {
                         navigate(Paths.Auth);
                       }}
                     >
-                      Sign in
+                      {AuthMode.SignIn}
                     </Button>
                   )}
                 </div>
@@ -97,7 +98,7 @@ export default function Header(props: Props) {
         </AppBar>
       </ElevationScroll>
       <Toolbar />
-      <Container sx={{ minHeight: 'calc(100vh - 205px)' }}>
+      <Container sx={{ minHeight: 'calc(100vh - 205px)', padding: '24px' }}>
         <Box sx={{ my: 2 }}>{children}</Box>
       </Container>
     </>

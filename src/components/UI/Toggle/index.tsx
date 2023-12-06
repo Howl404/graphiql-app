@@ -21,7 +21,6 @@ export default function ToggleButtons({
     newLang: string
   ) => {
     setLang(newLang);
-    localStorage.setItem('lang', newLang);
   };
 
   return (

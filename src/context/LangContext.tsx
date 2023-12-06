@@ -4,6 +4,7 @@ import {
   Dispatch,
   SetStateAction,
   PropsWithChildren,
+  useEffect,
 } from 'react';
 
 type LangContextType = {
@@ -11,23 +12,18 @@ type LangContextType = {
   setLang: Dispatch<SetStateAction<string>>;
 };
 
-type LangProviderProps = {
-  value: string;
-} & PropsWithChildren;
+export const LangContext = createContext<LangContextType>(null!);
 
-const defaultState: LangContextType = {
-  lang: localStorage.getItem('lang') || 'EN',
-  setLang: () => {},
-};
-
-export const LangContext = createContext(defaultState);
-
-export function LangContextProvider({ children, value }: LangProviderProps) {
-  const [lang, setLang] = useState<string>(value);
-
-  return (
-    <LangContext.Provider value={{ lang, setLang }}>
-      {children}
-    </LangContext.Provider>
+export function LangContextProvider({ children }: PropsWithChildren) {
+  const [lang, setLang] = useState<string>(
+    localStorage.getItem('lang') || 'EN'
   );
+
+  useEffect(() => {
+    localStorage.setItem('lang', lang);
+  }, [lang]);
+
+  const value = { lang, setLang };
+
+  return <LangContext.Provider value={value}>{children}</LangContext.Provider>;
 }

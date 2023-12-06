@@ -1,14 +1,14 @@
 :root {
-  --bg-color: #070310;
-  --header-color: #17192f;
-  --graphql-color: #e10098;
-  --text-color: #c4c8e4;
-  --border-color: #232a2f;
+  --primary-dark: #070310;
+  --secondary-dark: #c4c8e4;
+  --accent: #e10098;
+  --header: #17192f;
+  --border: #232a2f;
 }
 
 #root {
-  background-color: var(--bg-color);
-  color: var(--text-color);
+  background-color: var(--primary-dark);
+  color: var(--secondary-dark);
 }
 
 body {
@@ -19,10 +19,10 @@ body {
 }
 
 button.MuiToggleButton-root {
-  color: var(--text-color);
+  color: var(--secondary-dark);
 }
 
 button.MuiToggleButton-root.Mui-selected {
-  color: var(--graphql-color) !important;
-  border-color: var(--graphql-color) !important;
+  color: var(--accent) !important;
+  border-color: var(--accent) !important;
 }

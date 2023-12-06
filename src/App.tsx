@@ -3,7 +3,7 @@ import AppRouter from './router/AppRouter';
 
 export default function App() {
   return (
-    <LangContextProvider value={localStorage.getItem('lang') || 'EN'}>
+    <LangContextProvider>
       <AppRouter />
     </LangContextProvider>
   );
