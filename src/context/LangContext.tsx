@@ -6,17 +6,21 @@ import {
   PropsWithChildren,
   useEffect,
 } from 'react';
+import { Languages } from 'src/types';
 
 type LangContextType = {
-  lang: string;
-  setLang: Dispatch<SetStateAction<string>>;
+  lang: Languages;
+  setLang: Dispatch<SetStateAction<Languages>>;
 };
 
 export const LangContext = createContext<LangContextType>(null!);
 
 export function LangContextProvider({ children }: PropsWithChildren) {
-  const [lang, setLang] = useState<string>(
-    localStorage.getItem('lang') || 'EN'
+  const localLanguage = localStorage.getItem('lang');
+  const [lang, setLang] = useState<Languages>(
+    localLanguage === 'EN' || localLanguage === 'RU'
+      ? localLanguage
+      : '' || 'EN'
   );
 
   useEffect(() => {

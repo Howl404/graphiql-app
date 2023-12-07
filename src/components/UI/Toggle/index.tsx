@@ -2,6 +2,7 @@ import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import { useContext } from 'react';
 import { LangContext } from 'src/context/LangContext';
+import { Languages } from 'src/types';
 
 type ToggleProps = {
   optionsName: string;
@@ -14,18 +15,18 @@ export default function ToggleButtons({
   firstOption,
   secondOption,
 }: ToggleProps) {
-  const { lang, setLang } = useContext(LangContext);
+  const { lang: value, setLang: setValue } = useContext(LangContext);
 
   const handleOption = (
     event: React.MouseEvent<HTMLElement>,
-    newLang: string
+    newLang: Languages
   ) => {
-    setLang(newLang);
+    setValue(newLang);
   };
 
   return (
     <ToggleButtonGroup
-      value={lang}
+      value={value}
       exclusive
       onChange={handleOption}
       aria-label={optionsName}
@@ -33,7 +34,7 @@ export default function ToggleButtons({
       <ToggleButton
         size="small"
         value={firstOption}
-        disabled={lang === firstOption}
+        disabled={value === firstOption}
         aria-label={firstOption}
       >
         {firstOption}
@@ -41,7 +42,7 @@ export default function ToggleButtons({
       <ToggleButton
         size="small"
         value={secondOption}
-        disabled={lang === secondOption}
+        disabled={value === secondOption}
         aria-label={secondOption}
       >
         {secondOption}

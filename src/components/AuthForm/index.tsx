@@ -2,7 +2,8 @@ import { Alert, Button, Snackbar, TextField } from '@mui/material';
 import { useState } from 'react';
 import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import { AuthMode, Paths } from 'src/enums';
+import { AuthMode } from 'src/enums/AuthMode';
+import { Paths } from 'src/enums/Paths';
 import { AuthService } from 'src/services/AuthService';
 import { AuthFormInputs } from 'src/types';
 import {

@@ -7,7 +7,9 @@ import Typography from '@mui/material/Typography';
 import useScrollTrigger from '@mui/material/useScrollTrigger';
 import { PropsWithChildren, ReactElement, cloneElement } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { AuthMode, Paths } from 'src/enums';
+import logo from 'src/assets/graphql-icon.svg';
+import { AuthMode } from 'src/enums/AuthMode';
+import { Paths } from 'src/enums/Paths';
 import { auth } from 'src/firebase';
 import { AuthService } from 'src/services/AuthService';
 
@@ -15,18 +17,18 @@ import ToggleButtons from 'components/UI/Toggle';
 
 import styles from './Header.module.scss';
 
-type Props = {
-  children?: ReactElement;
+type PropsType = {
+  children: ReactElement;
 };
 
-function ElevationScroll(props: Props) {
+function ElevationScroll(props: PropsType) {
   const { children }: PropsWithChildren = props;
   const trigger = useScrollTrigger({
     disableHysteresis: true,
     threshold: 0,
   });
 
-  return cloneElement(children!, {
+  return cloneElement(children, {
     sx: trigger
       ? {
           bgcolor: 'var(--primary-dark)',
@@ -43,14 +45,22 @@ function ElevationScroll(props: Props) {
   });
 }
 
-export default function Header(props: Props) {
+export default function Header() {
   const navigate = useNavigate();
   const isAuth = !!auth.currentUser;
+
+  function handleAuthClick() {
+    if (isAuth) {
+      AuthService.signOutUser();
+    } else {
+      navigate(Paths.Auth);
+    }
+  }
 
   return (
     <>
       <CssBaseline />
-      <ElevationScroll {...props}>
+      <ElevationScroll>
         <AppBar>
           <Toolbar>
             <Typography sx={{ width: '100%' }} variant="h6" component="div">
@@ -61,7 +71,7 @@ export default function Header(props: Props) {
                     navigate(Paths.Main);
                   }}
                 >
-                  <img src="./graphql-icon.svg" alt="" width={30} height={30} />
+                  <img src={logo} alt="" width={30} height={30} />
                   <div className={styles.logoText}>Graphql Sandbox</div>
                 </div>
                 <div className={styles.actions}>
@@ -70,25 +80,9 @@ export default function Header(props: Props) {
                     firstOption="EN"
                     secondOption="RU"
                   />
-                  {isAuth ? (
-                    <Button
-                      className={styles.signinBtn}
-                      onClick={() => {
-                        AuthService.signOutUser();
-                      }}
-                    >
-                      {AuthMode.SignOut}
-                    </Button>
-                  ) : (
-                    <Button
-                      className={styles.signinBtn}
-                      onClick={() => {
-                        navigate(Paths.Auth);
-                      }}
-                    >
-                      {AuthMode.SignIn}
-                    </Button>
-                  )}
+                  <Button className={styles.authBtn} onClick={handleAuthClick}>
+                    {isAuth ? AuthMode.SignOut : AuthMode.SignIn}
+                  </Button>
                 </div>
               </div>
             </Typography>
