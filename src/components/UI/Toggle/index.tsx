@@ -1,22 +1,22 @@
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
-import { useContext } from 'react';
-import { LangContext } from 'src/context/LangContext';
-import { Languages } from 'src/types';
+import { Languages } from 'src/enums/Languages';
 
 type ToggleProps = {
   optionsName: string;
   firstOption: string;
   secondOption: string;
+  value: Languages;
+  setValue: (value: Languages) => void;
 };
 
 export default function ToggleButtons({
   optionsName,
   firstOption,
   secondOption,
+  value,
+  setValue,
 }: ToggleProps) {
-  const { lang: value, setLang: setValue } = useContext(LangContext);
-
   const handleOption = (
     event: React.MouseEvent<HTMLElement>,
     newLang: Languages

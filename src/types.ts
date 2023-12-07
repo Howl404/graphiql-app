@@ -3,5 +3,3 @@ export type AuthFormInputs = {
   password: string;
   confirmPassword?: string;
 };
-
-export type Languages = 'EN' | 'RU';

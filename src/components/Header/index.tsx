@@ -5,10 +5,17 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import useScrollTrigger from '@mui/material/useScrollTrigger';
-import { PropsWithChildren, ReactElement, cloneElement } from 'react';
+import {
+  PropsWithChildren,
+  ReactElement,
+  cloneElement,
+  useContext,
+} from 'react';
 import { useNavigate } from 'react-router-dom';
 import logo from 'src/assets/graphql-icon.svg';
+import { LangContext } from 'src/context/LangContext';
 import { AuthMode } from 'src/enums/AuthMode';
+import { Languages } from 'src/enums/Languages';
 import { Paths } from 'src/enums/Paths';
 import { auth } from 'src/firebase';
 import { AuthService } from 'src/services/AuthService';
@@ -48,6 +55,8 @@ function ElevationScroll(props: PropsType) {
 export default function Header() {
   const navigate = useNavigate();
   const isAuth = !!auth.currentUser;
+  const { lang, setLang } = useContext(LangContext);
+  const changeLanguage = (value: Languages) => setLang(value);
 
   function handleAuthClick() {
     if (isAuth) {
@@ -79,6 +88,8 @@ export default function Header() {
                     optionsName="language"
                     firstOption="EN"
                     secondOption="RU"
+                    value={lang}
+                    setValue={changeLanguage}
                   />
                   <Button className={styles.authBtn} onClick={handleAuthClick}>
                     {isAuth ? AuthMode.SignOut : AuthMode.SignIn}
