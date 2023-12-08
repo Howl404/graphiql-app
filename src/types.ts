@@ -3,3 +3,63 @@ export type AuthFormInputs = {
   password: string;
   confirmPassword?: string;
 };
+
+export type SchemaResponse = {
+  data?: {
+    __schema: SchemaRoot;
+  };
+};
+
+export type SchemaRoot = {
+  queryType: SchemaTypeName;
+  mutationType?: SchemaTypeName;
+  subscriptionType?: SchemaTypeName;
+  types: SchemaType[];
+  directives: SchemaDirective[];
+};
+
+type SchemaType = {
+  name: string;
+  kind: string;
+  description?: string;
+  fields?: SchemaField[];
+  inputFields?: SchemaInputField[];
+  enumValues?: SchemaEnum[];
+};
+
+type SchemaTypeName = Pick<SchemaType, 'name'>;
+
+type SchemaField = {
+  name: string;
+  description?: string;
+  args: SchemaArg[];
+  type: SchemaType;
+  isDeprecated: boolean;
+  deprecationReason?: string;
+};
+
+type SchemaArg = {
+  name: string;
+  description?: string;
+  type: SchemaType;
+  defaultValue?: string;
+};
+
+type SchemaInputField = {
+  name: string;
+  type: SchemaType;
+};
+
+type SchemaEnum = {
+  name: string;
+  description?: string;
+  isDeprecated: boolean;
+  deprecationReason?: string;
+};
+
+type SchemaDirective = {
+  name: string;
+  description?: string;
+  locations: string[];
+  args: SchemaArg[];
+};
