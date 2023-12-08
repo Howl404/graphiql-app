@@ -25,21 +25,20 @@ export default class ErrorBoundary extends Component<
   };
 
   render() {
-    if (this.state.error) {
-      return (
-        <div className={styles.errorContainer}>
-          <h1 className={styles.errorHeading}>Something went wrong</h1>
-          <p className={styles.errorText}>{this.state.error.message}</p>
-          <button
-            onClick={this.resetError}
-            className={styles.resetButton}
-            type="button"
-          >
-            Reset
-          </button>
-        </div>
-      );
-    }
-    return this.props.children;
+    if (!this.state.error) return this.props.children;
+
+    return (
+      <div className={styles.errorContainer}>
+        <h1 className={styles.errorHeading}>Something went wrong</h1>
+        <p className={styles.errorText}>{this.state.error.message}</p>
+        <button
+          onClick={this.resetError}
+          className={styles.resetButton}
+          type="button"
+        >
+          Reset
+        </button>
+      </div>
+    );
   }
 }
