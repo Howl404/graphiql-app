@@ -1,6 +1,5 @@
 import { Button } from '@mui/material';
 import AppBar from '@mui/material/AppBar';
-import Container from '@mui/material/Container';
 import CssBaseline from '@mui/material/CssBaseline';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
@@ -11,7 +10,7 @@ import {
   cloneElement,
   useContext,
 } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import logo from 'src/assets/graphql-icon.svg';
 import { LangContext } from 'src/context/LangContext';
 import { AuthMode } from 'src/enums/AuthMode';
@@ -56,7 +55,11 @@ export default function Header() {
   const navigate = useNavigate();
   const isAuth = !!auth.currentUser;
   const { lang, setLang } = useContext(LangContext);
-  const changeLanguage = (value: Languages) => setLang(value);
+
+  function handleChangeLang(value: Languages) {
+    setLang(value);
+    localStorage.setItem('lang', value);
+  }
 
   function handleAuthClick() {
     if (isAuth) {
@@ -74,22 +77,17 @@ export default function Header() {
           <Toolbar>
             <Typography sx={{ width: '100%' }} variant="h6" component="div">
               <div className={styles.wrapper}>
-                <div
-                  className={styles.logoWrapper}
-                  onClick={() => {
-                    navigate(Paths.Main);
-                  }}
-                >
-                  <img src={logo} alt="" width={30} height={30} />
+                <Link to={Paths.Main} className={styles.logoWrapper}>
+                  <img src={logo} alt="Logo" width={30} height={30} />
                   <div className={styles.logoText}>Graphql Sandbox</div>
-                </div>
+                </Link>
                 <div className={styles.actions}>
                   <ToggleButtons
                     optionsName="language"
-                    firstOption="EN"
-                    secondOption="RU"
+                    firstOption={Languages.EN}
+                    secondOption={Languages.RU}
                     value={lang}
-                    setValue={changeLanguage}
+                    setValue={handleChangeLang}
                   />
                   <Button className={styles.authBtn} onClick={handleAuthClick}>
                     {isAuth ? AuthMode.SignOut : AuthMode.SignIn}
@@ -101,7 +99,6 @@ export default function Header() {
         </AppBar>
       </ElevationScroll>
       <Toolbar />
-      <Container></Container>
     </>
   );
 }

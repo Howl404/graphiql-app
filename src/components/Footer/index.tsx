@@ -25,9 +25,9 @@ export default function Footer() {
           </a>
         ))}
       </ul>
-      <ul className={styles.rsList}>
-        <li>2023</li>
-        <li>
+      <div className={styles.rsBlock}>
+        <div>{new Date().getFullYear()}</div>
+        <div>
           <a
             className={styles.link}
             href="https://rs.school/react/"
@@ -36,8 +36,8 @@ export default function Footer() {
           >
             <img src={rsschoolIcon} alt="RS School" width={70} height={30} />
           </a>
-        </li>
-      </ul>
+        </div>
+      </div>
     </div>
   );
 }

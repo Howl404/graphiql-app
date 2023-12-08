@@ -8,14 +8,14 @@
   padding: 24px;
 
   .githubList,
-  .rsList {
+  .rsBlock {
     display: flex;
     flex-direction: column;
     justify-content: center;
     gap: 10px;
   }
 
-  .rsList {
+  .rsBlock {
     align-items: center;
   }
 
