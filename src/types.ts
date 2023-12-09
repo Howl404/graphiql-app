@@ -19,12 +19,13 @@ export type SchemaRoot = {
 };
 
 type SchemaType = {
-  name: string;
+  name: string | null;
   kind: string;
   description?: string;
   fields?: SchemaField[];
   inputFields?: SchemaInputField[];
   enumValues?: SchemaEnum[];
+  ofType?: SchemaType | null;
 };
 
 type SchemaTypeName = Pick<SchemaType, 'name'>;
@@ -62,4 +63,9 @@ type SchemaDirective = {
   description?: string;
   locations: string[];
   args: SchemaArg[];
+};
+
+export type TypeName = {
+  type: string;
+  name?: string;
 };
