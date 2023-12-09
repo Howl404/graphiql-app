@@ -1,0 +1,44 @@
+import githubIcon from 'src/assets/github-mark.svg';
+import rsschoolIcon from 'src/assets/rs-school.svg';
+
+import styles from './Footer.module.scss';
+
+export default function Footer() {
+  const developers = [
+    { name: 'Arturas Viachirevas', github: 'https://github.com/Howl404' },
+    { name: 'Kostiantyn Suslov', github: 'https://github.com/Wystov' },
+    { name: 'Irina Akhanteva', github: 'https://github.com/IrinaEnotova' },
+  ];
+  return (
+    <div className={styles.wrapper}>
+      <ul className={styles.githubList}>
+        {developers.map((developer) => (
+          <li key={developer.github}>
+            <a
+              className={styles.link}
+              href={developer.github}
+              target="_blank"
+              rel="noreferrer"
+            >
+              <img src={githubIcon} alt="github" width={15} height={15} />
+              <div>{developer.name}</div>
+            </a>
+          </li>
+        ))}
+      </ul>
+      <div className={styles.rsBlock}>
+        <div>{new Date().getFullYear()}</div>
+        <div>
+          <a
+            className={styles.link}
+            href="https://rs.school/react/"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <img src={rsschoolIcon} alt="RS School" width={70} height={30} />
+          </a>
+        </div>
+      </div>
+    </div>
+  );
+}

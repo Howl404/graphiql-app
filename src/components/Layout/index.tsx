@@ -1,16 +1,24 @@
 import { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
 
-import ErrorBoundary from 'components/ErrorBoundary';
+import Footer from 'components/Footer';
+import Header from 'components/Header';
+import Loader from 'components/UI/Loader';
+
+import styles from './Layout.module.scss';
 
 export default function Layout() {
   return (
     <ErrorBoundary>
-      <h2>HEADER</h2>
-      <Suspense fallback={<h1>Loading...</h1>}>
-        <Outlet />
-      </Suspense>
-      <h2>FOOTER</h2>
+      <div className={styles.wrapper}>
+        <Header />
+        <div className={styles.content}>
+          <Suspense fallback={<Loader />}>
+            <Outlet />
+          </Suspense>
+        </div>
+        <Footer />
+      </div>
     </ErrorBoundary>
   );
 }
