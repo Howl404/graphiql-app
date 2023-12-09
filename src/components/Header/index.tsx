@@ -82,7 +82,7 @@ export default function Header() {
                     firstOption={Languages.EN}
                     secondOption={Languages.RU}
                     value={lang}
-                    setValue={(value) => setLang(value)}
+                    setValue={setLang}
                   />
                   <Button className={styles.authBtn} onClick={handleAuthClick}>
                     {isAuth ? AuthMode.SignOut : AuthMode.SignIn}
