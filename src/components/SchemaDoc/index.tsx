@@ -1,3 +1,5 @@
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { IconButton } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { fetchQuery } from 'src/utils/fetchQuery';
 import { INTROSPECTION_QUERY } from 'src/utils/introspectionQuery';
@@ -46,7 +48,9 @@ export default function SchemaDoc() {
 
     return (
       <>
-        <button onClick={handleBackClick}>Back</button>
+        <IconButton size="small" onClick={handleBackClick} aria-label="back">
+          <ArrowBackIcon fontSize="small" />
+        </IconButton>
         <span>{currentTypeName}</span>
         {currentType.fields?.length && (
           <SchemaItemsList
