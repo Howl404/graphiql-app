@@ -9,14 +9,16 @@ import styles from './Layout.module.scss';
 
 export default function Layout() {
   return (
-    <div className={styles.wrapper}>
-      <Header />
-      <div className={styles.content}>
-        <Suspense fallback={<Loader />}>
-          <Outlet />
-        </Suspense>
+    <ErrorBoundary>
+      <div className={styles.wrapper}>
+        <Header />
+        <div className={styles.content}>
+          <Suspense fallback={<Loader />}>
+            <Outlet />
+          </Suspense>
+        </div>
+        <Footer />
       </div>
-      <Footer />
-    </div>
+    </ErrorBoundary>
   );
 }
