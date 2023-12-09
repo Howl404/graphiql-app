@@ -4,7 +4,8 @@ import { INTROSPECTION_QUERY } from 'src/utils/introspectionQuery';
 
 import { SchemaField, SchemaResponse, SchemaRoot, TypeName } from 'src/types';
 
-import SchemaItemsList from '../SchemaItemsList';
+import SchemaBreadcrumbs from 'components/SchemaBreadcrumbs';
+import SchemaItemsList from 'components/SchemaItemsList';
 
 const api = 'https://spacex-production.up.railway.app/';
 
@@ -31,6 +32,10 @@ export default function SchemaDoc() {
     setTypeNameStack(typeNameStack.slice(0, -1));
   };
 
+  const handleBreadcrumbClick = (i: number) => {
+    setTypeNameStack(typeNameStack.slice(0, i));
+  };
+
   const renderFields = () => {
     const currentTypeName = typeNameStack.at(-1)?.type;
     const currentType = schema?.types.find(
@@ -41,11 +46,6 @@ export default function SchemaDoc() {
 
     return (
       <>
-        <span onClick={() => setTypeNameStack([])}>Root</span>
-        {typeNameStack.map(({ type, name }) => (
-          <span key={type}>{name ?? type} </span>
-        ))}
-        <br />
         <button onClick={handleBackClick}>Back</button>
         <span>{currentTypeName}</span>
         {currentType.fields?.length && (
@@ -81,7 +81,13 @@ export default function SchemaDoc() {
     <>
       <h1>Documentation</h1>
       {schema && (
-        <div>{typeNameStack.length ? renderFields() : renderRoot(schema)}</div>
+        <div>
+          <SchemaBreadcrumbs
+            items={typeNameStack}
+            handleClick={handleBreadcrumbClick}
+          />
+          {typeNameStack.length ? renderFields() : renderRoot(schema)}
+        </div>
       )}
     </>
   );
