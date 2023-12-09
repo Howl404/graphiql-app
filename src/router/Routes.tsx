@@ -1,4 +1,4 @@
-import { Paths } from 'src/enums/Paths';
+import Paths from 'src/enums/paths';
 import { auth } from 'src/firebase';
 
 import AuthForm from 'components/AuthForm';

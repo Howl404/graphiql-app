@@ -1,15 +1,9 @@
-import {
-  createContext,
-  useState,
-  Dispatch,
-  SetStateAction,
-  PropsWithChildren,
-} from 'react';
-import { Languages } from 'src/enums/Languages';
+import { createContext, useState, PropsWithChildren } from 'react';
+import Languages from 'src/enums/languages';
 
 type LangContextType = {
   lang: Languages;
-  setLang: Dispatch<SetStateAction<Languages>>;
+  setLang: (newLang: Languages) => void;
 };
 
 export const LangContext = createContext<LangContextType>(null!);
@@ -19,7 +13,12 @@ export default function LangContextProvider({ children }: PropsWithChildren) {
     (localStorage.getItem('lang') as Languages | null) ?? Languages.EN;
   const [lang, setLang] = useState<Languages>(initialLang);
 
-  const value = { lang, setLang };
+  const handleChangeLang = (newLang: Languages) => {
+    setLang(newLang);
+    localStorage.setItem('lang', newLang);
+  };
+
+  const value = { lang, setLang: handleChangeLang };
 
   return <LangContext.Provider value={value}>{children}</LangContext.Provider>;
 }

@@ -13,9 +13,9 @@ import {
 import { Link, useNavigate } from 'react-router-dom';
 import logo from 'src/assets/graphql-icon.svg';
 import { LangContext } from 'src/context/LangContext';
-import { AuthMode } from 'src/enums/AuthMode';
-import { Languages } from 'src/enums/Languages';
-import { Paths } from 'src/enums/Paths';
+import AuthMode from 'src/enums/authMode';
+import Languages from 'src/enums/languages';
+import Paths from 'src/enums/paths';
 import { auth } from 'src/firebase';
 import { AuthService } from 'src/services/AuthService';
 
@@ -56,11 +56,6 @@ export default function Header() {
   const isAuth = !!auth.currentUser;
   const { lang, setLang } = useContext(LangContext);
 
-  function handleChangeLang(value: Languages) {
-    setLang(value);
-    localStorage.setItem('lang', value);
-  }
-
   function handleAuthClick() {
     if (isAuth) {
       AuthService.signOutUser();
@@ -79,7 +74,7 @@ export default function Header() {
               <div className={styles.wrapper}>
                 <Link to={Paths.Main} className={styles.logoWrapper}>
                   <img src={logo} alt="Logo" width={30} height={30} />
-                  <div className={styles.logoText}>Graphql Sandbox</div>
+                  <div className={styles.logoText}>GraphQL Sandbox</div>
                 </Link>
                 <div className={styles.actions}>
                   <ToggleButtons
@@ -87,7 +82,7 @@ export default function Header() {
                     firstOption={Languages.EN}
                     secondOption={Languages.RU}
                     value={lang}
-                    setValue={handleChangeLang}
+                    setValue={(value) => setLang(value)}
                   />
                   <Button className={styles.authBtn} onClick={handleAuthClick}>
                     {isAuth ? AuthMode.SignOut : AuthMode.SignIn}

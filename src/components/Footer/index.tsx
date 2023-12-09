@@ -13,16 +13,17 @@ export default function Footer() {
     <div className={styles.wrapper}>
       <ul className={styles.githubList}>
         {developers.map((developer) => (
-          <a
-            key={developer.github}
-            className={styles.link}
-            href={developer.github}
-            target="_blank"
-            rel="noreferrer"
-          >
-            <img src={githubIcon} alt="icon" width={15} height={15} />
-            <li>{developer.name}</li>
-          </a>
+          <li key={developer.github}>
+            <a
+              className={styles.link}
+              href={developer.github}
+              target="_blank"
+              rel="noreferrer"
+            >
+              <img src={githubIcon} alt="github" width={15} height={15} />
+              <div>{developer.name}</div>
+            </a>
+          </li>
         ))}
       </ul>
       <div className={styles.rsBlock}>
