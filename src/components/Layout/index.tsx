@@ -1,6 +1,7 @@
 import { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
 
+import ErrorBoundary from 'components/ErrorBoundary';
 import Footer from 'components/Footer';
 import Header from 'components/Header';
 import Loader from 'components/UI/Loader';
