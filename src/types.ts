@@ -30,7 +30,7 @@ type SchemaType = {
 
 type SchemaTypeName = Pick<SchemaType, 'name'>;
 
-type SchemaField = {
+export type SchemaField = {
   name: string;
   description?: string;
   args: SchemaArg[];

@@ -2,7 +2,11 @@ import { useEffect, useState } from 'react';
 import { fetchQuery } from 'src/utils/fetchQuery';
 import { INTROSPECTION_QUERY } from 'src/utils/introspectionQuery';
 
-import { SchemaResponse, SchemaRoot, TypeName } from 'src/types';
+import { SchemaField, SchemaResponse, SchemaRoot, TypeName } from 'src/types';
+
+import SchemaItemsList from '../SchemaItemsList';
+
+const api = 'https://spacex-production.up.railway.app/';
 
 export default function SchemaDoc() {
   const [schema, setSchema] = useState<SchemaRoot | null>(null);
@@ -11,7 +15,7 @@ export default function SchemaDoc() {
   useEffect(() => {
     const getSchema = async () => {
       const { data }: SchemaResponse = await fetchQuery({
-        api: 'https://spacex-production.up.railway.app/',
+        api,
         query: JSON.stringify({ query: INTROSPECTION_QUERY }),
       });
       if (data?.__schema) setSchema(data.__schema);
@@ -37,7 +41,7 @@ export default function SchemaDoc() {
 
     return (
       <>
-        <span onClick={() => setTypeNameStack([])}>Root </span>
+        <span onClick={() => setTypeNameStack([])}>Root</span>
         {typeNameStack.map(({ type, name }) => (
           <span key={type}>{name ?? type} </span>
         ))}
@@ -45,32 +49,11 @@ export default function SchemaDoc() {
         <button onClick={handleBackClick}>Back</button>
         <span>{currentTypeName}</span>
         {currentType.fields?.length && (
-          <>
-            <p>Fields:</p>
-            <ul>
-              {currentType.fields?.map(({ name, type }) => {
-                const obj = {
-                  typeName: type.name,
-                  text: type.name,
-                };
-                if (!type.name && type.ofType?.name) {
-                  obj.typeName = type.ofType.name;
-                  obj.text = `[${type.ofType.name}]`;
-                }
-
-                return (
-                  <li
-                    key={name}
-                    onClick={() =>
-                      handleFieldClick({ type: obj.typeName ?? '', name })
-                    }
-                  >
-                    {name}: {obj.text}
-                  </li>
-                );
-              })}
-            </ul>
-          </>
+          <SchemaItemsList
+            title="Fields"
+            data={currentType.fields}
+            handleFieldClick={handleFieldClick}
+          />
         )}
       </>
     );
@@ -79,40 +62,26 @@ export default function SchemaDoc() {
   const renderRoot = (schema: SchemaRoot) => {
     const { queryType, mutationType, subscriptionType } = schema;
 
+    const rootItems = [
+      { type: { name: queryType?.name }, name: 'query' },
+      { type: { name: mutationType?.name }, name: 'mutation' },
+      { type: { name: subscriptionType?.name }, name: 'subscription' },
+    ].filter((field) => field.type.name !== null) as SchemaField[];
+
     return (
-      <>
-        Root types
-        <ul>
-          {[
-            { type: queryType?.name, name: 'query' },
-            { type: mutationType?.name, name: 'mutation' },
-            { type: subscriptionType?.name, name: 'subscription' },
-          ].map(
-            (field) =>
-              field.type && (
-                <li
-                  key={field.type}
-                  onClick={() =>
-                    handleFieldClick({
-                      name: field.type ?? '',
-                      type: field.type ?? '',
-                    })
-                  }
-                >
-                  {`${field.name}: ${field.type}`}
-                </li>
-              )
-          )}
-        </ul>
-      </>
+      <SchemaItemsList
+        title="Root types"
+        data={rootItems}
+        handleFieldClick={handleFieldClick}
+      />
     );
   };
 
   return (
     <>
-      <h1>docs</h1>
+      <h1>Documentation</h1>
       {schema && (
-        <div>{!typeNameStack.length ? renderRoot(schema) : renderFields()}</div>
+        <div>{typeNameStack.length ? renderFields() : renderRoot(schema)}</div>
       )}
     </>
   );
