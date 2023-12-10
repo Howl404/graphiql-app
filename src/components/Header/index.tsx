@@ -73,7 +73,13 @@ export default function Header() {
             <Typography sx={{ width: '100%' }} variant="h6" component="div">
               <div className={styles.wrapper}>
                 <Link to={Paths.Main} className={styles.logoWrapper}>
-                  <img src={logo} alt="Logo" width={30} height={30} />
+                  <img
+                    src={logo}
+                    alt="Logo"
+                    width={30}
+                    height={30}
+                    data-testid="logo"
+                  />
                   <div className={styles.logoText}>GraphQL Sandbox</div>
                 </Link>
                 <div className={styles.actions}>
@@ -84,7 +90,11 @@ export default function Header() {
                     value={lang}
                     setValue={setLang}
                   />
-                  <Button className={styles.authBtn} onClick={handleAuthClick}>
+                  <Button
+                    className={styles.authBtn}
+                    onClick={handleAuthClick}
+                    data-testid={isAuth ? 'sign-out-btn' : 'sign-in-btn'}
+                  >
                     {isAuth ? AuthMode.SignOut : AuthMode.SignIn}
                   </Button>
                 </div>

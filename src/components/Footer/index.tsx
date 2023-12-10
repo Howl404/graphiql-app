@@ -13,7 +13,7 @@ export default function Footer() {
     <div className={styles.wrapper}>
       <ul className={styles.githubList}>
         {developers.map((developer) => (
-          <li key={developer.github}>
+          <li key={developer.github} data-testid="developer-item">
             <a
               className={styles.link}
               href={developer.github}
@@ -27,7 +27,7 @@ export default function Footer() {
         ))}
       </ul>
       <div className={styles.rsBlock}>
-        <div>{new Date().getFullYear()}</div>
+        <div data-testid="year">{new Date().getFullYear()}</div>
         <div>
           <a
             className={styles.link}
@@ -35,7 +35,13 @@ export default function Footer() {
             target="_blank"
             rel="noreferrer"
           >
-            <img src={rsschoolIcon} alt="RS School" width={70} height={30} />
+            <img
+              src={rsschoolIcon}
+              alt="RS School"
+              width={70}
+              height={30}
+              data-testid="rs-logo"
+            />
           </a>
         </div>
       </div>

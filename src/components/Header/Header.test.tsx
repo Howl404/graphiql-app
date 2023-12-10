@@ -18,10 +18,10 @@ describe('Header', () => {
   });
 
   it('should contain specific content', () => {
-    const logo = screen.getByAltText('Logo');
-    const toggleEn = screen.getByText('EN');
-    const toggleRu = screen.getByText('RU');
-    const authBtn = screen.getByText(/sign in/i);
+    const logo = screen.getByTestId('logo');
+    const toggleEn = screen.getByTestId('EN');
+    const toggleRu = screen.getByTestId('RU');
+    const authBtn = screen.getByTestId('sign-in-btn');
 
     expect(logo).toBeInTheDocument();
     expect(toggleEn).toBeInTheDocument();

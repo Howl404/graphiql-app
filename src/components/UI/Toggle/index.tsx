@@ -36,6 +36,7 @@ export default function ToggleButtons({
         value={firstOption}
         disabled={value === firstOption}
         aria-label={firstOption}
+        data-testid={firstOption}
       >
         {firstOption}
       </ToggleButton>
@@ -44,6 +45,7 @@ export default function ToggleButtons({
         value={secondOption}
         disabled={value === secondOption}
         aria-label={secondOption}
+        data-testid={secondOption}
       >
         {secondOption}
       </ToggleButton>

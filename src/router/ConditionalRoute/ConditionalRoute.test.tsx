@@ -16,7 +16,7 @@ describe('ConditionalRoute', () => {
       </BrowserRouter>
     );
 
-    expect(window.location.href).toContain('/auth');
+    expect(window.location.href).toContain(Paths.Auth);
   });
 
   it('should redirect from auth page to main path if user was authorized', async () => {
@@ -28,7 +28,7 @@ describe('ConditionalRoute', () => {
       </BrowserRouter>
     );
 
-    expect(window.location.href).toContain('/');
-    expect(window.location.href).not.toContain('/auth');
+    expect(window.location.href).toContain(Paths.Main);
+    expect(window.location.href).not.toContain(Paths.Auth);
   });
 });
