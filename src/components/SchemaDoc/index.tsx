@@ -70,6 +70,7 @@ export default function SchemaDoc() {
         <span className={style.listTitle}>
           {currentName}: {currentTypeName}
         </span>
+        {currentType?.description && <p>{currentType.description}</p>}
         {items.map(
           ({ data, title }) =>
             data && (
