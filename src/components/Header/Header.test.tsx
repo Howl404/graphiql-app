@@ -30,8 +30,8 @@ describe('Header', () => {
   });
 
   it('should change localStorage value of language after click', () => {
-    const toggleEn = screen.getByText('EN');
-    const toggleRu = screen.getByText('RU');
+    const toggleEn = screen.getByTestId('EN');
+    const toggleRu = screen.getByTestId('RU');
 
     fireEvent.click(toggleRu);
     expect(localStorage.getItem('lang')).toBe('RU');
@@ -41,8 +41,8 @@ describe('Header', () => {
   });
 
   it('should navigate to auth and main page', async () => {
-    const logo = screen.getByAltText('Logo');
-    const authBtn = screen.getByText(/sign in/i);
+    const logo = screen.getByTestId('logo');
+    const authBtn = screen.getByTestId('sign-in-btn');
 
     fireEvent.click(authBtn);
     await waitFor(() => expect(window.location.href).toContain('/auth'));
