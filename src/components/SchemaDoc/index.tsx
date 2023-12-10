@@ -1,5 +1,5 @@
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import { IconButton } from '@mui/material';
+import { Divider, IconButton } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { fetchQuery } from 'src/utils/fetchQuery';
 import { INTROSPECTION_QUERY } from 'src/utils/introspectionQuery';
@@ -8,6 +8,8 @@ import { SchemaField, SchemaResponse, SchemaRoot, TypeName } from 'src/types';
 
 import SchemaBreadcrumbs from 'components/SchemaBreadcrumbs';
 import SchemaItemsList from 'components/SchemaItemsList';
+
+import style from './style.module.scss';
 
 const api = 'https://spacex-production.up.railway.app/';
 
@@ -51,7 +53,7 @@ export default function SchemaDoc() {
         <IconButton size="small" onClick={handleBackClick} aria-label="back">
           <ArrowBackIcon fontSize="small" />
         </IconButton>
-        <span>{currentTypeName}</span>
+        <span className={style.listTitle}>{currentTypeName}</span>
         {currentType.fields?.length && (
           <SchemaItemsList
             title="Fields"
@@ -82,17 +84,18 @@ export default function SchemaDoc() {
   };
 
   return (
-    <>
+    <div className={style.container}>
       <h1>Documentation</h1>
+      <Divider />
       {schema && (
-        <div>
+        <>
           <SchemaBreadcrumbs
             items={typeNameStack}
             handleClick={handleBreadcrumbClick}
           />
           {typeNameStack.length ? renderFields() : renderRoot(schema)}
-        </div>
+        </>
       )}
-    </>
+    </div>
   );
 }

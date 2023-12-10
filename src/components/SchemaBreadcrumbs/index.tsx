@@ -1,6 +1,9 @@
+import { ChevronRight } from '@mui/icons-material';
 import { Breadcrumbs, Button } from '@mui/material';
 
 import { TypeName } from 'src/types';
+
+import style from './style.module.css';
 
 type Props = {
   items: TypeName[];
@@ -9,7 +12,13 @@ type Props = {
 
 export default function SchemaBreadcrumbs({ items, handleClick }: Props) {
   return (
-    <Breadcrumbs aria-label="breadcrumb">
+    <Breadcrumbs
+      aria-label="breadcrumb"
+      classes={{
+        separator: style.separator,
+      }}
+      separator={<ChevronRight fontSize="small" />}
+    >
       <Button
         variant="text"
         size="small"
