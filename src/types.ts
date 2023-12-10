@@ -39,7 +39,7 @@ export type SchemaField = {
   deprecationReason?: string;
 };
 
-type SchemaArg = {
+export type SchemaArg = {
   name: string;
   description?: string;
   type: SchemaType;
@@ -65,7 +65,8 @@ type SchemaDirective = {
   args: SchemaArg[];
 };
 
-export type TypeName = {
+export type SchemaStackItem = {
   type: string;
   name?: string;
+  args?: SchemaArg[];
 };

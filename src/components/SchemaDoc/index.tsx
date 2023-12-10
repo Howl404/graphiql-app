@@ -4,7 +4,12 @@ import { useEffect, useState } from 'react';
 import { fetchQuery } from 'src/utils/fetchQuery';
 import { INTROSPECTION_QUERY } from 'src/utils/introspectionQuery';
 
-import { SchemaField, SchemaResponse, SchemaRoot, TypeName } from 'src/types';
+import {
+  SchemaField,
+  SchemaResponse,
+  SchemaRoot,
+  SchemaStackItem,
+} from 'src/types';
 
 import SchemaBreadcrumbs from 'components/SchemaBreadcrumbs';
 import SchemaItemsList from 'components/SchemaItemsList';
@@ -15,7 +20,7 @@ const api = 'https://spacex-production.up.railway.app/';
 
 export default function SchemaDoc() {
   const [schema, setSchema] = useState<SchemaRoot | null>(null);
-  const [typeNameStack, setTypeNameStack] = useState<TypeName[]>([]);
+  const [typeNameStack, setTypeNameStack] = useState<SchemaStackItem[]>([]);
 
   useEffect(() => {
     const getSchema = async () => {
@@ -28,8 +33,8 @@ export default function SchemaDoc() {
     getSchema();
   }, []);
 
-  const handleFieldClick = ({ type, name }: TypeName) => {
-    setTypeNameStack([...typeNameStack, { type, name }]);
+  const handleFieldClick = ({ type, name, args }: SchemaStackItem) => {
+    setTypeNameStack([...typeNameStack, { type, name, args }]);
   };
 
   const handleBackClick = () => {
@@ -41,25 +46,40 @@ export default function SchemaDoc() {
   };
 
   const renderFields = () => {
-    const currentTypeName = typeNameStack.at(-1)?.type;
+    const {
+      type: currentTypeName,
+      name: currentName,
+      args: currentArgs,
+    } = typeNameStack.at(-1) ?? {};
     const currentType = schema?.types.find(
       (type) => type.name === currentTypeName
     );
 
     if (!currentType) return;
 
+    const items = [
+      { data: currentArgs, title: 'Arguments' },
+      { data: currentType?.fields, title: 'Fields' },
+    ].filter(({ data }) => data?.length);
+
     return (
       <>
         <IconButton size="small" onClick={handleBackClick} aria-label="back">
           <ArrowBackIcon fontSize="small" />
         </IconButton>
-        <span className={style.listTitle}>{currentTypeName}</span>
-        {currentType.fields?.length && (
-          <SchemaItemsList
-            title="Fields"
-            data={currentType.fields}
-            handleFieldClick={handleFieldClick}
-          />
+        <span className={style.listTitle}>
+          {currentName}: {currentTypeName}
+        </span>
+        {items.map(
+          ({ data, title }) =>
+            data && (
+              <SchemaItemsList
+                key={title}
+                title={title}
+                data={data}
+                handleFieldClick={handleFieldClick}
+              />
+            )
         )}
       </>
     );

@@ -10,12 +10,14 @@ import {
 } from '@mui/material';
 import { useState } from 'react';
 
-import { SchemaField, TypeName } from 'src/types';
+import { SchemaArg, SchemaField, SchemaStackItem } from 'src/types';
+
+import style from './style.module.scss';
 
 type Props = {
   title: string;
-  data: SchemaField[];
-  handleFieldClick: (params: TypeName) => void;
+  data: SchemaField[] | SchemaArg[];
+  handleFieldClick: (params: SchemaStackItem) => void;
 };
 
 export default function SchemaItemsList({
@@ -28,13 +30,14 @@ export default function SchemaItemsList({
     <>
       <ListSubheader disableGutters component="div">
         <ListItemButton onClick={() => setOpen(!open)}>
-          <b>{title}</b>
+          <span className={style.listTitle}>{title}</span>
           <ListItemIcon>{open ? <ExpandMore /> : <ExpandLess />}</ListItemIcon>
         </ListItemButton>
       </ListSubheader>
       <Collapse in={open}>
         <List dense disablePadding>
-          {data.map(({ name, type }) => {
+          {data.map((item) => {
+            const { name, type } = item;
             const properType = {
               typeName: type.name,
               text: type.name,
@@ -48,7 +51,11 @@ export default function SchemaItemsList({
               <ListItem disablePadding key={name}>
                 <ListItemButton
                   onClick={() =>
-                    handleFieldClick({ type: properType.typeName ?? '', name })
+                    handleFieldClick({
+                      type: properType.typeName ?? '',
+                      name,
+                      args: ('args' in item && item.args) || [],
+                    })
                   }
                 >
                   <ListItemText>
