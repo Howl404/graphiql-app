@@ -1,12 +1,12 @@
 import { ChevronRight } from '@mui/icons-material';
 import { Breadcrumbs, Button } from '@mui/material';
 
-import { TypeName } from 'src/types';
+import { SchemaStackItem } from 'src/types';
 
 import style from './style.module.css';
 
 type Props = {
-  items: TypeName[];
+  items: SchemaStackItem[];
   handleClick: (i: number) => void;
 };
 
