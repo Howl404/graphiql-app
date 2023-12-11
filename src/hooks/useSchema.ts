@@ -11,7 +11,7 @@ const cache: Record<string, SchemaRoot> = {};
 export default function useSchema(api = DEFAULT_API) {
   const [schema, setSchema] = useState<SchemaRoot | null>(null);
   const [error, setError] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const getSchema = async () => {
