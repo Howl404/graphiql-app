@@ -1,4 +1,3 @@
-import SchemaDoc from 'src/components/SchemaDoc';
 import { auth } from 'src/firebase';
 
 import { Paths } from 'src/enums';
@@ -14,12 +13,7 @@ export default function Routes() {
     children: [
       {
         path: Paths.Main,
-        element: (
-          <>
-            <h1>MAIN PAGE</h1>
-            <SchemaDoc />
-          </>
-        ),
+        element: <h1>MAIN PAGE</h1>,
       },
       {
         path: Paths.Editor,
