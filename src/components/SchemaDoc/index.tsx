@@ -1,40 +1,24 @@
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { Divider, IconButton } from '@mui/material';
-import { useEffect, useState } from 'react';
-import { fetchQuery } from 'src/utils/fetchQuery';
-import { INTROSPECTION_QUERY } from 'src/utils/introspectionQuery';
+import { useState } from 'react';
 
-import {
-  SchemaField,
-  SchemaResponse,
-  SchemaRoot,
-  SchemaStackItem,
-} from 'src/types';
+import { SchemaField, SchemaStackItem } from 'src/types';
+
+import useSchema from 'hooks/useSchema';
 
 import SchemaBreadcrumbs from 'components/SchemaBreadcrumbs';
 import SchemaItemsList from 'components/SchemaItemsList';
+import Loader from 'components/UI/Loader';
 
 import style from './style.module.scss';
 
-const api = 'https://spacex-production.up.railway.app/';
-
 export default function SchemaDoc() {
-  const [schema, setSchema] = useState<SchemaRoot | null>(null);
   const [typeNameStack, setTypeNameStack] = useState<SchemaStackItem[]>([]);
 
-  useEffect(() => {
-    const getSchema = async () => {
-      const { data }: SchemaResponse = await fetchQuery({
-        api,
-        query: JSON.stringify({ query: INTROSPECTION_QUERY }),
-      });
-      if (data?.__schema) setSchema(data.__schema);
-    };
-    getSchema();
-  }, []);
+  const { schema, error, isLoading } = useSchema();
 
-  const handleFieldClick = ({ type, name, args }: SchemaStackItem) => {
-    setTypeNameStack([...typeNameStack, { type, name, args }]);
+  const handleFieldClick = (stackItem: SchemaStackItem) => {
+    setTypeNameStack([...typeNameStack, stackItem]);
   };
 
   const handleBackClick = () => {
@@ -86,7 +70,8 @@ export default function SchemaDoc() {
     );
   };
 
-  const renderRoot = (schema: SchemaRoot) => {
+  const renderRoot = () => {
+    if (!schema) return;
     const { queryType, mutationType, subscriptionType } = schema;
 
     const rootItems = [
@@ -104,19 +89,28 @@ export default function SchemaDoc() {
     );
   };
 
+  const renderContent = () => {
+    switch (true) {
+      case isLoading:
+        return <Loader />;
+      case error || !schema:
+        return <p>Unexpected error occurred</p>;
+      case typeNameStack.length > 0:
+        return renderFields();
+      default:
+        return renderRoot();
+    }
+  };
+
   return (
     <div className={style.container}>
       <h1>Documentation</h1>
       <Divider />
-      {schema && (
-        <>
-          <SchemaBreadcrumbs
-            items={typeNameStack}
-            handleClick={handleBreadcrumbClick}
-          />
-          {typeNameStack.length ? renderFields() : renderRoot(schema)}
-        </>
-      )}
+      <SchemaBreadcrumbs
+        items={typeNameStack}
+        handleClick={handleBreadcrumbClick}
+      />
+      {renderContent()}
     </div>
   );
 }
