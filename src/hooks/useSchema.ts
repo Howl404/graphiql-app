@@ -15,14 +15,14 @@ export default function useSchema(api = DEFAULT_API) {
 
   useEffect(() => {
     const getSchema = async () => {
+      if (cache[api]) {
+        setSchema(cache[api]);
+        return;
+      }
+
       setIsLoading(true);
 
       try {
-        if (cache[api]) {
-          setSchema(cache[api]);
-          return;
-        }
-
         const { data }: SchemaResponse = await fetchQuery({
           api,
           query: JSON.stringify({ query: INTROSPECTION_QUERY }),
