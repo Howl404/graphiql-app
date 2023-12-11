@@ -1,6 +1,34 @@
+:root {
+  --primary-dark: #070310;
+  --secondary-dark: #c4c8e4;
+  --accent: #e10098;
+  --header: #17192f;
+  --border: #232a2f;
+}
+
+#root {
+  background-color: var(--primary-dark);
+  color: var(--secondary-dark);
+}
+
 body {
   margin: 0;
 }
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
 .MuiFormHelperText-root {
   height: 0;
+}
+
+button.MuiToggleButton-root {
+  color: var(--secondary-dark);
+}
+
+button.MuiToggleButton-root.Mui-selected {
+  color: var(--accent) !important;
+  border-color: var(--accent) !important;
 }
