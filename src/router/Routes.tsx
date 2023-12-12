@@ -10,7 +10,10 @@ export default function Routes() {
   return {
     element: <Layout />,
     children: [
-      { path: Paths.Main, element: <h1>MAIN PAGE</h1> },
+      {
+        path: Paths.Main,
+        element: <h1>MAIN PAGE</h1>,
+      },
       {
         path: Paths.Editor,
         element: (
