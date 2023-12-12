@@ -6,6 +6,11 @@ import { defineConfig } from 'vitest/config';
 export default defineConfig({
   plugins: [react(), tsconfigPaths()],
   test: {
+    coverage: {
+      provider: 'v8',
+      all: true,
+      exclude: ['src/types.ts', 'src/vite-env.d.ts', 'src/main.tsx'],
+    },
     environment: 'jsdom',
     globals: true,
   },
