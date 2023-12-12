@@ -1,18 +1,27 @@
+import { getAuth } from 'firebase/auth';
 import { PropsWithChildren } from 'react';
 import { Navigate } from 'react-router-dom';
 
 export type ConditionalRouteProps = {
-  predicate: boolean;
-  path: string;
+  requireAuth: boolean;
+  redirectTo: string;
 } & PropsWithChildren;
 
 export default function ConditionalRoute({
-  predicate,
-  path,
+  requireAuth,
+  redirectTo,
   children,
 }: ConditionalRouteProps) {
-  if (!predicate) {
-    return <Navigate to={path} replace />;
+  const auth = getAuth();
+  const isAuthorized = !!auth.currentUser;
+
+  if (requireAuth && !isAuthorized) {
+    return <Navigate to={redirectTo} replace />;
   }
+
+  if (!requireAuth && isAuthorized) {
+    return <Navigate to={redirectTo} replace />;
+  }
+
   return children;
 }

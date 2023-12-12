@@ -1,7 +1,4 @@
-import { Validate } from 'react-hook-form';
-import { AuthFormInputs } from 'src/types';
-
-export const passwordValidation = (password: string) => {
+export default function passwordValidation(password: string) {
   switch (true) {
     case !/[A-Z]/.test(password):
       return 'At least one uppercase letter';
@@ -16,11 +13,4 @@ export const passwordValidation = (password: string) => {
     default:
       return true;
   }
-};
-
-export const confirmPasswordValidation:
-  | Validate<string | undefined, AuthFormInputs>
-  | Record<string, Validate<string | undefined, AuthFormInputs>>
-  | undefined = (confirmPassword, { password }) => {
-  return password === confirmPassword || 'Passwords do not match';
-};
+}

@@ -1,16 +1,22 @@
 import { render } from '@testing-library/react';
+import { getAuth } from 'firebase/auth';
 import { BrowserRouter } from 'react-router-dom';
-import Paths from 'src/enums/paths';
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, Mock, vi } from 'vitest';
+
+import Paths from 'enums/paths';
 
 import '@testing-library/jest-dom';
 import ConditionalRoute from './index';
 
+vi.mock('firebase/auth');
+
 describe('ConditionalRoute', () => {
   it('should redirect from private page to auth path if user was not authorized', async () => {
+    vi.mocked(getAuth as Mock).mockReturnValue({ currentUser: null });
+
     render(
       <BrowserRouter>
-        <ConditionalRoute predicate={false} path={Paths.Auth}>
+        <ConditionalRoute requireAuth={true} redirectTo={Paths.Auth}>
           <h1>Editor</h1>
         </ConditionalRoute>
       </BrowserRouter>
@@ -20,9 +26,11 @@ describe('ConditionalRoute', () => {
   });
 
   it('should redirect from auth page to main path if user was authorized', async () => {
+    vi.mocked(getAuth as Mock).mockReturnValue({ currentUser: true });
+
     render(
       <BrowserRouter>
-        <ConditionalRoute predicate={false} path={Paths.Main}>
+        <ConditionalRoute requireAuth={false} redirectTo={Paths.Main}>
           <h1>Auth form</h1>
         </ConditionalRoute>
       </BrowserRouter>

@@ -26,6 +26,9 @@
       "src/*": [
         "./src/*"
       ],
+      "common/*": [
+        "./src/common/*"
+      ],
       "components/*": [
         "./src/components/*"
       ],
@@ -38,8 +41,14 @@
       "utils/*": [
         "./src/utils/*"
       ],
+      "enums/*": [
+        "./src/enums/*"
+      ],
       "services/*": [
         "./src/services/*"
+      ],
+      "assets/*": [
+        "./src/assets/*"
       ]
     }
   },
