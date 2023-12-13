@@ -1,6 +1,11 @@
-import { getAuth } from 'firebase/auth';
 import { PropsWithChildren } from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
 import { Navigate } from 'react-router-dom';
+import { auth } from 'src/firebase.ts';
+
+import Loader from 'components/UI/Loader';
+
+import styles from './ConditionalRoute.module.scss';
 
 export type ConditionalRouteProps = {
   requireAuth: boolean;
@@ -12,14 +17,21 @@ export default function ConditionalRoute({
   redirectTo,
   children,
 }: ConditionalRouteProps) {
-  const auth = getAuth();
-  const isAuthorized = !!auth.currentUser;
+  const [user, loading] = useAuthState(auth);
 
-  if (requireAuth && !isAuthorized) {
+  if (loading) {
+    return (
+      <div className={styles.loaderContainer}>
+        <Loader />
+      </div>
+    );
+  }
+
+  if (requireAuth && !user) {
     return <Navigate to={redirectTo} replace />;
   }
 
-  if (!requireAuth && isAuthorized) {
+  if (!requireAuth && user) {
     return <Navigate to={redirectTo} replace />;
   }
 
