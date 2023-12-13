@@ -4,12 +4,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import useScrollTrigger from '@mui/material/useScrollTrigger';
-import {
-  cloneElement,
-  PropsWithChildren,
-  ReactElement,
-  useContext,
-} from 'react';
+import { cloneElement, ReactElement, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { LangContext } from 'src/context/LangContext';
 import { auth } from 'src/firebase';
@@ -30,8 +25,7 @@ type PropsType = {
   children: ReactElement;
 };
 
-function ElevationScroll(props: PropsType) {
-  const { children }: PropsWithChildren = props;
+function ElevationScroll({ children }: PropsType) {
   const trigger = useScrollTrigger({
     disableHysteresis: true,
     threshold: 0,
