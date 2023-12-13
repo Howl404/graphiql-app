@@ -12,8 +12,8 @@ import AuthService from 'services/AuthService';
 
 import InputPassword from 'components/UI/InputPassword';
 
-import confirmPasswordValidation from './confirmPasswordValidation.ts';
-import passwordValidation from './passwordValidation.ts';
+import confirmPasswordValidation from './utils/confirmPasswordValidation.ts';
+import passwordValidation from './utils/passwordValidation.ts';
 
 import styles from './AuthForm.module.scss';
 

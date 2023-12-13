@@ -100,7 +100,7 @@
             "position": "after"
           },
           {
-            "pattern": "./*.{ts,tsx}",
+            "pattern": "./utils/*.{ts,tsx}",
             "group": "internal",
             "position": "after"
           },
