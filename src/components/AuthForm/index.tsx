@@ -10,7 +10,7 @@ import { AuthFormInputs } from 'src/types';
 
 import AuthService from 'services/AuthService';
 
-import InputPassword from 'common/InputPassword';
+import InputPassword from 'components/UI/InputPassword';
 
 import confirmPasswordValidation from './confirmPasswordValidation.ts';
 import passwordValidation from './passwordValidation.ts';
