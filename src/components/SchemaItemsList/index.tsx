@@ -56,30 +56,32 @@ export default function SchemaItemsList({
       </ListSubheader>
       <Collapse in={open}>
         <List dense disablePadding>
-          {data.map((item) => {
-            const { name } = item;
+          {data
+            .sort((a, b) => a.name.localeCompare(b.name))
+            .map((item) => {
+              const { name } = item;
 
-            const type = extractTypeName(item.type);
+              const type = extractTypeName(item.type);
 
-            return (
-              <ListItem disablePadding key={name}>
-                <ListItemButton
-                  onClick={() =>
-                    handleFieldClick({
-                      type: type.type ?? '',
-                      name,
-                      args: ('args' in item && item.args) || [],
-                      text: type.text,
-                    })
-                  }
-                >
-                  <ListItemText>
-                    {name}: {type.text}
-                  </ListItemText>
-                </ListItemButton>
-              </ListItem>
-            );
-          })}
+              return (
+                <ListItem disablePadding key={name}>
+                  <ListItemButton
+                    onClick={() =>
+                      handleFieldClick({
+                        type: type.type ?? '',
+                        name,
+                        args: ('args' in item && item.args) || [],
+                        text: type.text,
+                      })
+                    }
+                  >
+                    <ListItemText>
+                      {name}: {type.text}
+                    </ListItemText>
+                  </ListItemButton>
+                </ListItem>
+              );
+            })}
         </List>
       </Collapse>
     </>

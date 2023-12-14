@@ -80,7 +80,7 @@ export default function SchemaDoc() {
       { type: { name: queryType?.name }, name: 'query' },
       { type: { name: mutationType?.name }, name: 'mutation' },
       { type: { name: subscriptionType?.name }, name: 'subscription' },
-    ].filter((field) => field.type.name !== null) as SchemaField[];
+    ].filter((field) => field.type.name) as SchemaField[];
 
     return (
       <SchemaItemsList
