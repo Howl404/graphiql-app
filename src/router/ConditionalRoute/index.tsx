@@ -27,11 +27,7 @@ export default function ConditionalRoute({
     );
   }
 
-  if (requireAuth && !user) {
-    return <Navigate to={redirectTo} replace />;
-  }
-
-  if (!requireAuth && user) {
+  if ((requireAuth && !user) || (!requireAuth && user)) {
     return <Navigate to={redirectTo} replace />;
   }
 

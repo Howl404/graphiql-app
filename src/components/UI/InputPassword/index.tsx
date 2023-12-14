@@ -15,12 +15,10 @@ type InputPasswordProps<T extends FieldValues, K extends Path<T>> = {
   label: string;
 };
 
-export default function Index<T extends FieldValues, K extends Path<T>>({
-  field,
-  error,
-  id,
-  label,
-}: InputPasswordProps<T, K>) {
+export default function InputPassword<
+  T extends FieldValues,
+  K extends Path<T>,
+>({ field, error, id, label }: InputPasswordProps<T, K>) {
   const [showPassword, setShowPassword] = useState(false);
 
   const type = showPassword ? 'text' : 'password';
