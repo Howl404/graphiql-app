@@ -18,7 +18,7 @@ export type SchemaRoot = {
   directives: SchemaDirective[];
 };
 
-type SchemaType = {
+export type SchemaType = {
   name: string | null;
   kind: string;
   description?: string;
@@ -66,9 +66,10 @@ type SchemaDirective = {
 };
 
 export type SchemaStackItem = {
-  type: string;
-  name?: string;
+  type: string | null;
+  name?: string | null;
   args?: SchemaArg[];
+  text: string | null;
 };
 
 export type FetchQueryParams = {

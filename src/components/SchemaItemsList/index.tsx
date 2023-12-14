@@ -10,7 +10,7 @@ import {
 } from '@mui/material';
 import { useState } from 'react';
 
-import { SchemaArg, SchemaField, SchemaStackItem } from 'src/types';
+import { SchemaArg, SchemaField, SchemaStackItem, SchemaType } from 'src/types';
 
 import style from './style.module.scss';
 
@@ -26,6 +26,26 @@ export default function SchemaItemsList({
   handleFieldClick,
 }: Props) {
   const [open, setOpen] = useState(true);
+
+  const extractTypeName = ({
+    name: type,
+    kind,
+    ofType,
+  }: SchemaType): SchemaStackItem => {
+    const typeDescription: SchemaStackItem = {
+      type,
+      text: type,
+    };
+
+    if (!type && ofType) {
+      const nested = extractTypeName(ofType);
+      if (kind === 'LIST') nested.text = `[${nested.text}]`;
+      if (kind === 'NON_NULL') nested.text = `${nested.text}!`;
+      return nested;
+    }
+    return typeDescription;
+  };
+
   return (
     <>
       <ListSubheader disableGutters component="div">
@@ -37,29 +57,24 @@ export default function SchemaItemsList({
       <Collapse in={open}>
         <List dense disablePadding>
           {data.map((item) => {
-            const { name, type } = item;
-            const properType = {
-              typeName: type.name,
-              text: type.name,
-            };
-            if (!type.name && type.ofType?.name) {
-              properType.typeName = type.ofType.name;
-              properType.text = `[${type.ofType.name}]`;
-            }
+            const { name } = item;
+
+            const type = extractTypeName(item.type);
 
             return (
               <ListItem disablePadding key={name}>
                 <ListItemButton
                   onClick={() =>
                     handleFieldClick({
-                      type: properType.typeName ?? '',
+                      type: type.type ?? '',
                       name,
                       args: ('args' in item && item.args) || [],
+                      text: type.text,
                     })
                   }
                 >
                   <ListItemText>
-                    {name}: {properType.text}
+                    {name}: {type.text}
                   </ListItemText>
                 </ListItemButton>
               </ListItem>

@@ -34,6 +34,7 @@ export default function SchemaDoc() {
       type: currentTypeName,
       name: currentName,
       args: currentArgs,
+      text: currentText,
     } = typeNameStack.at(-1) ?? {};
     const currentType = schema?.types.find(
       (type) => type.name === currentTypeName
@@ -52,7 +53,7 @@ export default function SchemaDoc() {
           <ArrowBackIcon fontSize="small" />
         </IconButton>
         <span className={style.listTitle}>
-          {currentName}: {currentTypeName}
+          {currentName}: {currentText ?? currentName}
         </span>
         {currentType?.description && <p>{currentType.description}</p>}
         {items.map(

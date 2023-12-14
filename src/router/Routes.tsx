@@ -1,3 +1,5 @@
+import SchemaDoc from 'src/components/SchemaDoc';
+
 import Paths from 'enums/paths';
 
 import AuthForm from 'components/AuthForm';
@@ -18,6 +20,7 @@ export default function Routes() {
         element: (
           <ConditionalRoute requireAuth={true} redirectTo={Paths.Auth}>
             <h1>Editor</h1>
+            <SchemaDoc />
           </ConditionalRoute>
         ),
       },
