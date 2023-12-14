@@ -1,23 +1,25 @@
-import { Alert, Button, Snackbar, TextField } from '@mui/material';
+import { Button, TextField } from '@mui/material';
 import { useState } from 'react';
-import { useForm, SubmitHandler, Controller } from 'react-hook-form';
+import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import AuthMode from 'src/enums/authMode';
-import Paths from 'src/enums/paths';
-import { AuthService } from 'src/services/AuthService';
+
+import AuthMode from 'enums/authMode';
+import Paths from 'enums/paths';
+
 import { AuthFormInputs } from 'src/types';
-import {
-  confirmPasswordValidation,
-  passwordValidation,
-} from 'src/utils/password-validation';
 
-import InputPassword from 'components/common/InputPassword';
+import AuthService from 'services/AuthService';
 
-import style from './style.module.scss';
+import InputPassword from 'components/UI/InputPassword';
+
+import confirmPasswordValidation from './utils/confirmPasswordValidation.ts';
+import passwordValidation from './utils/passwordValidation.ts';
+
+import styles from './AuthForm.module.scss';
 
 export default function AuthForm() {
   const [mode, setMode] = useState<keyof typeof AuthMode>('SignIn');
-  const [formError, setFormError] = useState<string | null>(null);
+
   const navigate = useNavigate();
 
   const {
@@ -42,12 +44,12 @@ export default function AuthForm() {
       mode === 'SignIn'
         ? await AuthService.logInWithEmailAndPassword(email, password)
         : await AuthService.registerWithEmailAndPassword(email, password);
-    response.ok ? navigate(Paths.Main) : setFormError(response.error);
+    response && navigate(Paths.Main);
   };
 
   return (
-    <div className={style.authContainer}>
-      <div className={style.authSwitch}>
+    <div className={styles.authContainer}>
+      <div className={styles.authSwitch}>
         <Button
           onClick={() => {
             setMode('SignIn');
@@ -67,7 +69,7 @@ export default function AuthForm() {
           {AuthMode.SignUp}
         </Button>
       </div>
-      <form className={style.authForm} onSubmit={handleSubmit(onSubmit)}>
+      <form className={styles.authForm} onSubmit={handleSubmit(onSubmit)}>
         <Controller
           name="email"
           control={control}
@@ -126,20 +128,6 @@ export default function AuthForm() {
         <Button type="submit" variant="contained">
           {AuthMode[mode]}
         </Button>
-
-        {/* TODO: Change mui snackbar to toastify */}
-
-        <Snackbar
-          open={formError !== null}
-          autoHideDuration={5000}
-          onClose={() => setFormError(null)}
-          anchorOrigin={{
-            vertical: 'bottom',
-            horizontal: 'center',
-          }}
-        >
-          <Alert severity="error">{formError}</Alert>
-        </Snackbar>
       </form>
     </div>
   );

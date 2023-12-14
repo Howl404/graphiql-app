@@ -4,22 +4,20 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import useScrollTrigger from '@mui/material/useScrollTrigger';
-import {
-  PropsWithChildren,
-  ReactElement,
-  cloneElement,
-  useContext,
-} from 'react';
+import { cloneElement, ReactElement, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import logo from 'src/assets/graphql-icon.svg';
 import { LangContext } from 'src/context/LangContext';
-import AuthMode from 'src/enums/authMode';
-import Languages from 'src/enums/languages';
-import Paths from 'src/enums/paths';
 import { auth } from 'src/firebase';
-import { AuthService } from 'src/services/AuthService';
+
+import AuthMode from 'enums/authMode';
+import Languages from 'enums/languages';
+import Paths from 'enums/paths';
+
+import AuthService from 'services/AuthService';
 
 import ToggleButtons from 'components/UI/Toggle';
+
+import logo from 'assets/graphql-icon.svg';
 
 import styles from './Header.module.scss';
 
@@ -27,8 +25,7 @@ type PropsType = {
   children: ReactElement;
 };
 
-function ElevationScroll(props: PropsType) {
-  const { children }: PropsWithChildren = props;
+function ElevationScroll({ children }: PropsType) {
   const trigger = useScrollTrigger({
     disableHysteresis: true,
     threshold: 0,

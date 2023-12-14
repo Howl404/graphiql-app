@@ -1,5 +1,6 @@
-import { createContext, useState, PropsWithChildren } from 'react';
-import Languages from 'src/enums/languages';
+import { createContext, PropsWithChildren, useState } from 'react';
+
+import Languages from 'enums/languages';
 
 type LangContextType = {
   lang: Languages;

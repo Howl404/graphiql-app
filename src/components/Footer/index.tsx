@@ -1,5 +1,5 @@
-import githubIcon from 'src/assets/github-mark.svg';
-import rsschoolIcon from 'src/assets/rs-school.svg';
+import githubIcon from 'assets/github-mark.svg';
+import rsschoolIcon from 'assets/rs-school.svg';
 
 import styles from './Footer.module.scss';
 

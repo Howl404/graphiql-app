@@ -1,5 +1,7 @@
 import { FetchQueryParams } from 'src/types';
 
+import displayNotification from 'utils/displayNotification';
+
 export const fetchQuery = async ({ api, headers, query }: FetchQueryParams) => {
   try {
     const response = await fetch(api, {
@@ -10,10 +12,10 @@ export const fetchQuery = async ({ api, headers, query }: FetchQueryParams) => {
       },
       body: query,
     });
-    const data = await response.json();
-    return data;
+    return await response.json();
   } catch (e) {
-    // TODO: show notification
-    console.error(e);
+    if (e instanceof Error) {
+      displayNotification(e.message, 'error');
+    }
   }
 };

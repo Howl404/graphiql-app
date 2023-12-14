@@ -8,11 +8,11 @@ import {
 import { addDoc, collection, getDocs, query, where } from 'firebase/firestore';
 import { auth, db } from 'src/firebase.ts';
 
-import { authErrorHandler } from 'utils/auth-error-handler';
+import authErrorHandler from 'services/AuthService/authErrorHandler.ts';
 
 const PATH_TO_USERS_COLLECTION = 'users';
 
-export class AuthService {
+export default class AuthService {
   public static async signInWithGoogle() {
     const googleProvider = new GoogleAuthProvider();
 
@@ -31,8 +31,9 @@ export class AuthService {
           email: user.email,
         });
       }
+      return true;
     } catch (err) {
-      console.error(err);
+      return authErrorHandler(err);
     }
   }
 
@@ -42,7 +43,7 @@ export class AuthService {
   ) {
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      return { ok: true, error: null };
+      return true;
     } catch (err) {
       return authErrorHandler(err);
     }
@@ -59,7 +60,7 @@ export class AuthService {
         uid: user.uid,
         email,
       });
-      return { ok: true, error: null };
+      return true;
     } catch (err) {
       return authErrorHandler(err);
     }

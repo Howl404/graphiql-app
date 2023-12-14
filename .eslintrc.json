@@ -55,7 +55,7 @@
         ],
         "pathGroups": [
           {
-            "pattern": "src/enums",
+            "pattern": "enums/**",
             "group": "internal",
             "position": "after"
           },
@@ -80,12 +80,27 @@
             "position": "after"
           },
           {
+            "pattern": "common/**",
+            "group": "internal",
+            "position": "after"
+          },
+          {
             "pattern": "components/**",
             "group": "internal",
             "position": "after"
           },
           {
             "pattern": "pages/**",
+            "group": "internal",
+            "position": "after"
+          },
+          {
+            "pattern": "assets/**",
+            "group": "internal",
+            "position": "after"
+          },
+          {
+            "pattern": "./utils/*.{ts,tsx}",
             "group": "internal",
             "position": "after"
           },

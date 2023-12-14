@@ -1,5 +1,7 @@
 import { FirebaseError } from 'firebase/app';
 
+import displayNotification from 'utils/displayNotification';
+
 const firebaseErrors: Record<string, string> = {
   'auth/invalid-credential':
     "Invalid credentials. If you don't have an account, please sign up.",
@@ -8,10 +10,13 @@ const firebaseErrors: Record<string, string> = {
   'auth/too-many-requests': 'Too many requests. Please  try again later.',
 };
 
-export const authErrorHandler = (error: unknown) => {
+export default function authErrorHandler(error: unknown) {
   if (error instanceof FirebaseError) {
     const message = firebaseErrors[error.code];
-    return { ok: false, error: message ?? error.code };
+    displayNotification(message ?? error.code, 'error');
+  } else {
+    displayNotification('Unknown error', 'error');
   }
-  return { ok: false, error: 'Unknown error' };
-};
+
+  return false;
+}
