@@ -1,6 +1,13 @@
-import { ExpandLess, ExpandMore } from '@mui/icons-material';
+import {
+  ArrowBack,
+  ArrowForward,
+  ExpandLess,
+  ExpandMore,
+} from '@mui/icons-material';
+import AbcIcon from '@mui/icons-material/Abc';
 import {
   Collapse,
+  IconButton,
   List,
   ListItem,
   ListItemButton,
@@ -26,6 +33,11 @@ export default function SchemaItemsList({
   handleFieldClick,
 }: Props) {
   const [open, setOpen] = useState(true);
+  const [sortOrder, setSortOrder] = useState<'az' | 'za'>('az');
+
+  const handleChangeSort = () => {
+    setSortOrder(sortOrder === 'az' ? 'za' : 'az');
+  };
 
   const extractTypeName = ({
     name: type,
@@ -55,9 +67,23 @@ export default function SchemaItemsList({
         </ListItemButton>
       </ListSubheader>
       <Collapse in={open}>
+        {data.length > 1 && (
+          <IconButton onClick={handleChangeSort}>
+            <AbcIcon fontSize="large" color="primary" />
+            {sortOrder === 'az' ? (
+              <ArrowForward fontSize="small" color="primary" />
+            ) : (
+              <ArrowBack fontSize="small" color="primary" />
+            )}
+          </IconButton>
+        )}
         <List dense disablePadding>
           {data
-            .sort((a, b) => a.name.localeCompare(b.name))
+            .sort((a, b) =>
+              sortOrder === 'az'
+                ? a.name.localeCompare(b.name)
+                : b.name.localeCompare(a.name)
+            )
             .map((item) => {
               const { name } = item;
 
