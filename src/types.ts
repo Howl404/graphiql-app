@@ -26,6 +26,7 @@ export type SchemaType = {
   inputFields?: SchemaInputField[];
   enumValues?: SchemaEnum[];
   ofType?: SchemaType | null;
+  possibleTypes?: SchemaType[];
 };
 
 type SchemaTypeName = Pick<SchemaType, 'name'>;

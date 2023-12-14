@@ -36,9 +36,11 @@ export default function SchemaDoc() {
       args: currentArgs,
       text: currentText,
     } = typeNameStack.at(-1) ?? {};
-    const currentType = schema?.types.find(
-      (type) => type.name === currentTypeName
-    );
+
+    const getCurrentType = (typeName?: string | null) =>
+      schema?.types.find((type) => type.name === typeName);
+
+    const currentType = getCurrentType(currentTypeName);
 
     if (!currentType) return;
 
@@ -73,6 +75,24 @@ export default function SchemaDoc() {
                 handleFieldClick={handleFieldClick}
               />
             )
+        )}
+        {currentType.possibleTypes?.length && (
+          <>
+            <h3>Implementations</h3>
+            {currentType.possibleTypes.map(({ name }) => {
+              const typeLink = getCurrentType(name);
+              if (!typeLink) return;
+
+              return (
+                <SchemaItemsList
+                  key={typeLink.name}
+                  title={typeLink.name ?? ''}
+                  data={typeLink.fields ?? ([] as SchemaField[])}
+                  handleFieldClick={handleFieldClick}
+                />
+              );
+            })}
+          </>
         )}
       </>
     );
