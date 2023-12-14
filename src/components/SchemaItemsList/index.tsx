@@ -61,9 +61,14 @@ export default function SchemaItemsList({
   return (
     <>
       <ListSubheader disableGutters component="div">
-        <ListItemButton onClick={() => setOpen(!open)}>
+        <ListItemButton
+          onClick={() => setOpen(!open)}
+          classes={{ root: style.subHeader }}
+        >
           <span className={style.listTitle}>{title}</span>
-          <ListItemIcon>{open ? <ExpandMore /> : <ExpandLess />}</ListItemIcon>
+          <ListItemIcon classes={{ root: style.collapseIcon }}>
+            {open ? <ExpandLess /> : <ExpandMore />}
+          </ListItemIcon>
         </ListItemButton>
       </ListSubheader>
       <Collapse in={open}>
@@ -102,7 +107,10 @@ export default function SchemaItemsList({
                     }
                   >
                     <ListItemText>
-                      {name}: {type.text}
+                      <span className={style.listItem}>
+                        {name}:{' '}
+                        <span className={style.listItemType}>{type.text}</span>
+                      </span>
                     </ListItemText>
                   </ListItemButton>
                 </ListItem>

@@ -50,11 +50,17 @@ export default function SchemaDoc() {
 
     return (
       <>
-        <IconButton size="small" onClick={handleBackClick} aria-label="back">
+        <IconButton
+          size="small"
+          onClick={handleBackClick}
+          aria-label="back"
+          color="primary"
+        >
           <ArrowBackIcon fontSize="small" />
         </IconButton>
         <span className={style.listTitle}>
-          {currentName}: {currentText ?? currentName}
+          {currentName}:{' '}
+          <span className={style.itemType}>{currentText ?? currentName}</span>
         </span>
         {currentType?.description && <p>{currentType.description}</p>}
         {items.map(
