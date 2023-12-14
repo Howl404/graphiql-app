@@ -45,6 +45,7 @@ export default function SchemaDoc() {
     const items = [
       { data: currentArgs, title: 'Arguments' },
       { data: currentType?.fields, title: 'Fields' },
+      { data: currentType?.inputFields, title: 'Input Fields' },
     ].filter(({ data }) => data?.length);
 
     return (
