@@ -113,7 +113,7 @@ export default function SchemaDoc() {
         title="Root types"
         data={rootItems}
         handleFieldClick={handleFieldClick}
-        noSort
+        disableSort
       />
     );
   };

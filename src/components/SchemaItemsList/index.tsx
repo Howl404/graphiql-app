@@ -25,19 +25,19 @@ type Props = {
   title: string;
   data: SchemaField[] | SchemaArg[];
   handleFieldClick: (params: SchemaStackItem) => void;
-  noSort?: boolean;
+  disableSort?: boolean;
 };
 
 export default function SchemaItemsList({
   title,
   data,
   handleFieldClick,
-  noSort,
+  disableSort,
 }: Props) {
   const [open, setOpen] = useState(true);
   const [sortOrder, setSortOrder] = useState<'az' | 'za'>('az');
 
-  if (!noSort)
+  if (!disableSort)
     data.sort((a, b) =>
       sortOrder === 'az'
         ? a.name.localeCompare(b.name)
@@ -81,7 +81,7 @@ export default function SchemaItemsList({
         </ListItemButton>
       </ListSubheader>
       <Collapse in={open}>
-        {!noSort && data.length > 1 && (
+        {!disableSort && data.length > 1 && (
           <IconButton onClick={handleChangeSort}>
             <AbcIcon fontSize="large" color="primary" />
             {sortOrder === 'az' ? (
