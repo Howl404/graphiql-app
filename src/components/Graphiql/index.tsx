@@ -17,11 +17,7 @@ import prettifyQuery from './utils/prettifyQuery';
 
 export default function Graphiql() {
   const [endpoint, setEndpoint] = useState(DEFAULT_API);
-  const [query, setQuery] = useState(`query ExampleQuery {
-    rockets {
-      company
-    }
-  }`);
+  const [query, setQuery] = useState('query ExampleQuery {rockets {company}}');
   const [viewerValue, setViewerValue] = useState('');
   const [isJsonLoading, setIsJsonLoading] = useState(false);
 
