@@ -12,7 +12,7 @@
     "prepare": "husky install",
     "test": "vitest",
     "coverage": "vitest run --coverage",
-    "coverage-ui": "vitest --ui --coverage.enabled=true"
+    "coverage-ui": "vitest --ui --coverage"
   },
   "dependencies": {
     "@emotion/react": "^11.11.1",
