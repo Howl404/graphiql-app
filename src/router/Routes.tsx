@@ -1,8 +1,7 @@
-import SchemaDoc from 'src/components/SchemaDoc';
-
 import Paths from 'enums/paths';
 
 import AuthForm from 'components/AuthForm';
+import Graphiql from 'components/Graphiql';
 import Layout from 'components/Layout';
 
 import ConditionalRoute from './ConditionalRoute';
@@ -19,8 +18,7 @@ export default function Routes() {
         path: Paths.Editor,
         element: (
           <ConditionalRoute requireAuth={true} redirectTo={Paths.Auth}>
-            <h1>Editor</h1>
-            <SchemaDoc />
+            <Graphiql />
           </ConditionalRoute>
         ),
       },

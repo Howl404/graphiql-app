@@ -1,0 +1,33 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.handlerEndpoint {
+  display: flex;
+  gap: 10px;
+}
+
+.inputEndpoint {
+  width: 250px;
+  padding: 5px;
+  background-color: var(--header);
+  color: var(--secondary-dark);
+  border: none;
+}
+
+.sandboxWrapper {
+  display: flex;
+  gap: 10px;
+}
+
+.editorWrapper {
+  width: 50%;
+  position: relative;
+}
+
+.jsonViewer {
+  width: 50%;
+}
