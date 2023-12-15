@@ -1,0 +1,16 @@
+.dimming {
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--dimming);
+}
+
+.content {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  display: flex;
+}
