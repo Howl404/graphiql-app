@@ -1,0 +1,52 @@
+import { render, screen, waitFor } from '@testing-library/react';
+import { describe, expect, it, vi } from 'vitest';
+
+import SchemaItemsList from '.';
+import '@testing-library/jest-dom';
+
+describe('Tests for SchemaItemsList component', () => {
+  const props = {
+    title: 'List title',
+    data: [
+      {
+        name: 'landings',
+        type: {
+          kind: 'SCALAR',
+          name: 'Int',
+          ofType: null,
+        },
+      },
+      {
+        name: 'missions',
+        type: {
+          kind: 'LIST',
+          name: null,
+          ofType: {
+            kind: 'OBJECT',
+            name: 'CapsuleMission',
+            ofType: null,
+          },
+        },
+      },
+    ],
+    handleFieldClick: vi.fn(),
+  };
+
+  it('renders all items', () => {
+    render(<SchemaItemsList {...props} />);
+
+    const listItems = screen.getAllByRole('listitem');
+    const title = screen.getByText(props.title);
+
+    expect(listItems.length).toBe(2);
+    expect(title).toBeInTheDocument();
+
+    listItems[0].click();
+
+    waitFor(() =>
+      expect(props.handleFieldClick).toHaveBeenCalledWith({
+        type: props.data[0].type.name,
+      })
+    );
+  });
+});
