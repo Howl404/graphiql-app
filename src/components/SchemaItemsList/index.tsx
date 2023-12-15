@@ -25,15 +25,24 @@ type Props = {
   title: string;
   data: SchemaField[] | SchemaArg[];
   handleFieldClick: (params: SchemaStackItem) => void;
+  noSort?: boolean;
 };
 
 export default function SchemaItemsList({
   title,
   data,
   handleFieldClick,
+  noSort,
 }: Props) {
   const [open, setOpen] = useState(true);
   const [sortOrder, setSortOrder] = useState<'az' | 'za'>('az');
+
+  if (!noSort)
+    data.sort((a, b) =>
+      sortOrder === 'az'
+        ? a.name.localeCompare(b.name)
+        : b.name.localeCompare(a.name)
+    );
 
   const handleChangeSort = () => {
     setSortOrder(sortOrder === 'az' ? 'za' : 'az');
@@ -72,7 +81,7 @@ export default function SchemaItemsList({
         </ListItemButton>
       </ListSubheader>
       <Collapse in={open}>
-        {data.length > 1 && (
+        {!noSort && data.length > 1 && (
           <IconButton onClick={handleChangeSort}>
             <AbcIcon fontSize="large" color="primary" />
             {sortOrder === 'az' ? (
@@ -83,39 +92,33 @@ export default function SchemaItemsList({
           </IconButton>
         )}
         <List dense disablePadding>
-          {data
-            .sort((a, b) =>
-              sortOrder === 'az'
-                ? a.name.localeCompare(b.name)
-                : b.name.localeCompare(a.name)
-            )
-            .map((item) => {
-              const { name } = item;
+          {data.map((item) => {
+            const { name } = item;
 
-              const type = extractTypeName(item.type);
+            const type = extractTypeName(item.type);
 
-              return (
-                <ListItem disablePadding key={name}>
-                  <ListItemButton
-                    onClick={() =>
-                      handleFieldClick({
-                        type: type.type ?? '',
-                        name,
-                        args: ('args' in item && item.args) || [],
-                        text: type.text,
-                      })
-                    }
-                  >
-                    <ListItemText>
-                      <span className={style.listItem}>
-                        {name}:{' '}
-                        <span className={style.listItemType}>{type.text}</span>
-                      </span>
-                    </ListItemText>
-                  </ListItemButton>
-                </ListItem>
-              );
-            })}
+            return (
+              <ListItem disablePadding key={name}>
+                <ListItemButton
+                  onClick={() =>
+                    handleFieldClick({
+                      type: type.type ?? '',
+                      name,
+                      args: ('args' in item && item.args) || [],
+                      text: type.text,
+                    })
+                  }
+                >
+                  <ListItemText>
+                    <span className={style.listItem}>
+                      {name}:{' '}
+                      <span className={style.listItemType}>{type.text}</span>
+                    </span>
+                  </ListItemText>
+                </ListItemButton>
+              </ListItem>
+            );
+          })}
         </List>
       </Collapse>
     </>
