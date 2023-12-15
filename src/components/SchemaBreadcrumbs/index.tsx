@@ -3,7 +3,7 @@ import { Breadcrumbs, Button } from '@mui/material';
 
 import { SchemaStackItem } from 'src/types';
 
-import style from './style.module.css';
+import style from './style.module.scss';
 
 type Props = {
   items: SchemaStackItem[];
@@ -15,6 +15,7 @@ export default function SchemaBreadcrumbs({ items, handleClick }: Props) {
     <Breadcrumbs
       aria-label="breadcrumb"
       classes={{
+        root: style.breadcrumbs,
         separator: style.separator,
       }}
       separator={<ChevronRight fontSize="small" />}
@@ -24,6 +25,7 @@ export default function SchemaBreadcrumbs({ items, handleClick }: Props) {
         size="small"
         onClick={() => handleClick(0)}
         disabled={!items.length}
+        classes={{ root: style.breadcrumbBtn }}
       >
         Root
       </Button>
@@ -33,6 +35,7 @@ export default function SchemaBreadcrumbs({ items, handleClick }: Props) {
           key={type}
           onClick={() => handleClick(i + 1)}
           disabled={i + 1 === items.length}
+          classes={{ root: style.breadcrumbBtn }}
         >
           {name ?? type}{' '}
         </Button>

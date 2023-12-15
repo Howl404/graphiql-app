@@ -18,7 +18,7 @@ export type SchemaRoot = {
   directives: SchemaDirective[];
 };
 
-type SchemaType = {
+export type SchemaType = {
   name: string | null;
   kind: string;
   description?: string;
@@ -26,6 +26,7 @@ type SchemaType = {
   inputFields?: SchemaInputField[];
   enumValues?: SchemaEnum[];
   ofType?: SchemaType | null;
+  possibleTypes?: SchemaType[];
 };
 
 type SchemaTypeName = Pick<SchemaType, 'name'>;
@@ -66,9 +67,10 @@ type SchemaDirective = {
 };
 
 export type SchemaStackItem = {
-  type: string;
-  name?: string;
+  type: string | null;
+  name?: string | null;
   args?: SchemaArg[];
+  text: string | null;
 };
 
 export type FetchQueryParams = {

@@ -1,6 +1,13 @@
-import { ExpandLess, ExpandMore } from '@mui/icons-material';
+import {
+  ArrowBack,
+  ArrowForward,
+  ExpandLess,
+  ExpandMore,
+} from '@mui/icons-material';
+import AbcIcon from '@mui/icons-material/Abc';
 import {
   Collapse,
+  IconButton,
   List,
   ListItem,
   ListItemButton,
@@ -10,7 +17,7 @@ import {
 } from '@mui/material';
 import { useState } from 'react';
 
-import { SchemaArg, SchemaField, SchemaStackItem } from 'src/types';
+import { SchemaArg, SchemaField, SchemaStackItem, SchemaType } from 'src/types';
 
 import style from './style.module.scss';
 
@@ -18,48 +25,95 @@ type Props = {
   title: string;
   data: SchemaField[] | SchemaArg[];
   handleFieldClick: (params: SchemaStackItem) => void;
+  disableSort?: boolean;
 };
 
 export default function SchemaItemsList({
   title,
   data,
   handleFieldClick,
+  disableSort,
 }: Props) {
   const [open, setOpen] = useState(true);
+  const [sortOrder, setSortOrder] = useState<'az' | 'za'>('az');
+
+  if (!disableSort)
+    data.sort((a, b) =>
+      sortOrder === 'az'
+        ? a.name.localeCompare(b.name)
+        : b.name.localeCompare(a.name)
+    );
+
+  const handleChangeSort = () => {
+    setSortOrder(sortOrder === 'az' ? 'za' : 'az');
+  };
+
+  const extractTypeName = ({
+    name: type,
+    kind,
+    ofType,
+  }: SchemaType): SchemaStackItem => {
+    const typeDescription: SchemaStackItem = {
+      type,
+      text: type,
+    };
+
+    if (!type && ofType) {
+      const nested = extractTypeName(ofType);
+      if (kind === 'LIST') nested.text = `[${nested.text}]`;
+      if (kind === 'NON_NULL') nested.text = `${nested.text}!`;
+      return nested;
+    }
+    return typeDescription;
+  };
+
   return (
     <>
       <ListSubheader disableGutters component="div">
-        <ListItemButton onClick={() => setOpen(!open)}>
+        <ListItemButton
+          onClick={() => setOpen(!open)}
+          classes={{ root: style.subHeader }}
+        >
           <span className={style.listTitle}>{title}</span>
-          <ListItemIcon>{open ? <ExpandMore /> : <ExpandLess />}</ListItemIcon>
+          <ListItemIcon classes={{ root: style.collapseIcon }}>
+            {open ? <ExpandLess /> : <ExpandMore />}
+          </ListItemIcon>
         </ListItemButton>
       </ListSubheader>
       <Collapse in={open}>
+        {!disableSort && data.length > 1 && (
+          <IconButton onClick={handleChangeSort}>
+            <AbcIcon fontSize="large" color="primary" />
+            {sortOrder === 'az' ? (
+              <ArrowForward fontSize="small" color="primary" />
+            ) : (
+              <ArrowBack fontSize="small" color="primary" />
+            )}
+          </IconButton>
+        )}
         <List dense disablePadding>
           {data.map((item) => {
-            const { name, type } = item;
-            const properType = {
-              typeName: type.name,
-              text: type.name,
-            };
-            if (!type.name && type.ofType?.name) {
-              properType.typeName = type.ofType.name;
-              properType.text = `[${type.ofType.name}]`;
-            }
+            const { name } = item;
+
+            const type = extractTypeName(item.type);
 
             return (
               <ListItem disablePadding key={name}>
                 <ListItemButton
                   onClick={() =>
                     handleFieldClick({
-                      type: properType.typeName ?? '',
+                      type: type.type ?? '',
                       name,
                       args: ('args' in item && item.args) || [],
+                      text: type.text,
                     })
                   }
                 >
                   <ListItemText>
-                    {name}: {properType.text}
+                    <span className={style.listItem}>
+                      {name}:{' '}
+                      <span className={style.listItemType}>{type.text}</span>
+                    </span>
                   </ListItemText>
                 </ListItemButton>
               </ListItem>

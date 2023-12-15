@@ -1,4 +1,22 @@
 .listTitle {
   font-weight: 600;
+  font-size: 16px;
   color: black;
+}
+
+.subHeader {
+  justify-content: space-between !important;
+  padding: 0 16px !important;
+}
+
+.collapseIcon {
+  min-width: 0 !important;
+}
+
+.listItem {
+  font-size: 16px !important;
+}
+
+.listItemType {
+  opacity: 0.7;
 }
