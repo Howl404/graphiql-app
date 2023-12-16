@@ -12,10 +12,14 @@ import Loader from 'components/UI/Loader';
 
 import style from './style.module.scss';
 
-export default function SchemaDoc() {
+type SchemaDocType = {
+  api: string;
+};
+
+export default function SchemaDoc({ api }: SchemaDocType) {
   const [typeNameStack, setTypeNameStack] = useState<SchemaStackItem[]>([]);
 
-  const { schema, error, isLoading } = useSchema();
+  const { schema, error, isLoading } = useSchema(api);
 
   const handleFieldClick = (stackItem: SchemaStackItem) => {
     setTypeNameStack([...typeNameStack, stackItem]);

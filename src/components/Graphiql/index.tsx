@@ -16,28 +16,31 @@ import styles from './Graphiql.module.scss';
 import prettifyQuery from './utils/prettifyQuery';
 
 export default function Graphiql() {
-  const [endpoint, setEndpoint] = useState(DEFAULT_API);
+  const [inputValue, setInputValue] = useState(DEFAULT_API);
+  const [currentEndpoint, setCurrentEndpoint] = useState(DEFAULT_API);
   const [query, setQuery] = useState('query ExampleQuery {rockets {company}}');
   const [viewerValue, setViewerValue] = useState('');
   const [isJsonLoading, setIsJsonLoading] = useState(false);
 
   const handleChangeEndpoint = (event: FormEvent) => {
     event.preventDefault();
-
-    // TODO update documentation for current endpoint or display error notification
-    // TODO add handler onBlur for change endpoint
+    setCurrentEndpoint(inputValue);
   };
+
   const handleChangeQuery = (value: string) => setQuery(value);
+
   const handleChangeViewer = (value: string) => setViewerValue(value);
+
   const sendQuery = async () => {
     setIsJsonLoading(true);
     const json = await fetchQuery({
-      api: endpoint,
+      api: currentEndpoint,
       query: JSON.stringify({ query: query }),
     });
     setViewerValue(JSON.stringify(json, null, '  '));
     setIsJsonLoading(false);
   };
+
   const setPrettifiedQuery = () => {
     setQuery(prettifyQuery(query));
   };
@@ -52,12 +55,18 @@ export default function Graphiql() {
       <form className={styles.handlerEndpoint} onSubmit={handleChangeEndpoint}>
         <input
           className={styles.inputEndpoint}
-          value={endpoint}
-          onChange={(event) => setEndpoint(event.target.value)}
+          value={inputValue}
+          onChange={(event) => setInputValue(event.target.value)}
+          onBlur={handleChangeEndpoint}
           type="text"
           placeholder="Enter endpoint"
         />
-        <Button className={styles.btnEndpoint} size="small" variant="contained">
+        <Button
+          onClick={handleChangeEndpoint}
+          className={styles.btnEndpoint}
+          size="small"
+          variant="contained"
+        >
           Change endpoint
         </Button>
       </form>
@@ -82,7 +91,7 @@ export default function Graphiql() {
           />
         </div>
       </div>
-      <SchemaDoc />
+      <SchemaDoc api={currentEndpoint} />
     </div>
   );
 }
