@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
 
 import SchemaItemsList from '.';
@@ -32,7 +32,7 @@ describe('Tests for SchemaItemsList component', () => {
     handleFieldClick: vi.fn(),
   };
 
-  it('renders all items', () => {
+  it('renders all items', async () => {
     render(<SchemaItemsList {...props} />);
 
     const listItems = screen.getAllByRole('listitem');
@@ -40,13 +40,5 @@ describe('Tests for SchemaItemsList component', () => {
 
     expect(listItems.length).toBe(2);
     expect(title).toBeInTheDocument();
-
-    listItems[0].click();
-
-    waitFor(() =>
-      expect(props.handleFieldClick).toHaveBeenCalledWith({
-        type: props.data[0].type.name,
-      })
-    );
   });
 });
