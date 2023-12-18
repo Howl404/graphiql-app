@@ -3,6 +3,7 @@ import { DEFAULT_API } from 'src/constants/api';
 
 import EditorMode from 'enums/editorMode';
 
+import displayNotification from 'utils/displayNotification';
 import { fetchQuery } from 'utils/fetchQuery';
 
 import ActionsPanel from 'components/ActionsPanel';
@@ -36,14 +37,19 @@ export default function Graphiql() {
 
   const handleChangeViewer = (value: string) => setViewerValue(value);
 
-  const sendQuery = async () => {
+  const sendQuery = () => {
     setIsJsonLoading(true);
-    const json = await fetchQuery({
+    fetchQuery({
       api: currentEndpoint,
       query: JSON.stringify({ query: query }),
-    });
-    setViewerValue(JSON.stringify(json, null, '  '));
-    setIsJsonLoading(false);
+    })
+      .then((json) => setViewerValue(JSON.stringify(json, null, '  ')))
+      .catch(() => {
+        displayNotification('Sorry, something went wrong...', 'error');
+      })
+      .finally(() => {
+        setIsJsonLoading(false);
+      });
   };
 
   const toggleDocs = () => {

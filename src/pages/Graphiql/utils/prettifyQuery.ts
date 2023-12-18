@@ -1,5 +1,10 @@
 import displayNotification from 'utils/displayNotification';
 
+const OPENING_BRACE = '{';
+const CLOSING_BRACE = '}';
+const NEW_LINE = '\n';
+const SINGLE_SPACE = ' ';
+
 export default function prettifyQuery(fullQuery: string) {
   const queryArr = fullQuery.split('fragment');
   const resultArr = queryArr.map((query) => {
@@ -16,7 +21,7 @@ export default function prettifyQuery(fullQuery: string) {
     }
   });
 
-  return resultArr.join('\n\nfragment ');
+  return resultArr.join(`${NEW_LINE}${NEW_LINE}fragment `);
 }
 
 function checkBrackets(query: string) {
@@ -24,10 +29,10 @@ function checkBrackets(query: string) {
   for (let i = 0; i < query.length; i++) {
     const currentChar = query[i];
     const topStackItem = stack[stack.length - 1];
-    if (currentChar === '{') {
+    if (currentChar === OPENING_BRACE) {
       stack.push(currentChar);
     }
-    if (currentChar === '}' && topStackItem === '{') {
+    if (currentChar === CLOSING_BRACE && topStackItem === OPENING_BRACE) {
       stack.pop();
     }
   }
@@ -36,18 +41,18 @@ function checkBrackets(query: string) {
 }
 
 function clearFormat(query: string) {
-  return query.replace(/\n/g, ' ').replace(/\s+/g, ' ');
+  return query.replace(/\n/g, SINGLE_SPACE).replace(/\s+/g, SINGLE_SPACE);
 }
 
 function formatQuery(query: string) {
   const title =
-    query.replace(/(?<![A-Za-z)]) {/gm, '{\n')[0] !== '{'
-      ? query.split('{')[0]
+    query.replace(/(?<![A-Za-z)]) {/gm, `{${NEW_LINE}`)[0] !== OPENING_BRACE
+      ? query.split(OPENING_BRACE)[0]
       : '';
   if (title) {
-    const queryInnerArr = query.split('{');
+    const queryInnerArr = query.split(OPENING_BRACE);
     queryInnerArr.shift();
-    const queryInner = `{${queryInnerArr.join('{')}`;
+    const queryInner = `{${queryInnerArr.join(OPENING_BRACE)}`;
     const formatInner = formatQueryInner(queryInner);
     return `${formatTitle(title.trim())} ${formatInner}`;
   } else {
@@ -71,27 +76,27 @@ function formatQueryInner(query: string) {
     .replace(/( : |(?<=[A-Za-z]):(?=[A-Za-z]))/gm, ': ')
     .replace(/( , |(?<=[A-Za-z]),(?=[A-Za-z]))/gm, ', ')
     .replace(/((?<=.[^ ])= |(?<=.[^ ])=(?=.[^ ])| =(?=.[^ ]))/gm, ' = ')
-    .replace(/{/m, '{\n')
-    .replace(/(?<![A-Za-z)]) {/gm, '{\n')
-    .replace(/(?<=[A-Za-z)] |[A-Za-z)]){/gm, ' {\n')
-    .replace(/{\n (?=[A-Za-z)])/gm, '{\n')
-    .replace(/}/gm, '\n}')
-    .replace(/} (?=[A-Za-z)])/gm, '}\n')
-    .replace(/}(?=[A-Za-z)])/gm, '}\n')
-    .replace(/(?<=[A-Za-z)]) (?=[A-Za-z)])/gm, '\n')
+    .replace(/{/m, `${OPENING_BRACE}${NEW_LINE}`)
+    .replace(/(?<![A-Za-z)]) {/gm, `${OPENING_BRACE}${NEW_LINE}`)
+    .replace(/(?<=[A-Za-z)] |[A-Za-z)]){/gm, ` ${OPENING_BRACE}${NEW_LINE}`)
+    .replace(/{\n (?=[A-Za-z)])/gm, `${OPENING_BRACE}${NEW_LINE}`)
+    .replace(/}/gm, `${NEW_LINE}${CLOSING_BRACE}`)
+    .replace(/} (?=[A-Za-z)])/gm, `${CLOSING_BRACE}${NEW_LINE}`)
+    .replace(/}(?=[A-Za-z)])/gm, `${CLOSING_BRACE}${NEW_LINE}`)
+    .replace(/(?<=[A-Za-z)]) (?=[A-Za-z)])/gm, NEW_LINE)
     .replace(/ {2,}/gm, ' ');
 }
 
 function addIndents(query: string) {
-  const queryArr = query.split('\n');
+  const queryArr = query.split(NEW_LINE);
   const indent = 2;
   let indentCount = 0;
   let result = '';
 
   for (let i = 0; i < queryArr.length; i++) {
-    if (queryArr[i].includes('}')) indentCount--;
-    result += ' '.repeat(indentCount * indent) + queryArr[i].trim() + '\n';
-    if (queryArr[i].includes('{')) indentCount++;
+    if (queryArr[i].includes(CLOSING_BRACE)) indentCount--;
+    result += ' '.repeat(indentCount * indent) + queryArr[i].trim() + NEW_LINE;
+    if (queryArr[i].includes(OPENING_BRACE)) indentCount++;
   }
 
   return result.trim();
