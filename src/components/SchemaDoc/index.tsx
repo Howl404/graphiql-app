@@ -1,9 +1,10 @@
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { Divider, IconButton } from '@mui/material';
-import cn from 'classnames';
 import { useState } from 'react';
 
 import { SchemaField, SchemaStackItem } from 'src/types';
+
+import classnames from 'utils/classnames';
 
 import useSchema from 'hooks/useSchema';
 
@@ -138,7 +139,12 @@ export default function SchemaDoc({ api, isDocsOpen }: SchemaDocType) {
   };
 
   return (
-    <div className={cn(style.container, { [style.docsVisible]: isDocsOpen })}>
+    <div
+      className={classnames(
+        style.container,
+        isDocsOpen ? style.docsVisible : ''
+      )}
+    >
       <h1>Documentation</h1>
       <Divider />
       <SchemaBreadcrumbs
