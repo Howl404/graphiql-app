@@ -1,4 +1,4 @@
-import displayNotification from 'src/utils/displayNotification';
+import displayNotification from 'utils/displayNotification';
 
 export default async function copyToClipboard(value: string) {
   try {

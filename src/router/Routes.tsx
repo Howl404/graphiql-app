@@ -1,8 +1,9 @@
 import Paths from 'enums/paths';
 
 import AuthForm from 'components/AuthForm';
-import Graphiql from 'components/Graphiql';
 import Layout from 'components/Layout';
+
+import Graphiql from 'pages/Graphiql';
 
 import ConditionalRoute from './ConditionalRoute';
 

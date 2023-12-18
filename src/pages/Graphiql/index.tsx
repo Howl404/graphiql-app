@@ -1,4 +1,3 @@
-import { Button } from '@mui/material';
 import { FormEvent, useState } from 'react';
 import { DEFAULT_API } from 'src/constants/api';
 
@@ -8,6 +7,7 @@ import { fetchQuery } from 'utils/fetchQuery';
 
 import ActionsPanel from 'components/ActionsPanel';
 import Editor from 'components/Editor';
+import EndpointForm from 'components/EndpointForm';
 import SchemaDoc from 'components/SchemaDoc';
 import Dimming from 'components/UI/Dimming';
 import Loader from 'components/UI/Loader';
@@ -18,7 +18,9 @@ import prettifyQuery from './utils/prettifyQuery';
 export default function Graphiql() {
   const [inputValue, setInputValue] = useState(DEFAULT_API);
   const [currentEndpoint, setCurrentEndpoint] = useState(DEFAULT_API);
-  const [query, setQuery] = useState('query ExampleQuery {rockets {company}}');
+  const [query, setQuery] = useState(
+    'query ExampleQuery ( $first : Int=3) {rockets {company}}fragment comparisonFields on Character {name country}'
+  );
   const [viewerValue, setViewerValue] = useState('');
   const [isJsonLoading, setIsJsonLoading] = useState(false);
 
@@ -26,6 +28,8 @@ export default function Graphiql() {
     event.preventDefault();
     setCurrentEndpoint(inputValue);
   };
+
+  const handleChangeInput = (value: string) => setInputValue(value);
 
   const handleChangeQuery = (value: string) => setQuery(value);
 
@@ -52,24 +56,11 @@ export default function Graphiql() {
           <Loader />
         </Dimming>
       )}
-      <form className={styles.handlerEndpoint} onSubmit={handleChangeEndpoint}>
-        <input
-          className={styles.inputEndpoint}
-          value={inputValue}
-          onChange={(event) => setInputValue(event.target.value)}
-          onBlur={handleChangeEndpoint}
-          type="text"
-          placeholder="Enter endpoint"
-        />
-        <Button
-          onClick={handleChangeEndpoint}
-          className={styles.btnEndpoint}
-          size="small"
-          variant="contained"
-        >
-          Change endpoint
-        </Button>
-      </form>
+      <EndpointForm
+        inputValue={inputValue}
+        handleChangeEndpoint={handleChangeEndpoint}
+        handleChangeInput={handleChangeInput}
+      />
       <div className={styles.sandboxWrapper}>
         <div className={styles.editorWrapper}>
           <Editor
