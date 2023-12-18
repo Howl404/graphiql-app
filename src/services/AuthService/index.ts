@@ -60,7 +60,6 @@ export default class AuthService {
         uid: user.uid,
         email,
       });
-
       return true;
     } catch (err) {
       return authErrorHandler(err);
