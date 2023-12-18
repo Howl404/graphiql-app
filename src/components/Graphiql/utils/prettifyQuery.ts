@@ -1,49 +1,85 @@
-export default function prettifyQuery(query: string) {
-  const unformattedQuery = clearFormat(query);
-  const formattedQuery = formatQuery(unformattedQuery);
-  return addIndents(formattedQuery);
+import displayNotification from 'utils/displayNotification';
+
+export default function prettifyQuery(fullQuery: string) {
+  const queryArr = fullQuery.split('fragment');
+  const resultArr = queryArr.map((query) => {
+    if (checkBrackets(query)) {
+      const unformattedQuery = clearFormat(query);
+      const formattedQuery = formatQuery(unformattedQuery);
+      return addIndents(formattedQuery);
+    } else {
+      displayNotification(
+        `Please check your query's brackets and run again`,
+        'error'
+      );
+      return query;
+    }
+  });
+
+  return resultArr.join('\n\nfragment ');
+}
+
+function checkBrackets(query: string) {
+  const stack = [];
+  for (let i = 0; i < query.length; i++) {
+    const currentChar = query[i];
+    const topStackItem = stack[stack.length - 1];
+    if (currentChar === '{') {
+      stack.push(currentChar);
+    }
+    if (currentChar === '}' && topStackItem === '{') {
+      stack.pop();
+    }
+  }
+
+  return stack.length === 0;
 }
 
 function clearFormat(query: string) {
-  return query.replace(/\n/, ' ').replace(/\s+/g, ' ');
+  return query.replace(/\n/g, ' ').replace(/\s+/g, ' ');
 }
 
 function formatQuery(query: string) {
-  let result = '';
-  for (let i = 0; i < query.length; i++) {
-    if (query[i] === '{') {
-      result +=
-        query[i - 1] && query[i - 1] !== ' '
-          ? ` ${query[i]}\n`
-          : `${query[i]}\n`;
-      continue;
-    }
-    if (query[i] === '}') {
-      result += `\n${query[i]}`;
-      if (
-        query[i + 1] &&
-        (query[i + 1].match(/[A-Za-z]/) ||
-          (query[i + 1] === ' ' &&
-            query[i + 2] &&
-            query[i + 2].match(/[A-Za-z]/)))
-      )
-        result += '\n';
-      continue;
-    }
-    if (
-      query[i] === ' ' &&
-      query[i - 1] &&
-      query[i - 1].match(/[A-Za-z]/) &&
-      query[i + 1].match(/[A-Za-z]/) &&
-      result.includes('{')
-    ) {
-      result += '\n';
-      continue;
-    }
-    if (query[i] === '\n' && query[i + 1].match(/[A-Za-z]/)) continue;
-    result += query[i];
+  const title =
+    query.replace(/(?<![A-Za-z)]) {/gm, '{\n')[0] !== '{'
+      ? query.split('{')[0]
+      : '';
+  if (title) {
+    const queryInnerArr = query.split('{');
+    queryInnerArr.shift();
+    const queryInner = `{${queryInnerArr.join('{')}`;
+    const formatInner = formatQueryInner(queryInner);
+    return `${formatTitle(title.trim())} ${formatInner}`;
+  } else {
+    return formatQueryInner(query.trim());
   }
-  return result;
+}
+
+function formatTitle(queryTitle: string) {
+  return queryTitle
+    .replace(/( \( | \(|\( )/gm, '(')
+    .replace(/( \))/gm, ')')
+    .replace(/( : |(?<=[A-Za-z]):(?=[A-Za-z]))/gm, ': ')
+    .replace(/( , |(?<=[A-Za-z]),(?=[A-Za-z]))/gm, ', ')
+    .replace(/((?<=.[^ ])= |(?<=.[^ ])=(?=.[^ ])| =(?=.[^ ]))/gm, ' = ');
+}
+
+function formatQueryInner(query: string) {
+  return query
+    .replace(/( \( | \(|\( )/gm, '(')
+    .replace(/( \))/gm, ')')
+    .replace(/( : |(?<=[A-Za-z]):(?=[A-Za-z]))/gm, ': ')
+    .replace(/( , |(?<=[A-Za-z]),(?=[A-Za-z]))/gm, ', ')
+    .replace(/((?<=.[^ ])= |(?<=.[^ ])=(?=.[^ ])| =(?=.[^ ]))/gm, ' = ')
+    .replace(/{/m, '{\n')
+    .replace(/(?<![A-Za-z)]) {/gm, '{\n')
+    .replace(/(?<=[A-Za-z)] |[A-Za-z)]){/gm, ' {\n')
+    .replace(/{\n (?=[A-Za-z)])/gm, '{\n')
+    .replace(/}/gm, '\n}')
+    .replace(/} (?=[A-Za-z)])/gm, '}\n')
+    .replace(/}(?=[A-Za-z)])/gm, '}\n')
+    .replace(/(?<=[A-Za-z)]) (?=[A-Za-z)])/gm, '\n')
+    .replace(/ {2,}/gm, ' ');
 }
 
 function addIndents(query: string) {
