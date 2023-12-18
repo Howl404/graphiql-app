@@ -15,7 +15,7 @@ type EditorType = {
   setValue: (value: string) => void;
 };
 
-function Editor({ editorMode, value, setValue }: EditorType) {
+export default function Editor({ editorMode, value, setValue }: EditorType) {
   const onChange = useCallback(
     (val: string) => {
       setValue(val);
@@ -47,4 +47,3 @@ function Editor({ editorMode, value, setValue }: EditorType) {
     />
   );
 }
-export default Editor;

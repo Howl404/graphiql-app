@@ -3,7 +3,7 @@ import Paths from 'enums/paths';
 import AuthForm from 'components/AuthForm';
 import Layout from 'components/Layout';
 
-import Graphiql from 'pages/Graphiql';
+import GraphiqlPage from 'pages/GraphiqlPage';
 
 import ConditionalRoute from './ConditionalRoute';
 
@@ -19,7 +19,7 @@ export default function Routes() {
         path: Paths.Editor,
         element: (
           <ConditionalRoute requireAuth={true} redirectTo={Paths.Auth}>
-            <Graphiql />
+            <GraphiqlPage />
           </ConditionalRoute>
         ),
       },

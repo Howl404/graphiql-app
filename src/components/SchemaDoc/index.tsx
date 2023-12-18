@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 import { SchemaField, SchemaStackItem } from 'src/types';
 
-import classnames from 'utils/classnames';
+import cls from 'utils/classnames';
 
 import useSchema from 'hooks/useSchema';
 
@@ -139,12 +139,7 @@ export default function SchemaDoc({ api, isDocsOpen }: SchemaDocType) {
   };
 
   return (
-    <div
-      className={classnames(
-        style.container,
-        isDocsOpen ? style.docsVisible : ''
-      )}
-    >
+    <div className={cls(style.container, isDocsOpen && style.docsVisible)}>
       <h1>Documentation</h1>
       <Divider />
       <SchemaBreadcrumbs
