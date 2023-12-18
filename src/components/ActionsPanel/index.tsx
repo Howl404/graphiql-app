@@ -9,55 +9,60 @@ import copyToClipboard from './utils/copyToClipboard';
 type ActionsPanelType = {
   query: string;
   sendQuery: () => void;
+  toggleDocs: () => void;
   setPrettifiedQuery: () => void;
 };
 
 export default function ActionsPanel({
   query,
   sendQuery,
+  toggleDocs,
   setPrettifiedQuery,
 }: ActionsPanelType) {
+  const icons = [
+    {
+      onClick: sendQuery,
+      src: runIcon,
+      alt: 'Run',
+      title: 'Send query',
+      width: 35,
+    },
+    {
+      onClick: toggleDocs,
+      src: docsIcon,
+      alt: 'Docs',
+      title: 'Documentation',
+      width: 26,
+    },
+    {
+      onClick: setPrettifiedQuery,
+      src: prettifyIcon,
+      alt: 'Prettify',
+      title: 'Prettify query',
+      width: 30,
+    },
+    {
+      onClick: () => copyToClipboard(query),
+      src: copyIcon,
+      alt: 'Copy',
+      title: 'Copy query',
+      width: 26,
+    },
+  ];
   return (
     <ul className={styles.actions}>
-      <li>
-        <img
-          className={styles.actionBtn}
-          onClick={sendQuery}
-          src={runIcon}
-          alt="Run"
-          title="Send query"
-          width={35}
-        />
-      </li>
-      <li>
-        <img
-          className={styles.actionBtn}
-          src={docsIcon}
-          alt="Docs"
-          title="Documentation"
-          width={26}
-        />
-      </li>
-      <li>
-        <img
-          className={styles.actionBtn}
-          src={prettifyIcon}
-          alt="Prettify"
-          title="Prettify query"
-          width={30}
-          onClick={setPrettifiedQuery}
-        />
-      </li>
-      <li>
-        <img
-          className={styles.actionBtn}
-          src={copyIcon}
-          alt="Copy"
-          title="Copy query"
-          width={26}
-          onClick={() => copyToClipboard(query)}
-        />
-      </li>
+      {icons.map((icon) => (
+        <li key={icon.alt}>
+          <img
+            className={styles.actionBtn}
+            onClick={icon.onClick}
+            src={icon.src}
+            alt={icon.alt}
+            title={icon.title}
+            width={icon.width}
+          />
+        </li>
+      ))}
     </ul>
   );
 }

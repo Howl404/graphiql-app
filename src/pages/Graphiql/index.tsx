@@ -23,6 +23,7 @@ export default function Graphiql() {
   );
   const [viewerValue, setViewerValue] = useState('');
   const [isJsonLoading, setIsJsonLoading] = useState(false);
+  const [isDocsOpen, setIsDocsOpen] = useState(false);
 
   const handleChangeEndpoint = (event: FormEvent) => {
     event.preventDefault();
@@ -45,17 +46,16 @@ export default function Graphiql() {
     setIsJsonLoading(false);
   };
 
+  const toggleDocs = () => {
+    setIsDocsOpen((prev) => !prev);
+  };
+
   const setPrettifiedQuery = () => {
     setQuery(prettifyQuery(query));
   };
 
   return (
     <div className={styles.wrapper}>
-      {isJsonLoading && (
-        <Dimming>
-          <Loader />
-        </Dimming>
-      )}
       <EndpointForm
         inputValue={inputValue}
         handleChangeEndpoint={handleChangeEndpoint}
@@ -71,6 +71,7 @@ export default function Graphiql() {
           <ActionsPanel
             query={query}
             sendQuery={sendQuery}
+            toggleDocs={toggleDocs}
             setPrettifiedQuery={setPrettifiedQuery}
           />
         </div>
@@ -82,7 +83,12 @@ export default function Graphiql() {
           />
         </div>
       </div>
-      <SchemaDoc api={currentEndpoint} />
+      <SchemaDoc api={currentEndpoint} isDocsOpen={isDocsOpen} />
+      {isJsonLoading && (
+        <Dimming>
+          <Loader />
+        </Dimming>
+      )}
     </div>
   );
 }
