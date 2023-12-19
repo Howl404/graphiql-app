@@ -1,4 +1,5 @@
-import LangContextProvider from './context/LangContext';
+import LangContextProvider from 'context/LangContext';
+
 import AppRouter from './router/AppRouter';
 
 export default function App() {

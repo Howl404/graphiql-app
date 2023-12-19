@@ -1,6 +1,6 @@
 import Button from '@mui/material/Button';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { auth } from 'src/firebase.ts';
+import { auth } from 'src/firebase';
 
 import authMode from 'enums/authMode';
 import Paths from 'enums/paths';

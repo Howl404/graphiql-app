@@ -49,9 +49,16 @@
       ],
       "assets/*": [
         "./src/assets/*"
+      ],
+      "locales/*": [
+        "./src/locales/*"
+      ],
+      "context/*": [
+        "./src/context/*"
       ]
     }
   },
+
   "include": [
     "src"
   ],

@@ -6,12 +6,13 @@ import Typography from '@mui/material/Typography';
 import useScrollTrigger from '@mui/material/useScrollTrigger';
 import { cloneElement, ReactElement, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { LangContext } from 'src/context/LangContext';
 import { auth } from 'src/firebase';
 
 import AuthMode from 'enums/authMode';
 import Languages from 'enums/languages';
 import Paths from 'enums/paths';
+
+import { LangContext } from 'context/LangContext';
 
 import AuthService from 'services/AuthService';
 

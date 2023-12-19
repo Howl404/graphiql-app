@@ -1,7 +1,9 @@
 import { useContext } from 'react';
-import { LangContext } from 'src/context/LangContext.tsx';
-import EN from 'src/locales/en.json';
-import RU from 'src/locales/ru.json';
+
+import EN from 'locales/en.json';
+import RU from 'locales/ru.json';
+
+import { LangContext } from 'context/LangContext';
 
 type TranslationKeys = keyof typeof EN;
 

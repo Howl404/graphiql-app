@@ -2,7 +2,7 @@ import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { Suspense, useEffect, useState } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
 
-import Paths from 'enums/paths.ts';
+import Paths from 'enums/paths';
 
 import ErrorBoundary from 'components/ErrorBoundary';
 import Footer from 'components/Footer';
