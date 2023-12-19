@@ -1,9 +1,10 @@
-import SchemaDoc from 'src/components/SchemaDoc';
-
 import Paths from 'enums/paths';
 
 import AuthForm from 'components/AuthForm';
 import Layout from 'components/Layout';
+import SchemaDoc from 'components/SchemaDoc';
+
+import MainPage from 'pages/MainPage';
 
 import ConditionalRoute from './ConditionalRoute';
 
@@ -13,7 +14,7 @@ export default function Routes() {
     children: [
       {
         path: Paths.Main,
-        element: <h1>MAIN PAGE</h1>,
+        element: <MainPage />,
       },
       {
         path: Paths.Editor,
