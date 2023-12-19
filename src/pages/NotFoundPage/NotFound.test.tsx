@@ -20,8 +20,9 @@ describe('Not Found page', () => {
       </LangContextProvider>
     );
 
-    const notFoundText = screen.getByText(NOT_FOUND_TEXT);
+    const notFoundText = screen.getByTestId('not-found-text');
 
     expect(notFoundText).toBeInTheDocument();
+    expect(notFoundText.textContent).toBe(NOT_FOUND_TEXT);
   });
 });

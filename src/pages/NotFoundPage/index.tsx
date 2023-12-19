@@ -13,7 +13,7 @@ export default function NotFoundPage() {
         <h1>4</h1>
       </div>
 
-      <p>{NOT_FOUND_TEXT}</p>
+      <p data-testid="not-found-text">{NOT_FOUND_TEXT}</p>
     </div>
   );
 }
