@@ -4,7 +4,7 @@ import { beforeEach, describe, expect, it } from 'vitest';
 
 import { AuthFormInputs } from 'src/types';
 
-import AuthForm from '.';
+import AuthForm from './index';
 import '@testing-library/jest-dom';
 import confirmPasswordValidation from './utils/confirmPasswordValidation';
 import passwordValidation from './utils/passwordValidation';

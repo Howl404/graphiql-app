@@ -1,8 +1,8 @@
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { describe, expect, it, vi } from 'vitest';
 
-import SchemaBreadcrumbs from '.';
+import SchemaBreadcrumbs from './index';
 import '@testing-library/jest-dom';
 
 describe('Tests for SchemaBreadcrumbs component', () => {
@@ -51,5 +51,29 @@ describe('Tests for SchemaBreadcrumbs component', () => {
     breadcrumbs[0].click();
 
     expect(onClick).toHaveBeenCalledWith(0);
+  });
+
+  it('puts type as textcontent if name is undefined and onclick is called with right index', () => {
+    const items = [
+      {
+        type: 'Query',
+        text: 'Query',
+      },
+      { type: 'Next', text: 'next' },
+      { type: 'Last', text: 'last' },
+    ];
+    render(
+      <MemoryRouter>
+        <SchemaBreadcrumbs items={items} handleClick={onClick} />
+      </MemoryRouter>
+    );
+
+    const breadcrumbs = screen.getAllByRole('button');
+
+    expect(breadcrumbs[1]).toHaveTextContent(items[0].type);
+
+    fireEvent.click(breadcrumbs[1]);
+
+    expect(onClick).toHaveBeenCalledWith(1);
   });
 });

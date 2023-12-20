@@ -1,7 +1,7 @@
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
 
-import SchemaItemsList from '.';
+import SchemaItemsList from './index';
 import '@testing-library/jest-dom';
 
 describe('Tests for SchemaItemsList component', () => {
@@ -40,5 +40,19 @@ describe('Tests for SchemaItemsList component', () => {
 
     expect(listItems.length).toBe(2);
     expect(title).toBeInTheDocument();
+  });
+
+  it('should handle sorting', async () => {
+    render(<SchemaItemsList {...props} />);
+
+    const listItems = screen.getAllByRole('listitem');
+
+    expect(listItems[0]).toHaveTextContent('landings');
+
+    const sortBtn = screen.getByTestId('sort-btn');
+    fireEvent.click(sortBtn);
+    const sortedListItems = screen.getAllByRole('listitem');
+
+    expect(sortedListItems[0]).toHaveTextContent('missions');
   });
 });

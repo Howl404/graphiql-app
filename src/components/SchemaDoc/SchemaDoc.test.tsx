@@ -6,7 +6,7 @@ import { describe, expect, it, vi } from 'vitest';
 import '@testing-library/jest-dom';
 import { SchemaRoot } from 'src/types';
 
-import SchemaDoc from '.';
+import SchemaDoc from './index';
 
 vi.mock('hooks/useSchema', () => ({
   default: vi.fn(),
