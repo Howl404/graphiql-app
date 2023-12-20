@@ -4,6 +4,8 @@ import { useState } from 'react';
 
 import { SchemaField, SchemaStackItem } from 'src/types';
 
+import cls from 'utils/classnames';
+
 import useSchema from 'hooks/useSchema';
 
 import SchemaBreadcrumbs from 'components/SchemaBreadcrumbs';
@@ -12,10 +14,15 @@ import Loader from 'components/UI/Loader';
 
 import style from './style.module.scss';
 
-export default function SchemaDoc() {
+type SchemaDocType = {
+  api: string;
+  isDocsOpen: boolean;
+};
+
+export default function SchemaDoc({ api, isDocsOpen }: SchemaDocType) {
   const [typeNameStack, setTypeNameStack] = useState<SchemaStackItem[]>([]);
 
-  const { schema, error, isLoading } = useSchema();
+  const { schema, error, isLoading } = useSchema(api);
 
   const handleFieldClick = (stackItem: SchemaStackItem) => {
     setTypeNameStack([...typeNameStack, stackItem]);
@@ -132,7 +139,7 @@ export default function SchemaDoc() {
   };
 
   return (
-    <div className={style.container}>
+    <div className={cls(style.container, isDocsOpen && style.docsVisible)}>
       <h1>Documentation</h1>
       <Divider />
       <SchemaBreadcrumbs
