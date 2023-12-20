@@ -1,0 +1,19 @@
+.separator {
+  margin: 0;
+  color: white;
+}
+
+.breadcrumbs {
+  margin-bottom: 16px !important;
+}
+
+.breadcrumbBtn {
+  color: white;
+  text-transform: none !important;
+  min-width: fit-content !important;
+  padding: 0 !important;
+
+  &:disabled {
+    color: var(--accent) !important;
+  }
+}

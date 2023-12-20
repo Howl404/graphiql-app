@@ -4,6 +4,8 @@ import { useState } from 'react';
 
 import { SchemaField, SchemaStackItem } from 'src/types';
 
+import cls from 'utils/classnames';
+
 import useSchema from 'hooks/useSchema';
 
 import SchemaBreadcrumbs from 'components/SchemaBreadcrumbs';
@@ -12,10 +14,15 @@ import Loader from 'components/UI/Loader';
 
 import style from './style.module.scss';
 
-export default function SchemaDoc() {
+type SchemaDocType = {
+  api: string;
+  isDocsOpen: boolean;
+};
+
+export default function SchemaDoc({ api, isDocsOpen }: SchemaDocType) {
   const [typeNameStack, setTypeNameStack] = useState<SchemaStackItem[]>([]);
 
-  const { schema, error, isLoading } = useSchema();
+  const { schema, error, isLoading } = useSchema(api);
 
   const handleFieldClick = (stackItem: SchemaStackItem) => {
     setTypeNameStack([...typeNameStack, stackItem]);
@@ -34,25 +41,35 @@ export default function SchemaDoc() {
       type: currentTypeName,
       name: currentName,
       args: currentArgs,
+      text: currentText,
     } = typeNameStack.at(-1) ?? {};
-    const currentType = schema?.types.find(
-      (type) => type.name === currentTypeName
-    );
+
+    const getCurrentType = (typeName?: string | null) =>
+      schema?.types.find((type) => type.name === typeName);
+
+    const currentType = getCurrentType(currentTypeName);
 
     if (!currentType) return;
 
     const items = [
       { data: currentArgs, title: 'Arguments' },
       { data: currentType?.fields, title: 'Fields' },
+      { data: currentType?.inputFields, title: 'Input Fields' },
     ].filter(({ data }) => data?.length);
 
     return (
       <>
-        <IconButton size="small" onClick={handleBackClick} aria-label="back">
+        <IconButton
+          size="small"
+          onClick={handleBackClick}
+          aria-label="back"
+          color="primary"
+        >
           <ArrowBackIcon fontSize="small" />
         </IconButton>
         <span className={style.listTitle}>
-          {currentName}: {currentTypeName}
+          {currentName}:{' '}
+          <span className={style.itemType}>{currentText ?? currentName}</span>
         </span>
         {currentType?.description && <p>{currentType.description}</p>}
         {items.map(
@@ -66,6 +83,24 @@ export default function SchemaDoc() {
               />
             )
         )}
+        {currentType.possibleTypes?.length && (
+          <>
+            <h3>Implementations</h3>
+            {currentType.possibleTypes.map(({ name }) => {
+              const typeLink = getCurrentType(name);
+              if (!typeLink) return;
+
+              return (
+                <SchemaItemsList
+                  key={typeLink.name}
+                  title={typeLink.name ?? ''}
+                  data={typeLink.fields ?? ([] as SchemaField[])}
+                  handleFieldClick={handleFieldClick}
+                />
+              );
+            })}
+          </>
+        )}
       </>
     );
   };
@@ -78,13 +113,14 @@ export default function SchemaDoc() {
       { type: { name: queryType?.name }, name: 'query' },
       { type: { name: mutationType?.name }, name: 'mutation' },
       { type: { name: subscriptionType?.name }, name: 'subscription' },
-    ].filter((field) => field.type.name !== null) as SchemaField[];
+    ].filter((field) => field.type.name) as SchemaField[];
 
     return (
       <SchemaItemsList
         title="Root types"
         data={rootItems}
         handleFieldClick={handleFieldClick}
+        disableSort
       />
     );
   };
@@ -103,7 +139,7 @@ export default function SchemaDoc() {
   };
 
   return (
-    <div className={style.container}>
+    <div className={cls(style.container, isDocsOpen && style.docsVisible)}>
       <h1>Documentation</h1>
       <Divider />
       <SchemaBreadcrumbs

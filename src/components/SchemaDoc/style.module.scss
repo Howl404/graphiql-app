@@ -1,8 +1,17 @@
 .container {
+  display: none;
   padding: 20px;
 }
 
 .listTitle {
   padding-left: 1rem;
   font-weight: 600;
+}
+
+.itemType {
+  opacity: 0.7;
+}
+
+.docsVisible {
+  display: block;
 }
