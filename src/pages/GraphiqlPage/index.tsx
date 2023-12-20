@@ -1,5 +1,5 @@
 import { FormEvent, useState } from 'react';
-import { DEFAULT_API } from 'src/constants/api';
+import { DEFAULT_API, DEFAULT_QUERY } from 'src/constants/api';
 
 import EditorMode from 'enums/editorMode';
 
@@ -20,7 +20,7 @@ export default function GraphiqlPage() {
   const [inputValue, setInputValue] = useState(DEFAULT_API);
   const [currentEndpoint, setCurrentEndpoint] = useState(DEFAULT_API);
   const [query, setQuery] = useState(
-    'query ExampleQuery ( $first : Int=3) {rockets {company}}fragment comparisonFields on Character {name country}'
+    currentEndpoint === DEFAULT_API ? DEFAULT_QUERY : ''
   );
   const [viewerValue, setViewerValue] = useState('');
   const [isJsonLoading, setIsJsonLoading] = useState(false);

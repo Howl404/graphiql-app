@@ -84,7 +84,7 @@ function formatQueryInner(query: string) {
     .replace(/} (?=[A-Za-z)])/gm, `${CLOSING_BRACE}${NEW_LINE}`)
     .replace(/}(?=[A-Za-z)])/gm, `${CLOSING_BRACE}${NEW_LINE}`)
     .replace(/(?<=[A-Za-z)]) (?=[A-Za-z)])/gm, NEW_LINE)
-    .replace(/ {2,}/gm, ' ');
+    .replace(/ {2,}/gm, SINGLE_SPACE);
 }
 
 function addIndents(query: string) {
@@ -95,7 +95,8 @@ function addIndents(query: string) {
 
   for (let i = 0; i < queryArr.length; i++) {
     if (queryArr[i].includes(CLOSING_BRACE)) indentCount--;
-    result += ' '.repeat(indentCount * indent) + queryArr[i].trim() + NEW_LINE;
+    result +=
+      SINGLE_SPACE.repeat(indentCount * indent) + queryArr[i].trim() + NEW_LINE;
     if (queryArr[i].includes(OPENING_BRACE)) indentCount++;
   }
 

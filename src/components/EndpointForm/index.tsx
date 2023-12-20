@@ -24,7 +24,7 @@ export default function EndpointForm({
         type="text"
         placeholder="Enter endpoint"
       />
-      <Button onClick={handleChangeEndpoint} size="small" variant="contained">
+      <Button type="submit" size="small" variant="contained">
         Change endpoint
       </Button>
     </form>
