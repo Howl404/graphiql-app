@@ -2,7 +2,7 @@ import { FirebaseError } from 'firebase/app';
 
 import displayNotification from 'utils/displayNotification';
 
-const firebaseErrors: Record<string, string> = {
+export const firebaseErrors: Record<string, string> = {
   'auth/invalid-credential':
     "Invalid credentials. If you don't have an account, please sign up.",
   'auth/email-already-in-use':
