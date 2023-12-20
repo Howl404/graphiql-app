@@ -2,6 +2,9 @@ import Paths from 'enums/paths';
 
 import AuthForm from 'components/AuthForm';
 import Layout from 'components/Layout';
+import SchemaDoc from 'components/SchemaDoc';
+
+import NotFoundPage from 'pages/NotFoundPage';
 
 import GraphiqlPage from 'pages/GraphiqlPage';
 
@@ -31,7 +34,7 @@ export default function Routes() {
           </ConditionalRoute>
         ),
       },
-      { path: Paths.NotFound, element: <h1>404 page</h1> },
+      { path: Paths.NotFound, element: <NotFoundPage /> },
     ],
   };
 }
