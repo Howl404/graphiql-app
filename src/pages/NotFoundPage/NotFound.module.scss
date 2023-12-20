@@ -5,23 +5,15 @@
   justify-content: center;
   text-align: center;
 
-  p {
-    font-size: 18px;
-  }
-}
-
-.headingContainer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 68px;
-
   h1 {
-    margin: 0;
+    font-size: 128px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
   }
 
   svg {
-    height: 190px;
+    height: 180px;
     width: auto;
     background: var(--accent);
     clip-path: circle(60px);
