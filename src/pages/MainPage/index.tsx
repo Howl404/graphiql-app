@@ -12,7 +12,7 @@ import styles from './MainPage.module.scss';
 export default function MainPage() {
   const [user] = useAuthState(auth);
 
-  const { t } = useTranslation();
+  const translation = useTranslation();
 
   return (
     <div>
@@ -33,20 +33,20 @@ export default function MainPage() {
         )}
       </div>
       <div className={styles.textContainer}>
-        <h1>{t('MainPage.heading')}</h1>
-        <p>{t('MainPage.shortDescription')}</p>
+        <h1>{translation('MainPage.heading')}</h1>
+        <p>{translation('MainPage.shortDescription')}</p>
 
         <ul>
-          <li>{t('MainPage.firstFeature')}</li>
-          <li>{t('MainPage.secondFeature')}</li>
-          <li>{t('MainPage.thirdFeature')}</li>
+          <li>{translation('MainPage.firstFeature')}</li>
+          <li>{translation('MainPage.secondFeature')}</li>
+          <li>{translation('MainPage.thirdFeature')}</li>
         </ul>
 
-        <h2>{t('MainPage.aboutUsHeading')}</h2>
-        <p>{t('MainPage.aboutUsText')}</p>
+        <h2>{translation('MainPage.aboutUsHeading')}</h2>
+        <p>{translation('MainPage.aboutUsText')}</p>
 
-        <h2>{t('MainPage.aboutCourseHeading')}</h2>
-        <p>{t('MainPage.aboutCourseText')}</p>
+        <h2>{translation('MainPage.aboutCourseHeading')}</h2>
+        <p>{translation('MainPage.aboutCourseText')}</p>
       </div>
     </div>
   );

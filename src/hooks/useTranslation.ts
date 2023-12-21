@@ -15,9 +15,9 @@ const translations = {
 export const useTranslation = () => {
   const { lang } = useContext(LangContext);
 
-  const t = (key: TranslationKeys): string => {
+  const translation = (key: TranslationKeys): string => {
     return translations[lang][key];
   };
 
-  return { t };
+  return translation;
 };
