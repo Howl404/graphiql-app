@@ -1,0 +1,20 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.sandboxWrapper {
+  display: flex;
+  gap: 10px;
+}
+
+.editorWrapper {
+  width: 50%;
+  position: relative;
+}
+
+.jsonViewer {
+  width: 50%;
+}

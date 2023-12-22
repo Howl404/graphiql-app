@@ -56,6 +56,7 @@ export default function AuthForm() {
           }}
           size="large"
           variant={mode === 'SignIn' ? 'outlined' : 'text'}
+          data-testid="mode-sign-in"
         >
           {AuthMode.SignIn}
         </Button>
@@ -65,6 +66,7 @@ export default function AuthForm() {
           }}
           size="large"
           variant={mode === 'SignUp' ? 'outlined' : 'text'}
+          data-testid="mode-sign-up"
         >
           {AuthMode.SignUp}
         </Button>
@@ -125,7 +127,7 @@ export default function AuthForm() {
             )}
           />
         )}
-        <Button type="submit" variant="contained">
+        <Button type="submit" variant="contained" data-testid="submit-btn">
           {AuthMode[mode]}
         </Button>
       </form>

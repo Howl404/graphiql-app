@@ -5,6 +5,9 @@ import Layout from 'components/Layout';
 import SchemaDoc from 'components/SchemaDoc';
 
 import MainPage from 'pages/MainPage';
+import NotFoundPage from 'pages/NotFoundPage';
+import GraphiqlPage from 'pages/GraphiqlPage';
+
 
 import ConditionalRoute from './ConditionalRoute';
 
@@ -20,8 +23,7 @@ export default function Routes() {
         path: Paths.Editor,
         element: (
           <ConditionalRoute requireAuth={true} redirectTo={Paths.Auth}>
-            <h1>Editor</h1>
-            <SchemaDoc />
+            <GraphiqlPage />
           </ConditionalRoute>
         ),
       },
@@ -33,7 +35,7 @@ export default function Routes() {
           </ConditionalRoute>
         ),
       },
-      { path: Paths.NotFound, element: <h1>404 page</h1> },
+      { path: Paths.NotFound, element: <NotFoundPage /> },
     ],
   };
 }

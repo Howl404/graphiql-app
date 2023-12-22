@@ -82,7 +82,7 @@ export default function SchemaItemsList({
       </ListSubheader>
       <Collapse in={open}>
         {!disableSort && data.length > 1 && (
-          <IconButton onClick={handleChangeSort}>
+          <IconButton onClick={handleChangeSort} data-testid="sort-btn">
             <AbcIcon fontSize="large" color="primary" />
             {sortOrder === 'az' ? (
               <ArrowForward fontSize="small" color="primary" />

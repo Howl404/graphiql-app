@@ -14,6 +14,7 @@ export default function useSchema(api = DEFAULT_API) {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
+    setError(false);
     const getSchema = async () => {
       if (cache[api]) {
         setSchema(cache[api]);
