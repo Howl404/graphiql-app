@@ -18,7 +18,7 @@ export default function MainPage() {
     <div>
       <div className={styles.buttonsContainer}>
         {user ? (
-          <Button href={Paths.Editor} variant={'outlined'}>
+          <Button href={Paths.Graphiql} variant={'outlined'}>
             Main Page
           </Button>
         ) : (

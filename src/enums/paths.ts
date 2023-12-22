@@ -1,7 +1,7 @@
 enum Paths {
   Main = '/',
   Auth = '/auth',
-  Editor = '/graphiql',
+  Graphiql = '/graphiql',
   NotFound = '*',
 }
 
