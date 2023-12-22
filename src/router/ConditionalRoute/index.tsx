@@ -1,7 +1,7 @@
 import { PropsWithChildren } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { Navigate } from 'react-router-dom';
-import { auth } from 'src/firebase.ts';
+import { auth } from 'src/firebase';
 
 import Loader from 'components/UI/Loader';
 

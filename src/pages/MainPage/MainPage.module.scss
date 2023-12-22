@@ -1,0 +1,27 @@
+.buttonsContainer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.textContainer {
+  margin: 0 auto;
+  max-width: 870px;
+
+  li {
+    margin: 5px 0;
+    line-height: 28px;
+  }
+
+  // TODO: font size and line height vars
+
+  p {
+    font-size: 18px;
+    line-height: 28px;
+  }
+
+  h1 {
+    font-size: 40px;
+    line-height: 56px;
+  }
+}

@@ -3,8 +3,9 @@ import docsIcon from 'assets/docs-icon.svg';
 import prettifyIcon from 'assets/prettify-icon.svg';
 import runIcon from 'assets/run-icon.svg';
 
-import styles from './ActionsPanel.module.scss';
 import copyToClipboard from './utils/copyToClipboard';
+
+import styles from './ActionsPanel.module.scss';
 
 type ActionsPanelType = {
   query: string;

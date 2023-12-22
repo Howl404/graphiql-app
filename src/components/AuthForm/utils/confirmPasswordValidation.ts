@@ -1,4 +1,4 @@
-import { AuthFormInputs } from 'src/types.ts';
+import { AuthFormInputs } from 'src/types';
 
 export default function confirmPasswordValidation(
   confirmPassword: string | undefined,

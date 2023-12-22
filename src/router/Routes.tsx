@@ -2,11 +2,10 @@ import Paths from 'enums/paths';
 
 import AuthForm from 'components/AuthForm';
 import Layout from 'components/Layout';
-import SchemaDoc from 'components/SchemaDoc';
-
-import NotFoundPage from 'pages/NotFoundPage';
 
 import GraphiqlPage from 'pages/GraphiqlPage';
+import MainPage from 'pages/MainPage';
+import NotFoundPage from 'pages/NotFoundPage';
 
 import ConditionalRoute from './ConditionalRoute';
 
@@ -16,10 +15,10 @@ export default function Routes() {
     children: [
       {
         path: Paths.Main,
-        element: <h1>MAIN PAGE</h1>,
+        element: <MainPage />,
       },
       {
-        path: Paths.Editor,
+        path: Paths.Graphiql,
         element: (
           <ConditionalRoute requireAuth={true} redirectTo={Paths.Auth}>
             <GraphiqlPage />

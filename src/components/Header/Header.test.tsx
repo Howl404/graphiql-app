@@ -1,7 +1,8 @@
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
-import LangContextProvider from 'src/context/LangContext';
 import { beforeEach, describe, expect, it } from 'vitest';
+
+import LangContextProvider from 'context/LangContext';
 
 import '@testing-library/jest-dom';
 import Header from '.';

@@ -70,6 +70,16 @@
             "position": "after"
           },
           {
+            "pattern": "locales/**",
+            "group": "internal",
+            "position": "after"
+          },
+          {
+            "pattern": "context/**",
+            "group": "internal",
+            "position": "after"
+          },
+          {
             "pattern": "services/**",
             "group": "internal",
             "position": "after"
@@ -100,7 +110,7 @@
             "position": "after"
           },
           {
-            "pattern": "./utils/*.{ts,tsx}",
+            "pattern": "./utils/**",
             "group": "internal",
             "position": "after"
           },

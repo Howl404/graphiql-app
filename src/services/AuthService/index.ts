@@ -6,9 +6,9 @@ import {
   signOut,
 } from 'firebase/auth';
 import { addDoc, collection, getDocs, query, where } from 'firebase/firestore';
-import { auth, db } from 'src/firebase.ts';
+import { auth, db } from 'src/firebase';
 
-import authErrorHandler from 'services/AuthService/authErrorHandler.ts';
+import authErrorHandler from 'services/AuthService/authErrorHandler';
 
 const PATH_TO_USERS_COLLECTION = 'users';
 

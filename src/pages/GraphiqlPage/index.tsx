@@ -13,8 +13,9 @@ import SchemaDoc from 'components/SchemaDoc';
 import Dimming from 'components/UI/Dimming';
 import Loader from 'components/UI/Loader';
 
-import styles from './GraphiqlPage.module.scss';
 import prettifyQuery from './utils/prettifyQuery';
+
+import styles from './GraphiqlPage.module.scss';
 
 export default function GraphiqlPage() {
   const [inputValue, setInputValue] = useState(DEFAULT_API);

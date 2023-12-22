@@ -1,7 +1,8 @@
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
-import LangContextProvider from 'src/context/LangContext';
 import { describe, expect, it } from 'vitest';
+
+import LangContextProvider from 'context/LangContext';
 
 import '@testing-library/jest-dom';
 import Layout from './index';
