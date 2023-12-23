@@ -50,8 +50,9 @@ export default function ActionsPanel({
       width: 26,
     },
   ];
+
   return (
-    <ul className={styles.actions}>
+    <ul className={styles.actions} data-testid="actions-panel">
       {icons.map((icon) => (
         <li key={icon.alt}>
           <img
@@ -61,6 +62,7 @@ export default function ActionsPanel({
             alt={icon.alt}
             title={icon.title}
             width={icon.width}
+            data-testid={icon.alt}
           />
         </li>
       ))}
