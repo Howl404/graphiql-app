@@ -23,8 +23,14 @@ export default function EndpointForm({
         onBlur={handleChangeEndpoint}
         type="text"
         placeholder="Enter endpoint"
+        data-testid="endpoint-input"
       />
-      <Button type="submit" size="small" variant="contained">
+      <Button
+        type="submit"
+        size="small"
+        variant="contained"
+        data-testid="endpoint-btn"
+      >
         Change endpoint
       </Button>
     </form>
