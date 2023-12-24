@@ -1,4 +1,4 @@
-import { javascript } from '@codemirror/lang-javascript';
+import { langs } from '@uiw/codemirror-extensions-langs';
 import { aura } from '@uiw/codemirror-theme-aura';
 import { tokyoNightStorm } from '@uiw/codemirror-theme-tokyo-night-storm';
 import CodeMirror, { lineNumbers } from '@uiw/react-codemirror';
@@ -25,12 +25,14 @@ export default function Editor({ editorMode, value, setValue }: EditorType) {
 
   const isReadonly = editorMode === EditorMode.JSON;
   const editorTheme = isReadonly ? tokyoNightStorm : aura;
-  const editorLanguage = isReadonly ? javascript() : graphql();
+  const editorLanguage = isReadonly ? langs.json() : graphql();
+  const testId = isReadonly ? 'viewer' : 'editor';
   const basicSetup = {
     lineNumbers: false,
     closeBrackets: false,
     autocompletion: true,
     highlightSelectionMatches: true,
+    foldGutter: true,
   };
 
   return (
@@ -44,6 +46,7 @@ export default function Editor({ editorMode, value, setValue }: EditorType) {
       extensions={[lineNumbers(), editorLanguage]}
       onChange={onChange}
       basicSetup={basicSetup}
+      data-testid={testId}
     />
   );
 }

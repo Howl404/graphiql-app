@@ -24,7 +24,7 @@ export default function prettifyQuery(fullQuery: string) {
   return resultArr.join(`${NEW_LINE}${NEW_LINE}fragment `);
 }
 
-function checkBrackets(query: string) {
+export function checkBrackets(query: string) {
   const stack = [];
   for (let i = 0; i < query.length; i++) {
     const currentChar = query[i];
@@ -40,11 +40,11 @@ function checkBrackets(query: string) {
   return stack.length === 0;
 }
 
-function clearFormat(query: string) {
+export function clearFormat(query: string) {
   return query.replace(/\n/g, SINGLE_SPACE).replace(/\s+/g, SINGLE_SPACE);
 }
 
-function formatQuery(query: string) {
+export function formatQuery(query: string) {
   const title =
     query.replace(/(?<![A-Za-z)]) {/gm, `{${NEW_LINE}`)[0] !== OPENING_BRACE
       ? query.split(OPENING_BRACE)[0]
@@ -60,7 +60,7 @@ function formatQuery(query: string) {
   }
 }
 
-function formatTitle(queryTitle: string) {
+export function formatTitle(queryTitle: string) {
   return queryTitle
     .replace(/( \( | \(|\( )/gm, '(')
     .replace(/( \))/gm, ')')
@@ -69,10 +69,11 @@ function formatTitle(queryTitle: string) {
     .replace(/((?<=.[^ ])= |(?<=.[^ ])=(?=.[^ ])| =(?=.[^ ]))/gm, ' = ');
 }
 
-function formatQueryInner(query: string) {
+export function formatQueryInner(query: string) {
   return query
     .replace(/( \( | \(|\( )/gm, '(')
     .replace(/( \))/gm, ')')
+    .replace(/\)(?=[A-Za-z])/gm, `)${NEW_LINE}`)
     .replace(/( : |(?<=[A-Za-z]):(?=[A-Za-z]))/gm, ': ')
     .replace(/( , |(?<=[A-Za-z]),(?=[A-Za-z]))/gm, ', ')
     .replace(/((?<=.[^ ])= |(?<=.[^ ])=(?=.[^ ])| =(?=.[^ ]))/gm, ' = ')
@@ -87,7 +88,7 @@ function formatQueryInner(query: string) {
     .replace(/ {2,}/gm, SINGLE_SPACE);
 }
 
-function addIndents(query: string) {
+export function addIndents(query: string) {
   const queryArr = query.split(NEW_LINE);
   const indent = 2;
   let indentCount = 0;
