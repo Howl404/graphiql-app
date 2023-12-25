@@ -15,9 +15,9 @@ import InputPassword from 'components/UI/InputPassword';
 import confirmPasswordValidation from './utils/confirmPasswordValidation';
 import passwordValidation from './utils/passwordValidation';
 
-import styles from './AuthForm.module.scss';
+import styles from './AuthPage.module.scss';
 
-export default function AuthForm() {
+export default function AuthPage() {
   const [mode, setMode] = useState<keyof typeof AuthMode>('SignIn');
 
   const navigate = useNavigate();
