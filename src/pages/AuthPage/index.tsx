@@ -1,4 +1,5 @@
-import { Button, TextField } from '@mui/material';
+import { Google } from '@mui/icons-material';
+import { Button, Divider, TextField } from '@mui/material';
 import { useState } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
@@ -129,6 +130,10 @@ export default function AuthPage() {
         )}
         <Button type="submit" variant="contained" data-testid="submit-btn">
           {AuthMode[mode]}
+        </Button>
+        <Divider textAlign="center">or</Divider>
+        <Button startIcon={<Google />} onClick={AuthService.signInWithGoogle}>
+          Continue with google
         </Button>
       </form>
     </div>
