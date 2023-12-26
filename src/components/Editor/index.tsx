@@ -1,11 +1,16 @@
 import { langs } from '@uiw/codemirror-extensions-langs';
 import { aura } from '@uiw/codemirror-theme-aura';
+import { githubLight } from '@uiw/codemirror-theme-github';
+import { materialLight } from '@uiw/codemirror-theme-material';
 import { tokyoNightStorm } from '@uiw/codemirror-theme-tokyo-night-storm';
 import CodeMirror, { lineNumbers } from '@uiw/react-codemirror';
 import { graphql } from 'cm6-graphql';
-import { useCallback } from 'react';
+import { useCallback, useContext } from 'react';
 
 import EditorMode from 'enums/editorMode';
+import Themes from 'enums/themes';
+
+import { AppThemeContext } from 'context/ThemeContext';
 
 import styles from './Editor.module.scss';
 
@@ -23,8 +28,15 @@ export default function Editor({ editorMode, value, setValue }: EditorType) {
     [setValue]
   );
 
+  const { themeType } = useContext(AppThemeContext);
   const isReadonly = editorMode === EditorMode.JSON;
-  const editorTheme = isReadonly ? tokyoNightStorm : aura;
+  let editorTheme;
+  if (isReadonly) {
+    editorTheme = themeType === Themes.Dark ? tokyoNightStorm : materialLight;
+  } else {
+    editorTheme = themeType === Themes.Dark ? aura : githubLight;
+  }
+
   const editorLanguage = isReadonly ? langs.json() : graphql();
   const testId = isReadonly ? 'viewer' : 'editor';
   const basicSetup = {

@@ -1,5 +1,11 @@
 import { Button } from '@mui/material';
-import { FormEvent } from 'react';
+import { FormEvent, useContext } from 'react';
+
+import Themes from 'enums/themes';
+
+import cls from 'utils/classnames';
+
+import { AppThemeContext } from 'context/ThemeContext';
 
 import styles from './EndpointForm.module.scss';
 
@@ -14,10 +20,15 @@ export default function EndpointForm({
   handleChangeEndpoint,
   handleChangeInput,
 }: EndpointFormType) {
+  const { themeType } = useContext(AppThemeContext);
+
   return (
     <form className={styles.handlerEndpoint} onSubmit={handleChangeEndpoint}>
       <input
-        className={styles.inputEndpoint}
+        className={cls(
+          styles.inputEndpoint,
+          themeType === Themes.Dark ? styles.inputDark : styles.inputLight
+        )}
         value={inputValue}
         onChange={(event) => handleChangeInput(event.target.value)}
         onBlur={handleChangeEndpoint}
@@ -26,12 +37,13 @@ export default function EndpointForm({
         data-testid="endpoint-input"
       />
       <Button
+        className={styles.updateBtn}
         type="submit"
         size="small"
         variant="contained"
         data-testid="endpoint-btn"
       >
-        Change endpoint
+        Update
       </Button>
     </form>
   );

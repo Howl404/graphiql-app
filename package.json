@@ -22,6 +22,8 @@
     "@types/toastify-js": "^1.12.3",
     "@uiw/codemirror-extensions-langs": "^4.21.21",
     "@uiw/codemirror-theme-aura": "^4.21.21",
+    "@uiw/codemirror-theme-github": "^4.21.21",
+    "@uiw/codemirror-theme-material": "^4.21.21",
     "@uiw/codemirror-theme-tokyo-night-storm": "^4.21.21",
     "@uiw/react-codemirror": "^4.21.21",
     "cm6-graphql": "^0.0.12",
