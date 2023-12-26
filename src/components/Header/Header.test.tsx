@@ -3,6 +3,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { beforeEach, describe, expect, it } from 'vitest';
 
 import LangContextProvider from 'context/LangContext';
+import AppThemeProvider from 'context/ThemeContext';
 
 import '@testing-library/jest-dom';
 import Header from '.';
@@ -11,9 +12,11 @@ describe('Header', () => {
   beforeEach(() => {
     render(
       <BrowserRouter>
-        <LangContextProvider>
-          <Header />
-        </LangContextProvider>
+        <AppThemeProvider>
+          <LangContextProvider>
+            <Header />
+          </LangContextProvider>
+        </AppThemeProvider>
       </BrowserRouter>
     );
   });
