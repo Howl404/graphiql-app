@@ -29,6 +29,7 @@ export default function ActionsPanel({
   setPrettifiedQuery,
 }: ActionsPanelType) {
   const { themeType } = useContext(AppThemeContext);
+  const isDarkTheme = themeType === Themes.Dark;
   const icons = [
     {
       onClick: sendQuery,
@@ -64,7 +65,7 @@ export default function ActionsPanel({
     <ul
       className={cls(
         styles.actions,
-        themeType === Themes.Dark ? styles.actionsDark : styles.actionsLight
+        isDarkTheme ? styles.actionsDark : styles.actionsLight
       )}
       data-testid="actions-panel"
     >

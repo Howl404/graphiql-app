@@ -64,6 +64,7 @@ export default function Header() {
   const isAuth = !!auth.currentUser;
   const { lang, setLang } = useContext(LangContext);
   const { themeType, toggleTheme } = useContext(AppThemeContext);
+  const isDarkTheme = themeType === Themes.Dark;
 
   function handleAuthClick() {
     if (isAuth) {
@@ -104,11 +105,7 @@ export default function Header() {
                     onClick={toggleTheme}
                     color="primary"
                   >
-                    {themeType === Themes.Dark ? (
-                      <BrightnessMedium />
-                    ) : (
-                      <Brightness7 />
-                    )}
+                    {isDarkTheme ? <BrightnessMedium /> : <Brightness7 />}
                   </IconButton>
                   <ToggleButtons
                     optionsName="language"

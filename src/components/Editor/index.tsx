@@ -29,12 +29,13 @@ export default function Editor({ editorMode, value, setValue }: EditorType) {
   );
 
   const { themeType } = useContext(AppThemeContext);
+  const isDarkTheme = themeType === Themes.Dark;
   const isReadonly = editorMode === EditorMode.JSON;
   let editorTheme;
   if (isReadonly) {
-    editorTheme = themeType === Themes.Dark ? tokyoNightStorm : materialLight;
+    editorTheme = isDarkTheme ? tokyoNightStorm : materialLight;
   } else {
-    editorTheme = themeType === Themes.Dark ? aura : githubLight;
+    editorTheme = isDarkTheme ? aura : githubLight;
   }
 
   const editorLanguage = isReadonly ? langs.json() : graphql();

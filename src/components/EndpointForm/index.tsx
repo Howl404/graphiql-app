@@ -21,13 +21,14 @@ export default function EndpointForm({
   handleChangeInput,
 }: EndpointFormType) {
   const { themeType } = useContext(AppThemeContext);
+  const isDarkTheme = themeType === Themes.Dark;
 
   return (
     <form className={styles.handlerEndpoint} onSubmit={handleChangeEndpoint}>
       <input
         className={cls(
           styles.inputEndpoint,
-          themeType === Themes.Dark ? styles.inputDark : styles.inputLight
+          isDarkTheme ? styles.inputDark : styles.inputLight
         )}
         value={inputValue}
         onChange={(event) => handleChangeInput(event.target.value)}

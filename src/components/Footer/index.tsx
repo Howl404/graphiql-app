@@ -13,6 +13,7 @@ import styles from './Footer.module.scss';
 
 export default function Footer() {
   const { themeType } = useContext(AppThemeContext);
+  const isDarkTheme = themeType === Themes.Dark;
 
   const developers = [
     { name: 'Arturas Viachirevas', github: 'https://github.com/Howl404' },
@@ -23,7 +24,7 @@ export default function Footer() {
     <div
       className={cls(
         styles.wrapper,
-        themeType === Themes.Dark ? styles.wrapperDark : styles.wrapperLight
+        isDarkTheme ? styles.wrapperDark : styles.wrapperLight
       )}
     >
       <ul className={styles.githubList}>
@@ -32,7 +33,7 @@ export default function Footer() {
             <a
               className={cls(
                 styles.link,
-                themeType === Themes.Dark ? styles.linkDark : styles.linkLight
+                isDarkTheme ? styles.linkDark : styles.linkLight
               )}
               href={developer.github}
               target="_blank"
