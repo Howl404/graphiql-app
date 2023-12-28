@@ -1,5 +1,5 @@
 import { ThemeOptions } from '@mui/material';
-import { blue } from '@mui/material/colors';
+import { blue, indigo } from '@mui/material/colors';
 
 export const darkTheme: ThemeOptions = {
   palette: {
@@ -17,6 +17,7 @@ export const lightTheme: ThemeOptions = {
   palette: {
     mode: 'light',
     background: { default: 'var(--secondary-dark)' },
+    primary: { main: indigo[500] },
   },
   typography: {
     fontFamily: 'Montserrat, Arial, Helvetica, sans-serif',

@@ -1,7 +1,7 @@
 import { langs } from '@uiw/codemirror-extensions-langs';
 import { aura } from '@uiw/codemirror-theme-aura';
-import { githubLight } from '@uiw/codemirror-theme-github';
-import { materialLight } from '@uiw/codemirror-theme-material';
+import { noctisLilac } from '@uiw/codemirror-theme-noctis-lilac';
+import { tokyoNightDay } from '@uiw/codemirror-theme-tokyo-night-day';
 import { tokyoNightStorm } from '@uiw/codemirror-theme-tokyo-night-storm';
 import CodeMirror, { lineNumbers } from '@uiw/react-codemirror';
 import { graphql } from 'cm6-graphql';
@@ -31,9 +31,9 @@ export default function Editor({ editorMode, value, setValue }: EditorType) {
   const isReadonly = editorMode === EditorMode.JSON;
   let editorTheme;
   if (isReadonly) {
-    editorTheme = isDarkTheme ? tokyoNightStorm : materialLight;
+    editorTheme = isDarkTheme ? tokyoNightStorm : tokyoNightDay;
   } else {
-    editorTheme = isDarkTheme ? aura : githubLight;
+    editorTheme = isDarkTheme ? aura : noctisLilac;
   }
 
   const editorLanguage = isReadonly ? langs.json() : graphql();
