@@ -6,6 +6,8 @@ import { describe, expect, it } from 'vitest';
 
 import '@testing-library/jest-dom';
 
+import AppThemeProvider from 'context/ThemeContext';
+
 import { NOT_FOUND_TEXT } from 'pages/NotFoundPage';
 
 describe('Not Found page', () => {
@@ -15,9 +17,11 @@ describe('Not Found page', () => {
     });
 
     render(
-      <LangContextProvider>
-        <RouterProvider router={router} />
-      </LangContextProvider>
+      <AppThemeProvider>
+        <LangContextProvider>
+          <RouterProvider router={router} />
+        </LangContextProvider>
+      </AppThemeProvider>
     );
 
     const notFoundText = screen.getByTestId('not-found-text');

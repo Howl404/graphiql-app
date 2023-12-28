@@ -1,5 +1,6 @@
 import Button from '@mui/material/Button';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import { Link } from 'react-router-dom';
 import { auth } from 'src/firebase';
 
 import authMode from 'enums/authMode';
@@ -18,15 +19,15 @@ export default function MainPage() {
     <div>
       <div className={styles.buttonsContainer}>
         {user ? (
-          <Button href={Paths.Graphiql} variant={'outlined'}>
+          <Button component={Link} to={Paths.Graphiql} variant={'outlined'}>
             Main Page
           </Button>
         ) : (
           <>
-            <Button href={Paths.Auth} variant={'outlined'}>
+            <Button component={Link} to={Paths.Auth} variant={'outlined'}>
               {authMode.SignIn}
             </Button>
-            <Button href={Paths.Auth} variant={'outlined'}>
+            <Button component={Link} to={Paths.Auth} variant={'outlined'}>
               {authMode.SignUp}
             </Button>
           </>
