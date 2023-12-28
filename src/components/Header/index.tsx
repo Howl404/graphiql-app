@@ -63,8 +63,7 @@ export default function Header() {
   const navigate = useNavigate();
   const isAuth = !!auth.currentUser;
   const { lang, setLang } = useContext(LangContext);
-  const { themeType, toggleTheme } = useContext(AppThemeContext);
-  const isDarkTheme = themeType === Themes.Dark;
+  const { themeType, toggleTheme, isDarkTheme } = useContext(AppThemeContext);
 
   function handleAuthClick() {
     if (isAuth) {

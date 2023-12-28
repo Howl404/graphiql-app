@@ -8,7 +8,6 @@ import { graphql } from 'cm6-graphql';
 import { useCallback, useContext } from 'react';
 
 import EditorMode from 'enums/editorMode';
-import Themes from 'enums/themes';
 
 import { AppThemeContext } from 'context/ThemeContext';
 
@@ -27,9 +26,8 @@ export default function Editor({ editorMode, value, setValue }: EditorType) {
     },
     [setValue]
   );
+  const { isDarkTheme } = useContext(AppThemeContext);
 
-  const { themeType } = useContext(AppThemeContext);
-  const isDarkTheme = themeType === Themes.Dark;
   const isReadonly = editorMode === EditorMode.JSON;
   let editorTheme;
   if (isReadonly) {

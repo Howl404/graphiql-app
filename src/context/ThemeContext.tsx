@@ -1,21 +1,25 @@
 import CssBaseline from '@mui/material/CssBaseline';
-import { createTheme, ThemeOptions, ThemeProvider } from '@mui/material/styles';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { createContext, PropsWithChildren, useState } from 'react';
 
 import Themes from 'enums/themes';
 
+import getBrowserTheme from './utils/getBrowserTheme';
 import { darkTheme, lightTheme } from './utils/themes';
 
 type AppThemeContextData = {
   themeType: Themes;
   toggleTheme: () => void;
+  isDarkTheme: boolean;
 };
 
 export const AppThemeContext = createContext<AppThemeContextData>(null!);
 
 const AppThemeProvider = ({ children }: PropsWithChildren) => {
   const initialTheme =
-    (localStorage.getItem('theme') as Themes | null) ?? Themes.Dark;
+    (localStorage.getItem('theme') as Themes | null) ??
+    getBrowserTheme() ??
+    Themes.Dark;
   const [themeType, setThemeType] = useState<Themes>(initialTheme);
 
   const toggleTheme = () => {
@@ -28,14 +32,11 @@ const AppThemeProvider = ({ children }: PropsWithChildren) => {
     );
   };
 
-  const theme = createTheme(
-    themeType === Themes.Dark
-      ? (darkTheme as ThemeOptions)
-      : (lightTheme as ThemeOptions)
-  );
+  const theme = createTheme(themeType === Themes.Dark ? darkTheme : lightTheme);
+  const isDarkTheme = themeType === Themes.Dark;
 
   return (
-    <AppThemeContext.Provider value={{ themeType, toggleTheme }}>
+    <AppThemeContext.Provider value={{ themeType, toggleTheme, isDarkTheme }}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
         {children}

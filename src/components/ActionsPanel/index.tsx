@@ -1,7 +1,5 @@
 import { useContext } from 'react';
 
-import Themes from 'enums/themes';
-
 import cls from 'utils/classnames';
 
 import { AppThemeContext } from 'context/ThemeContext';
@@ -28,8 +26,8 @@ export default function ActionsPanel({
   toggleDocs,
   setPrettifiedQuery,
 }: ActionsPanelType) {
-  const { themeType } = useContext(AppThemeContext);
-  const isDarkTheme = themeType === Themes.Dark;
+  const { isDarkTheme } = useContext(AppThemeContext);
+
   const icons = [
     {
       onClick: sendQuery,

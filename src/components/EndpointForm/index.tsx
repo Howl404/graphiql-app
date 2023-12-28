@@ -1,8 +1,6 @@
 import { Button } from '@mui/material';
 import { FormEvent, useContext } from 'react';
 
-import Themes from 'enums/themes';
-
 import cls from 'utils/classnames';
 
 import { AppThemeContext } from 'context/ThemeContext';
@@ -20,8 +18,7 @@ export default function EndpointForm({
   handleChangeEndpoint,
   handleChangeInput,
 }: EndpointFormType) {
-  const { themeType } = useContext(AppThemeContext);
-  const isDarkTheme = themeType === Themes.Dark;
+  const { isDarkTheme } = useContext(AppThemeContext);
 
   return (
     <form className={styles.handlerEndpoint} onSubmit={handleChangeEndpoint}>

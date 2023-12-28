@@ -1,7 +1,5 @@
 import { useContext } from 'react';
 
-import Themes from 'enums/themes';
-
 import cls from 'utils/classnames';
 
 import { AppThemeContext } from 'context/ThemeContext';
@@ -12,8 +10,7 @@ import rsschoolIcon from 'assets/rs-school.svg';
 import styles from './Footer.module.scss';
 
 export default function Footer() {
-  const { themeType } = useContext(AppThemeContext);
-  const isDarkTheme = themeType === Themes.Dark;
+  const { isDarkTheme } = useContext(AppThemeContext);
 
   const developers = [
     { name: 'Arturas Viachirevas', github: 'https://github.com/Howl404' },
