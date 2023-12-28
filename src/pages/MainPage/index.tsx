@@ -19,17 +19,17 @@ export default function MainPage() {
     <div>
       <div className={styles.buttonsContainer}>
         {user ? (
-          <Link to={Paths.Graphiql}>
-            <Button variant={'outlined'}>Main Page</Button>
-          </Link>
+          <Button component={Link} to={Paths.Graphiql} variant={'outlined'}>
+            Main Page
+          </Button>
         ) : (
           <>
-            <Link to={Paths.Auth}>
-              <Button variant={'outlined'}>{authMode.SignIn}</Button>
-            </Link>
-            <Link to={Paths.Auth}>
-              <Button variant={'outlined'}>{authMode.SignUp}</Button>
-            </Link>
+            <Button component={Link} to={Paths.Auth} variant={'outlined'}>
+              {authMode.SignIn}
+            </Button>
+            <Button component={Link} to={Paths.Auth} variant={'outlined'}>
+              {authMode.SignUp}
+            </Button>
           </>
         )}
       </div>
