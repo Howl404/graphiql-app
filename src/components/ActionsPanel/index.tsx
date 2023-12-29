@@ -1,3 +1,9 @@
+import { useContext } from 'react';
+
+import cls from 'utils/classnames';
+
+import { AppThemeContext } from 'context/ThemeContext';
+
 import copyIcon from 'assets/copy-icon.svg';
 import docsIcon from 'assets/docs-icon.svg';
 import prettifyIcon from 'assets/prettify-icon.svg';
@@ -20,6 +26,8 @@ export default function ActionsPanel({
   toggleDocs,
   setPrettifiedQuery,
 }: ActionsPanelType) {
+  const { isDarkTheme } = useContext(AppThemeContext);
+
   const icons = [
     {
       onClick: sendQuery,
@@ -52,7 +60,13 @@ export default function ActionsPanel({
   ];
 
   return (
-    <ul className={styles.actions} data-testid="actions-panel">
+    <ul
+      className={cls(
+        styles.actions,
+        isDarkTheme ? styles.actionsDark : styles.actionsLight
+      )}
+      data-testid="actions-panel"
+    >
       {icons.map((icon) => (
         <li key={icon.alt}>
           <img

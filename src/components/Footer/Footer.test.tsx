@@ -2,11 +2,17 @@ import { render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 
 import '@testing-library/jest-dom';
+import AppThemeProvider from 'context/ThemeContext';
+
 import Footer from './index';
 
 describe('Footer', () => {
   it('should contain specific content', () => {
-    render(<Footer />);
+    render(
+      <AppThemeProvider>
+        <Footer />
+      </AppThemeProvider>
+    );
 
     const developers = screen.getAllByTestId('developer-item');
     const year = screen.getByTestId('year');

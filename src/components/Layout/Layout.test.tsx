@@ -3,6 +3,7 @@ import { MemoryRouter } from 'react-router-dom';
 import { describe, expect, it } from 'vitest';
 
 import LangContextProvider from 'context/LangContext';
+import AppThemeProvider from 'context/ThemeContext';
 
 import '@testing-library/jest-dom';
 import Layout from './index';
@@ -11,9 +12,11 @@ describe('Layout', () => {
   it('should contain content from header and footer', () => {
     render(
       <MemoryRouter initialEntries={['/']}>
-        <LangContextProvider>
-          <Layout />
-        </LangContextProvider>
+        <AppThemeProvider>
+          <LangContextProvider>
+            <Layout />
+          </LangContextProvider>
+        </AppThemeProvider>
       </MemoryRouter>
     );
 
