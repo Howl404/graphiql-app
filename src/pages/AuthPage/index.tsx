@@ -1,4 +1,3 @@
-import { Google } from '@mui/icons-material';
 import { Button, Divider, TextField } from '@mui/material';
 import { useRef, useState } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
@@ -12,6 +11,7 @@ import { AuthFormInputs } from 'src/types';
 
 import AuthService from 'services/AuthService';
 
+import GoogleIcon from 'components/UI/GoogleIcon';
 import InputPassword from 'components/UI/InputPassword';
 
 import confirmPasswordValidation from './utils/confirmPasswordValidation';
@@ -151,7 +151,7 @@ export default function AuthPage() {
             </Button>
             <Divider textAlign="center">or</Divider>
             <Button
-              startIcon={<Google />}
+              startIcon={<GoogleIcon />}
               onClick={AuthService.signInWithGoogle}
             >
               Continue with google
