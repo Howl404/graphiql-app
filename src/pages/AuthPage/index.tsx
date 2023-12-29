@@ -1,8 +1,9 @@
 import { Google } from '@mui/icons-material';
 import { Button, Divider, TextField } from '@mui/material';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
+import { CSSTransition, SwitchTransition } from 'react-transition-group';
 
 import AuthMode from 'enums/authMode';
 import Paths from 'enums/paths';
@@ -20,6 +21,7 @@ import styles from './AuthPage.module.scss';
 
 export default function AuthPage() {
   const [mode, setMode] = useState<keyof typeof AuthMode>('SignIn');
+  const formRef = useRef<HTMLFormElement | null>(null);
 
   const navigate = useNavigate();
 
@@ -72,70 +74,91 @@ export default function AuthPage() {
           {AuthMode.SignUp}
         </Button>
       </div>
-      <form className={styles.authForm} onSubmit={handleSubmit(onSubmit)}>
-        <Controller
-          name="email"
-          control={control}
-          rules={{
-            required: 'Email is required',
-            pattern: {
-              value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-              message: 'Please enter valid email address',
-            },
+      <SwitchTransition>
+        <CSSTransition
+          key={mode}
+          nodeRef={formRef}
+          timeout={150}
+          classNames={{
+            enter: styles[`authForm--${mode}-enter`],
+            enterActive: styles['authForm-enter-active'],
+            exit: styles['authForm-exit'],
+            exitActive: styles[`authForm--${mode}-exit-active`],
           }}
-          render={({ field }) => (
-            <TextField
-              {...field}
-              id="email"
-              label="E-mail"
-              variant="outlined"
-              error={!!errors.email}
-              helperText={errors.email?.message}
+        >
+          <form
+            className={styles.authForm}
+            onSubmit={handleSubmit(onSubmit)}
+            ref={formRef}
+          >
+            <Controller
+              name="email"
+              control={control}
+              rules={{
+                required: 'Email is required',
+                pattern: {
+                  value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                  message: 'Please enter valid email address',
+                },
+              }}
+              render={({ field }) => (
+                <TextField
+                  {...field}
+                  id="email"
+                  label="E-mail"
+                  variant="outlined"
+                  error={!!errors.email}
+                  helperText={errors.email?.message}
+                />
+              )}
             />
-          )}
-        />
-        <Controller
-          name="password"
-          control={control}
-          rules={{
-            required: 'Password is required',
-            validate: passwordValidation,
-          }}
-          render={({ field }) => (
-            <InputPassword
-              field={field}
-              error={errors.password}
-              id="password"
-              label="Password"
+            <Controller
+              name="password"
+              control={control}
+              rules={{
+                required: 'Password is required',
+                validate: passwordValidation,
+              }}
+              render={({ field }) => (
+                <InputPassword
+                  field={field}
+                  error={errors.password}
+                  id="password"
+                  label="Password"
+                />
+              )}
             />
-          )}
-        />
-        {mode === 'SignUp' && (
-          <Controller
-            name="confirmPassword"
-            control={control}
-            rules={{
-              required: 'Confirmation of password is required',
-              validate: confirmPasswordValidation,
-            }}
-            render={({ field }) => (
-              <InputPassword
-                field={field}
-                error={errors.confirmPassword}
-                id="confirm-password"
-                label="Confirm password"
+            {mode === 'SignUp' && (
+              <Controller
+                name="confirmPassword"
+                control={control}
+                rules={{
+                  required: 'Confirmation of password is required',
+                  validate: confirmPasswordValidation,
+                }}
+                render={({ field }) => (
+                  <InputPassword
+                    field={field}
+                    error={errors.confirmPassword}
+                    id="confirm-password"
+                    label="Confirm password"
+                  />
+                )}
               />
             )}
-          />
-        )}
-        <Button type="submit" variant="contained" data-testid="submit-btn">
-          {AuthMode[mode]}
-        </Button>
-        <Divider textAlign="center">or</Divider>
-        <Button startIcon={<Google />} onClick={AuthService.signInWithGoogle}>
-          Continue with google
-        </Button>
-      </form>
+            <Button type="submit" variant="contained" data-testid="submit-btn">
+              {AuthMode[mode]}
+            </Button>
+            <Divider textAlign="center">or</Divider>
+            <Button
+              startIcon={<Google />}
+              onClick={AuthService.signInWithGoogle}
+            >
+              Continue with google
+            </Button>
+          </form>
+        </CSSTransition>
+      </SwitchTransition>
     </div>
   );
 }
