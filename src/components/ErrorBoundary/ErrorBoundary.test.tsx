@@ -4,7 +4,7 @@ import { expect, it } from 'vitest';
 
 import '@testing-library/jest-dom';
 
-import ErrorBoundary from './index.tsx';
+import ErrorBoundary from './index';
 
 function TestComponent() {
   const [error, setError] = useState(false);

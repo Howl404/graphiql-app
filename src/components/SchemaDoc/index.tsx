@@ -7,7 +7,7 @@ import { SchemaField, SchemaStackItem } from 'src/types';
 import cls from 'utils/classnames';
 
 import useSchema from 'hooks/useSchema';
-import useTranslation from 'hooks/useTranslation.ts';
+import useTranslation from 'hooks/useTranslation';
 
 import SchemaBreadcrumbs from 'components/SchemaBreadcrumbs';
 import SchemaItemsList from 'components/SchemaItemsList';

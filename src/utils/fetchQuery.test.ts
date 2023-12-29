@@ -1,7 +1,7 @@
 import { describe, expect, it, vi } from 'vitest';
 
 import displayNotification from 'utils/displayNotification';
-import fetchQuery from 'utils/fetchQuery.ts';
+import fetchQuery from 'utils/fetchQuery';
 
 vi.mock('utils/displayNotification', () => ({
   default: vi.fn(),

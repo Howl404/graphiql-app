@@ -15,7 +15,7 @@ import { LangContext } from 'context/LangContext';
 
 import AuthService from 'services/AuthService';
 
-import useTranslation from 'hooks/useTranslation.ts';
+import useTranslation from 'hooks/useTranslation';
 
 import ToggleButtons from 'components/UI/Toggle';
 

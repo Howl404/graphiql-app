@@ -28,12 +28,12 @@ vi.mock('firebase/firestore', () => ({
   where: vi.fn(),
 }));
 
-vi.mock('src/firebase.ts', () => ({
+vi.mock('src/firebase', () => ({
   auth: 'Auth object',
   db: 'Database object',
 }));
 
-vi.mock('services/authErrorHandler.ts', () => ({
+vi.mock('services/authErrorHandler', () => ({
   authErrorHandler: vi.fn(),
 }));
 

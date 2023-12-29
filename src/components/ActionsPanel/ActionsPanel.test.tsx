@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import '@testing-library/jest-dom';
-import LangContextProvider from 'context/LangContext.tsx';
+import LangContextProvider from 'context/LangContext';
 
 import ActionsPanel from './index';
 

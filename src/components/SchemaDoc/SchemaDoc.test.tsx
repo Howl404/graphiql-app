@@ -1,12 +1,12 @@
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
-import { DEFAULT_API } from 'src/constants/api.ts';
+import { DEFAULT_API } from 'src/constants/api';
 import schema from 'src/mocks/schema';
 import { describe, expect, it, vi } from 'vitest';
 
 import '@testing-library/jest-dom';
 import { SchemaRoot } from 'src/types';
 
-import LangContextProvider from 'context/LangContext.tsx';
+import LangContextProvider from 'context/LangContext';
 
 import useSchema from 'hooks/useSchema';
 

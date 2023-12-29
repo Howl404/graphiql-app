@@ -1,6 +1,6 @@
 import PublicIcon from '@mui/icons-material/Public';
 
-import useTranslation from 'hooks/useTranslation.ts';
+import useTranslation from 'hooks/useTranslation';
 
 import styles from './NotFound.module.scss';
 

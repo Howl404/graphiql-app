@@ -10,7 +10,7 @@ import {
 
 import EditorMode from 'enums/editorMode';
 
-import cls from 'utils/classnames.ts';
+import cls from 'utils/classnames';
 import displayNotification from 'utils/displayNotification';
 import fetchQuery from 'utils/fetchQuery';
 
@@ -24,7 +24,7 @@ import Dimming from 'components/UI/Dimming';
 import Loader from 'components/UI/Loader';
 
 import prettifyQuery from './utils/prettifyQuery';
-import safeJsonParse from './utils/safeJsonParse.ts';
+import safeJsonParse from './utils/safeJsonParse';
 
 import styles from './GraphiqlPage.module.scss';
 

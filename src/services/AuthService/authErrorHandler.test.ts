@@ -3,7 +3,7 @@ import { describe, expect, it, vi } from 'vitest';
 
 import displayNotification from 'utils/displayNotification';
 
-import authErrorHandler, { firebaseErrors } from './authErrorHandler.ts';
+import authErrorHandler, { firebaseErrors } from './authErrorHandler';
 
 vi.mock('utils/displayNotification', () => ({
   default: vi.fn(),

@@ -1,7 +1,7 @@
 import { Button } from '@mui/material';
 import { FormEvent } from 'react';
 
-import useTranslation from 'hooks/useTranslation.ts';
+import useTranslation from 'hooks/useTranslation';
 
 import styles from './EndpointForm.module.scss';
 

@@ -2,7 +2,7 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { describe, expect, it, vi } from 'vitest';
 
-import LangContextProvider from 'context/LangContext.tsx';
+import LangContextProvider from 'context/LangContext';
 
 import SchemaBreadcrumbs from './index';
 

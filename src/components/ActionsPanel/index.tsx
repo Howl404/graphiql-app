@@ -1,4 +1,4 @@
-import useTranslation from 'hooks/useTranslation.ts';
+import useTranslation from 'hooks/useTranslation';
 
 import copyIcon from 'assets/copy-icon.svg';
 import docsIcon from 'assets/docs-icon.svg';

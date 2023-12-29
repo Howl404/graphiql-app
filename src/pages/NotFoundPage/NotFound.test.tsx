@@ -2,9 +2,9 @@ import { render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 
 import '@testing-library/jest-dom';
-import LangContextProvider from 'context/LangContext.tsx';
+import LangContextProvider from 'context/LangContext';
 
-import NotFoundPage from 'pages/NotFoundPage/index.tsx';
+import NotFoundPage from 'pages/NotFoundPage/index';
 
 describe('Not Found page', () => {
   it('Correctly renders Not Found Page', () => {

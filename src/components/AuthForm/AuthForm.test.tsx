@@ -2,7 +2,7 @@ import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { beforeEach, describe, expect, it } from 'vitest';
 
-import LangContextProvider from 'context/LangContext.tsx';
+import LangContextProvider from 'context/LangContext';
 
 import AuthForm from './index';
 
