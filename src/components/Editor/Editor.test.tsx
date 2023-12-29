@@ -4,6 +4,8 @@ import { describe, expect, it, vi } from 'vitest';
 import EditorMode from 'enums/editorMode';
 
 import '@testing-library/jest-dom';
+import AppThemeProvider from 'context/ThemeContext';
+
 import Editor from './index';
 
 describe('Editor', () => {
@@ -24,13 +26,15 @@ describe('Editor', () => {
     });
 
     render(
-      <Editor
-        editorMode={EditorMode.JSON}
-        value={data}
-        setValue={handleChange}
-        isReadonly={true}
-        size={'large'}
-      />
+      <AppThemeProvider>
+        <Editor
+          editorMode={EditorMode.JSON}
+          value={data}
+          setValue={handleChange}
+          isReadonly={true}
+          size={'large'}
+        />
+      </AppThemeProvider>
     );
 
     const viewer = screen.getByTestId('viewer');

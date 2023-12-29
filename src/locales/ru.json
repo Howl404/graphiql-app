@@ -11,7 +11,7 @@
   "GraphQLPage.variablesError": "Неверный формат JSON в секции Variables",
   "GraphQLPage.headersError": "Неверный формат JSON в секции Headers",
   "GraphQLPage.unknownError": "Извините, что-то пошло не так...",
-  "GraphQLPage.changeEndpoint": "Сменить endpoint",
+  "GraphQLPage.update": "Обновить",
   "GraphQLPage.sendQuery": "Отправить query",
   "GraphQLPage.documentation": "Документация",
   "GraphQLPage.prettifyQuery": "Форматировать query",

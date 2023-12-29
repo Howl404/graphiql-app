@@ -1,3 +1,9 @@
+import { useContext } from 'react';
+
+import cls from 'utils/classnames';
+
+import { AppThemeContext } from 'context/ThemeContext';
+
 import useTranslation from 'hooks/useTranslation';
 
 import copyIcon from 'assets/copy-icon.svg';
@@ -23,6 +29,8 @@ export default function ActionsPanel({
   setPrettifiedQuery,
 }: ActionsPanelType) {
   const translation = useTranslation();
+
+  const { isDarkTheme } = useContext(AppThemeContext);
 
   const icons = [
     {
@@ -56,7 +64,13 @@ export default function ActionsPanel({
   ];
 
   return (
-    <ul className={styles.actions} data-testid="actions-panel">
+    <ul
+      className={cls(
+        styles.actions,
+        isDarkTheme ? styles.actionsDark : styles.actionsLight
+      )}
+      data-testid="actions-panel"
+    >
       {icons.map((icon) => (
         <li key={icon.alt}>
           <img

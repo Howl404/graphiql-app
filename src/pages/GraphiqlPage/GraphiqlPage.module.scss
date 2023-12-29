@@ -7,16 +7,29 @@
 
 .sandboxWrapper {
   display: flex;
+  align-items: center;
+  justify-content: center;
   gap: 10px;
 }
 
 .editorWrapper {
-  width: 50%;
+  width: 100%;
   position: relative;
 }
 
 .jsonViewer {
-  width: 50%;
+  width: 100%;
+}
+
+@media (max-width: 800px) {
+  .sandboxWrapper {
+    flex-wrap: wrap;
+  }
+
+  .editorWrapper,
+  .jsonViewer {
+    max-width: 600px;
+  }
 }
 
 .additionalFeaturesWrapper {

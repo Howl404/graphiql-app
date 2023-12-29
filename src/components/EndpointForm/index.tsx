@@ -1,5 +1,9 @@
 import { Button } from '@mui/material';
-import { FormEvent } from 'react';
+import { FormEvent, useContext } from 'react';
+
+import cls from 'utils/classnames';
+
+import { AppThemeContext } from 'context/ThemeContext';
 
 import useTranslation from 'hooks/useTranslation';
 
@@ -18,10 +22,15 @@ export default function EndpointForm({
 }: EndpointFormType) {
   const translation = useTranslation();
 
+  const { isDarkTheme } = useContext(AppThemeContext);
+
   return (
     <form className={styles.handlerEndpoint} onSubmit={handleChangeEndpoint}>
       <input
-        className={styles.inputEndpoint}
+        className={cls(
+          styles.inputEndpoint,
+          isDarkTheme ? styles.inputDark : styles.inputLight
+        )}
         value={inputValue}
         onChange={(event) => handleChangeInput(event.target.value)}
         onBlur={handleChangeEndpoint}
@@ -30,12 +39,13 @@ export default function EndpointForm({
         data-testid="endpoint-input"
       />
       <Button
+        className={styles.updateBtn}
         type="submit"
         size="small"
         variant="contained"
         data-testid="endpoint-btn"
       >
-        {translation('GraphQLPage.changeEndpoint')}
+        {translation('GraphQLPage.update')}
       </Button>
     </form>
   );

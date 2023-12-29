@@ -3,6 +3,7 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import '@testing-library/jest-dom';
 import LangContextProvider from 'context/LangContext';
+import AppThemeProvider from 'context/ThemeContext';
 
 import EndpointForm from './index';
 
@@ -13,11 +14,13 @@ describe('EndpointForm', () => {
   beforeEach(() => {
     render(
       <LangContextProvider>
-        <EndpointForm
-          inputValue=""
-          handleChangeEndpoint={changeEndpoint}
-          handleChangeInput={changeInput}
-        />
+        <AppThemeProvider>
+          <EndpointForm
+            inputValue=""
+            handleChangeEndpoint={changeEndpoint}
+            handleChangeInput={changeInput}
+          />
+        </AppThemeProvider>
       </LangContextProvider>
     );
   });

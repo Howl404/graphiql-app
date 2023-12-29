@@ -11,7 +11,7 @@
   "GraphQLPage.variablesError": "Invalid JSON format in Variables section",
   "GraphQLPage.headersError": "Invalid JSON format in Headers section",
   "GraphQLPage.unknownError": "Sorry, something went wrong...",
-  "GraphQLPage.changeEndpoint": "Change endpoint",
+  "GraphQLPage.update": "Update",
   "GraphQLPage.sendQuery": "Send query",
   "GraphQLPage.documentation": "Documentation",
   "GraphQLPage.prettifyQuery": "Prettify query",
