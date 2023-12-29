@@ -1,6 +1,8 @@
 import { Button } from '@mui/material';
 import { FormEvent } from 'react';
 
+import useTranslation from 'hooks/useTranslation.ts';
+
 import styles from './EndpointForm.module.scss';
 
 type EndpointFormType = {
@@ -14,6 +16,8 @@ export default function EndpointForm({
   handleChangeEndpoint,
   handleChangeInput,
 }: EndpointFormType) {
+  const translation = useTranslation();
+
   return (
     <form className={styles.handlerEndpoint} onSubmit={handleChangeEndpoint}>
       <input
@@ -31,7 +35,7 @@ export default function EndpointForm({
         variant="contained"
         data-testid="endpoint-btn"
       >
-        Change endpoint
+        {translation('GraphQLPage.changeEndpoint')}
       </Button>
     </form>
   );

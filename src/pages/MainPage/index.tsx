@@ -2,10 +2,9 @@ import Button from '@mui/material/Button';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from 'src/firebase';
 
-import authMode from 'enums/authMode';
 import Paths from 'enums/paths';
 
-import { useTranslation } from 'hooks/useTranslation';
+import useTranslation from 'hooks/useTranslation';
 
 import styles from './MainPage.module.scss';
 
@@ -19,15 +18,15 @@ export default function MainPage() {
       <div className={styles.buttonsContainer}>
         {user ? (
           <Button href={Paths.Graphiql} variant={'outlined'}>
-            Main Page
+            {translation(`Shared.MainPage`)}
           </Button>
         ) : (
           <>
             <Button href={Paths.Auth} variant={'outlined'}>
-              {authMode.SignIn}
+              {translation(`Shared.SignIn`)}
             </Button>
             <Button href={Paths.Auth} variant={'outlined'}>
-              {authMode.SignUp}
+              {translation(`Shared.SignUp`)}
             </Button>
           </>
         )}

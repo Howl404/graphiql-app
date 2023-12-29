@@ -4,7 +4,7 @@ import { INTROSPECTION_QUERY } from 'src/constants/introspectionQuery';
 
 import { SchemaResponse, SchemaRoot } from 'src/types';
 
-import { fetchQuery } from 'utils/fetchQuery';
+import fetchQuery from 'utils/fetchQuery';
 
 const cache: Record<string, SchemaRoot> = {};
 

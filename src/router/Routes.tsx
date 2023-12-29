@@ -1,13 +1,15 @@
+import { lazy } from 'react';
+
 import Paths from 'enums/paths';
 
-import AuthForm from 'components/AuthForm';
-import Layout from 'components/Layout';
-
-import GraphiqlPage from 'pages/GraphiqlPage';
-import MainPage from 'pages/MainPage';
-import NotFoundPage from 'pages/NotFoundPage';
-
 import ConditionalRoute from './ConditionalRoute';
+
+const AuthForm = lazy(() => import('components/AuthForm'));
+const Layout = lazy(() => import('components/Layout'));
+
+const GraphiqlPage = lazy(() => import('pages/GraphiqlPage'));
+const MainPage = lazy(() => import('pages/MainPage'));
+const NotFoundPage = lazy(() => import('pages/NotFoundPage'));
 
 export default function Routes() {
   return {

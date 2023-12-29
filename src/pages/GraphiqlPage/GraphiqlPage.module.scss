@@ -18,3 +18,30 @@
 .jsonViewer {
   width: 50%;
 }
+
+.additionalFeaturesWrapper {
+  display: flex;
+  gap: 10px;
+
+  .headersContainer,
+  .variablesContainer {
+    width: 50%;
+
+    p {
+      margin: 0;
+    }
+
+    button {
+      color: var(--accent);
+    }
+  }
+
+  svg {
+    transition: 300ms;
+  }
+
+  .rotate {
+    transform: rotate(180deg);
+    transition: transform 300ms;
+  }
+}

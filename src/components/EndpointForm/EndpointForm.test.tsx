@@ -2,6 +2,8 @@ import { render, screen } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import '@testing-library/jest-dom';
+import LangContextProvider from 'context/LangContext.tsx';
+
 import EndpointForm from './index';
 
 describe('EndpointForm', () => {
@@ -10,11 +12,13 @@ describe('EndpointForm', () => {
 
   beforeEach(() => {
     render(
-      <EndpointForm
-        inputValue=""
-        handleChangeEndpoint={changeEndpoint}
-        handleChangeInput={changeInput}
-      />
+      <LangContextProvider>
+        <EndpointForm
+          inputValue=""
+          handleChangeEndpoint={changeEndpoint}
+          handleChangeInput={changeInput}
+        />
+      </LangContextProvider>
     );
   });
 

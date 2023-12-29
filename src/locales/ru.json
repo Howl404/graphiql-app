@@ -7,5 +7,21 @@
   "MainPage.aboutUsHeading": "О нас",
   "MainPage.aboutUsText": "Мы - тройка разработчиков, каждый из которых вносит свой уникальный вклад. Наш проект - это не только демонстрация наших технических способностей, это свидетельство нашего совместного духа и общего пути в постоянно развивающемся мире веб-разработки. Объединенные нашим любопытством и общей целью, мы не просто программируем - мы учимся, растем и исследуем новые границы.",
   "MainPage.aboutCourseHeading": "Наш учебный путь",
-  "MainPage.aboutCourseText": "Этот проект является частью курса React в Rolling Scopes School, путешествием через яркий пейзаж веб-разработки. Он выделяется как один из лучших открытых курсов, доступных онлайн."
+  "MainPage.aboutCourseText": "Этот проект является частью курса React в Rolling Scopes School, путешествием через яркий пейзаж веб-разработки. Он выделяется как один из лучших открытых курсов, доступных онлайн.",
+  "GraphQLPage.variablesError": "Неверный формат JSON в секции Variables",
+  "GraphQLPage.headersError": "Неверный формат JSON в секции Headers",
+  "GraphQLPage.unknownError": "Извините, что-то пошло не так...",
+  "GraphQLPage.changeEndpoint": "Сменить endpoint",
+  "GraphQLPage.sendQuery": "Отправить query",
+  "GraphQLPage.documentation": "Документация",
+  "GraphQLPage.prettifyQuery": "Форматировать query",
+  "GraphQLPage.copyQuery": "Скопировать query",
+  "GraphQLPage.arguments": "Аргументы",
+  "GraphQLPage.fields": "Поля",
+  "GraphQLPage.inputFields": "Входные поля",
+  "NotFoundPage.error": "Уппс.. Похоже вы потерялись в Космосе",
+  "Shared.SignIn": "Вход",
+  "Shared.SignUp": "Регистрация",
+  "Shared.SignOut": "Выход",
+  "Shared.MainPage": "Главная страница"
 }

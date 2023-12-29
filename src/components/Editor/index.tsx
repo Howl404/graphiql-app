@@ -11,11 +11,19 @@ import styles from './Editor.module.scss';
 
 type EditorType = {
   editorMode: EditorMode;
+  isReadonly: boolean;
   value: string;
   setValue: (value: string) => void;
+  size: 'small' | 'large';
 };
 
-export default function Editor({ editorMode, value, setValue }: EditorType) {
+export default function Editor({
+  editorMode,
+  isReadonly,
+  value,
+  setValue,
+  size,
+}: EditorType) {
   const onChange = useCallback(
     (val: string) => {
       setValue(val);
@@ -23,9 +31,9 @@ export default function Editor({ editorMode, value, setValue }: EditorType) {
     [setValue]
   );
 
-  const isReadonly = editorMode === EditorMode.JSON;
-  const editorTheme = isReadonly ? tokyoNightStorm : aura;
-  const editorLanguage = isReadonly ? langs.json() : graphql();
+  const editorTheme = editorMode === EditorMode.JSON ? tokyoNightStorm : aura;
+  const editorLanguage =
+    editorMode === EditorMode.JSON ? langs.json() : graphql();
   const testId = isReadonly ? 'viewer' : 'editor';
   const basicSetup = {
     lineNumbers: false,
@@ -42,7 +50,7 @@ export default function Editor({ editorMode, value, setValue }: EditorType) {
       theme={editorTheme}
       className={styles.editor}
       width="100%"
-      height="55vh"
+      height={size === 'large' ? '55vh' : '20vh'}
       extensions={[lineNumbers(), editorLanguage]}
       onChange={onChange}
       basicSetup={basicSetup}

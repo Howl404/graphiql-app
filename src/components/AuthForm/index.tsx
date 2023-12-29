@@ -3,12 +3,13 @@ import { useState } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
-import AuthMode from 'enums/authMode';
 import Paths from 'enums/paths';
 
 import { AuthFormInputs } from 'src/types';
 
 import AuthService from 'services/AuthService';
+
+import useTranslation from 'hooks/useTranslation.ts';
 
 import InputPassword from 'components/UI/InputPassword';
 
@@ -18,7 +19,9 @@ import passwordValidation from './utils/passwordValidation';
 import styles from './AuthForm.module.scss';
 
 export default function AuthForm() {
-  const [mode, setMode] = useState<keyof typeof AuthMode>('SignIn');
+  const [mode, setMode] = useState<'SignIn' | 'SignUp' | 'SignOut'>('SignIn');
+
+  const translation = useTranslation();
 
   const navigate = useNavigate();
 
@@ -58,7 +61,7 @@ export default function AuthForm() {
           variant={mode === 'SignIn' ? 'outlined' : 'text'}
           data-testid="mode-sign-in"
         >
-          {AuthMode.SignIn}
+          {translation(`Shared.SignIn`)}
         </Button>
         <Button
           onClick={() => {
@@ -68,7 +71,7 @@ export default function AuthForm() {
           variant={mode === 'SignUp' ? 'outlined' : 'text'}
           data-testid="mode-sign-up"
         >
-          {AuthMode.SignUp}
+          {translation(`Shared.SignUp`)}
         </Button>
       </div>
       <form className={styles.authForm} onSubmit={handleSubmit(onSubmit)}>
@@ -128,7 +131,7 @@ export default function AuthForm() {
           />
         )}
         <Button type="submit" variant="contained" data-testid="submit-btn">
-          {AuthMode[mode]}
+          {translation(`Shared.${mode}`)}
         </Button>
       </form>
     </div>

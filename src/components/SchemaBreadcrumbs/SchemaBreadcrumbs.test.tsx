@@ -2,7 +2,10 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { describe, expect, it, vi } from 'vitest';
 
+import LangContextProvider from 'context/LangContext.tsx';
+
 import SchemaBreadcrumbs from './index';
+
 import '@testing-library/jest-dom';
 
 describe('Tests for SchemaBreadcrumbs component', () => {
@@ -11,7 +14,9 @@ describe('Tests for SchemaBreadcrumbs component', () => {
   it('renders only disabled root for empty list', () => {
     render(
       <MemoryRouter>
-        <SchemaBreadcrumbs items={[]} handleClick={onClick} />
+        <LangContextProvider>
+          <SchemaBreadcrumbs items={[]} handleClick={onClick} />
+        </LangContextProvider>
       </MemoryRouter>
     );
 
@@ -38,7 +43,9 @@ describe('Tests for SchemaBreadcrumbs component', () => {
 
     render(
       <MemoryRouter>
-        <SchemaBreadcrumbs items={items} handleClick={onClick} />
+        <LangContextProvider>
+          <SchemaBreadcrumbs items={items} handleClick={onClick} />
+        </LangContextProvider>
       </MemoryRouter>
     );
 
@@ -64,7 +71,9 @@ describe('Tests for SchemaBreadcrumbs component', () => {
     ];
     render(
       <MemoryRouter>
-        <SchemaBreadcrumbs items={items} handleClick={onClick} />
+        <LangContextProvider>
+          <SchemaBreadcrumbs items={items} handleClick={onClick} />
+        </LangContextProvider>
       </MemoryRouter>
     );
 

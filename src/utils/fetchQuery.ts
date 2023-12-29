@@ -2,7 +2,11 @@ import { FetchQueryParams } from 'src/types';
 
 import displayNotification from 'utils/displayNotification';
 
-export const fetchQuery = async ({ api, headers, query }: FetchQueryParams) => {
+export default async function fetchQuery({
+  api,
+  headers,
+  query,
+}: FetchQueryParams) {
   try {
     const response = await fetch(api, {
       method: 'POST',
@@ -18,4 +22,4 @@ export const fetchQuery = async ({ api, headers, query }: FetchQueryParams) => {
       displayNotification(e.message, 'error');
     }
   }
-};
+}

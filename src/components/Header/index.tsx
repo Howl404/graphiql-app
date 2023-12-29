@@ -8,13 +8,14 @@ import { cloneElement, ReactElement, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { auth } from 'src/firebase';
 
-import AuthMode from 'enums/authMode';
 import Languages from 'enums/languages';
 import Paths from 'enums/paths';
 
 import { LangContext } from 'context/LangContext';
 
 import AuthService from 'services/AuthService';
+
+import useTranslation from 'hooks/useTranslation.ts';
 
 import ToggleButtons from 'components/UI/Toggle';
 
@@ -53,6 +54,8 @@ export default function Header() {
   const navigate = useNavigate();
   const isAuth = !!auth.currentUser;
   const { lang, setLang } = useContext(LangContext);
+
+  const translation = useTranslation();
 
   function handleAuthClick() {
     if (isAuth) {
@@ -93,7 +96,9 @@ export default function Header() {
                     onClick={handleAuthClick}
                     data-testid={isAuth ? 'sign-out-btn' : 'sign-in-btn'}
                   >
-                    {isAuth ? AuthMode.SignOut : AuthMode.SignIn}
+                    {isAuth
+                      ? translation('Shared.SignOut')
+                      : translation('Shared.SignIn')}
                   </Button>
                 </div>
               </div>

@@ -2,14 +2,19 @@ import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { beforeEach, describe, expect, it } from 'vitest';
 
+import LangContextProvider from 'context/LangContext.tsx';
+
 import AuthForm from './index';
+
 import '@testing-library/jest-dom';
 
 describe('Tests for AuthForm component', () => {
   beforeEach(() => {
     render(
       <MemoryRouter>
-        <AuthForm />
+        <LangContextProvider>
+          <AuthForm />
+        </LangContextProvider>
       </MemoryRouter>
     );
   });
