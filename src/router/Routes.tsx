@@ -1,8 +1,8 @@
 import Paths from 'enums/paths';
 
-import AuthForm from 'components/AuthForm';
 import Layout from 'components/Layout';
 
+import AuthPage from 'pages/AuthPage';
 import GraphiqlPage from 'pages/GraphiqlPage';
 import MainPage from 'pages/MainPage';
 import NotFoundPage from 'pages/NotFoundPage';
@@ -29,7 +29,7 @@ export default function Routes() {
         path: Paths.Auth,
         element: (
           <ConditionalRoute requireAuth={false} redirectTo={Paths.Main}>
-            <AuthForm />
+            <AuthPage />
           </ConditionalRoute>
         ),
       },

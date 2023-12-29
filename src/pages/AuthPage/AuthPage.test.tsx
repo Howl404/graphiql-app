@@ -2,14 +2,14 @@ import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { beforeEach, describe, expect, it } from 'vitest';
 
-import AuthForm from './index';
+import AuthPage from './index';
 import '@testing-library/jest-dom';
 
-describe('Tests for AuthForm component', () => {
+describe('Tests for Auth page', () => {
   beforeEach(() => {
     render(
       <MemoryRouter>
-        <AuthForm />
+        <AuthPage />
       </MemoryRouter>
     );
   });
