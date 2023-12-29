@@ -6,7 +6,7 @@ import '@testing-library/jest-dom';
 import LangContextProvider from 'context/LangContext';
 import AppThemeProvider from 'context/ThemeContext';
 
-import NotFoundPage from 'pages/NotFoundPage/index';
+import NotFoundPage from 'pages/NotFoundPage';
 
 describe('Not Found page', () => {
   it('Correctly renders Not Found Page', () => {
