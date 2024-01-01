@@ -1,11 +1,10 @@
+import RefreshIcon from '@mui/icons-material/Refresh';
 import { Button } from '@mui/material';
 import { FormEvent, useContext } from 'react';
 
 import cls from 'utils/classnames';
 
 import { AppThemeContext } from 'context/ThemeContext';
-
-import useTranslation from 'hooks/useTranslation';
 
 import styles from './EndpointForm.module.scss';
 
@@ -20,8 +19,6 @@ export default function EndpointForm({
   handleChangeEndpoint,
   handleChangeInput,
 }: EndpointFormType) {
-  const translation = useTranslation();
-
   const { isDarkTheme } = useContext(AppThemeContext);
 
   return (
@@ -45,7 +42,7 @@ export default function EndpointForm({
         variant="contained"
         data-testid="endpoint-btn"
       >
-        {translation('GraphQLPage.update')}
+        <RefreshIcon />
       </Button>
     </form>
   );

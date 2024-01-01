@@ -18,8 +18,10 @@ import passwordValidation from './utils/passwordValidation';
 
 import styles from './AuthForm.module.scss';
 
+type AuthMode = 'SignIn' | 'SignUp' | 'SignOut';
+
 export default function AuthForm() {
-  const [mode, setMode] = useState<'SignIn' | 'SignUp' | 'SignOut'>('SignIn');
+  const [mode, setMode] = useState<AuthMode>('SignIn');
 
   const translation = useTranslation();
 

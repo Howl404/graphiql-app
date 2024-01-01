@@ -15,29 +15,14 @@
 .editorWrapper {
   width: 100%;
   position: relative;
+  overflow: auto;
 }
 
-.jsonViewer {
-  width: 100%;
-}
-
-@media (max-width: 800px) {
-  .sandboxWrapper {
-    flex-wrap: wrap;
-  }
-
-  .editorWrapper,
-  .jsonViewer {
-    max-width: 600px;
-  }
-}
-
-.additionalFeaturesWrapper {
+.additionalFeatures {
   display: flex;
   gap: 10px;
 
-  .headersContainer,
-  .variablesContainer {
+  .feature {
     width: 50%;
 
     p {
@@ -56,5 +41,23 @@
   .rotate {
     transform: rotate(180deg);
     transition: transform 300ms;
+  }
+}
+
+@media (max-width: 800px) {
+  .additionalFeatures {
+    flex-wrap: wrap;
+
+    .feature {
+      width: 100%;
+    }
+  }
+
+  .sandboxWrapper {
+    flex-wrap: wrap;
+  }
+
+  .editorWrapper {
+    max-width: 600px;
   }
 }

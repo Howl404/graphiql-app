@@ -116,9 +116,18 @@ export default function SchemaDoc({ api, isDocsOpen }: SchemaDocType) {
     const { queryType, mutationType, subscriptionType } = schema;
 
     const rootItems = [
-      { type: { name: queryType?.name }, name: 'query' },
-      { type: { name: mutationType?.name }, name: 'mutation' },
-      { type: { name: subscriptionType?.name }, name: 'subscription' },
+      {
+        type: { name: queryType?.name },
+        name: translation('GraphQLPage.query'),
+      },
+      {
+        type: { name: mutationType?.name },
+        name: translation('GraphQLPage.mutation'),
+      },
+      {
+        type: { name: subscriptionType?.name },
+        name: translation('GraphQLPage.subscription'),
+      },
     ].filter((field) => field.type.name) as SchemaField[];
 
     return (

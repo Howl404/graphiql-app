@@ -8,7 +8,7 @@ export default function safeJsonParse(
   if (str === '') return fallback;
 
   try {
-    return JSON.parse(str);
+    return JSON.parse(str) as object;
   } catch (e) {
     displayNotification(errorMessage, 'error');
 

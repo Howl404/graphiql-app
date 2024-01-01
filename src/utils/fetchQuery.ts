@@ -1,6 +1,10 @@
-import { FetchQueryParams } from 'src/types';
-
 import displayNotification from 'utils/displayNotification';
+
+type FetchQueryParams = {
+  api: string;
+  headers?: Record<string, string>;
+  query: string;
+};
 
 export default async function fetchQuery({
   api,

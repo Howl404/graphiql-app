@@ -25,3 +25,9 @@
 .updateBtn {
   width: 20%;
 }
+
+@media (max-width: 800px) {
+  .updateBtn {
+    font-size: 12px;
+  }
+}

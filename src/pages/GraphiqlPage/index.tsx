@@ -1,12 +1,13 @@
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { Collapse, IconButton } from '@mui/material';
-import { FormEvent, useState } from 'react';
 import {
   DEFAULT_API,
   DEFAULT_HEADERS,
   DEFAULT_QUERY,
   DEFAULT_VARIABLES,
-} from 'src/constants/api';
+} from 'constants/api';
+
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { Collapse, IconButton } from '@mui/material';
+import { FormEvent, useState } from 'react';
 
 import EditorMode from 'enums/editorMode';
 
@@ -14,6 +15,7 @@ import cls from 'utils/classnames';
 import displayNotification from 'utils/displayNotification';
 import fetchQuery from 'utils/fetchQuery';
 
+import useOpen from 'hooks/useOpen';
 import useTranslation from 'hooks/useTranslation';
 
 import ActionsPanel from 'components/ActionsPanel';
@@ -32,23 +34,23 @@ export default function GraphiqlPage() {
   const translation = useTranslation();
   const [inputValue, setInputValue] = useState(DEFAULT_API);
   const [currentEndpoint, setCurrentEndpoint] = useState(DEFAULT_API);
+
   const [query, setQuery] = useState(
     currentEndpoint === DEFAULT_API ? DEFAULT_QUERY : ''
   );
-
   const [headers, setHeaders] = useState(
     currentEndpoint === DEFAULT_API ? DEFAULT_HEADERS : ''
   );
-  const [isHeadersOpen, setIsHeadersOpen] = useState(false);
-
   const [variables, setVariables] = useState(
     currentEndpoint === DEFAULT_API ? DEFAULT_VARIABLES : ''
   );
-  const [isVariablesOpen, setIsVariablesOpen] = useState(false);
+
+  const { isOpen: isVariablesOpen, setIsOpen: setIsVariablesOpen } = useOpen();
+  const { isOpen: isHeadersOpen, setIsOpen: setIsHeadersOpen } = useOpen();
+  const { isOpen: isDocsOpen, setIsOpen: setIsDocsOpen } = useOpen();
 
   const [viewerValue, setViewerValue] = useState('');
   const [isJsonLoading, setIsJsonLoading] = useState(false);
-  const [isDocsOpen, setIsDocsOpen] = useState(false);
 
   const handleChangeEndpoint = (event: FormEvent) => {
     event.preventDefault();
@@ -66,7 +68,7 @@ export default function GraphiqlPage() {
     fetchQuery({
       api: currentEndpoint,
       query: JSON.stringify({
-        query: query,
+        query,
         variables: safeJsonParse(
           variables,
           translation('GraphQLPage.variablesError')
@@ -102,10 +104,9 @@ export default function GraphiqlPage() {
         <div className={styles.editorWrapper}>
           <Editor
             editorMode={EditorMode.Query}
-            isReadonly={false}
             value={query}
             setValue={handleChangeQuery}
-            size={'large'}
+            size="large"
           />
           <ActionsPanel
             query={query}
@@ -114,20 +115,20 @@ export default function GraphiqlPage() {
             setPrettifiedQuery={setPrettifiedQuery}
           />
         </div>
-        <div className={styles.jsonViewer}>
+        <div className={styles.editorWrapper}>
           <Editor
             editorMode={EditorMode.JSON}
-            isReadonly={true}
+            isReadonly
             value={viewerValue}
             setValue={handleChangeViewer}
-            size={'large'}
+            size="large"
           />
         </div>
       </div>
-      <div className={styles.additionalFeaturesWrapper}>
-        <div className={styles.headersContainer}>
+      <div className={styles.additionalFeatures}>
+        <div className={styles.feature}>
           <p>
-            Headers
+            {translation('GraphQLPage.headers')}
             <IconButton
               onClick={() => setIsHeadersOpen(!isHeadersOpen)}
               aria-expanded={isHeadersOpen}
@@ -140,16 +141,15 @@ export default function GraphiqlPage() {
           <Collapse in={isHeadersOpen}>
             <Editor
               editorMode={EditorMode.JSON}
-              isReadonly={false}
               value={headers}
               setValue={(value) => setHeaders(value)}
-              size={'small'}
+              size="small"
             />
           </Collapse>
         </div>
-        <div className={styles.variablesContainer}>
+        <div className={styles.feature}>
           <p>
-            Variables
+            {translation('GraphQLPage.variables')}
             <IconButton
               onClick={() => setIsVariablesOpen(!isVariablesOpen)}
               aria-expanded={isVariablesOpen}
@@ -164,10 +164,9 @@ export default function GraphiqlPage() {
           <Collapse in={isVariablesOpen}>
             <Editor
               editorMode={EditorMode.JSON}
-              isReadonly={false}
               value={variables}
               setValue={(value) => setVariables(value)}
-              size={'small'}
+              size="small"
             />
           </Collapse>
         </div>

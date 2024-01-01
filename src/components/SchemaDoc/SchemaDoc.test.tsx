@@ -1,5 +1,6 @@
+import { DEFAULT_API } from 'constants/api';
+
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
-import { DEFAULT_API } from 'src/constants/api';
 import schema from 'src/mocks/schema';
 import { describe, expect, it, vi } from 'vitest';
 

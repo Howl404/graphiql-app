@@ -15,7 +15,7 @@ import styles from './Editor.module.scss';
 
 type EditorType = {
   editorMode: EditorMode;
-  isReadonly: boolean;
+  isReadonly?: boolean;
   value: string;
   setValue: (value: string) => void;
   size: 'small' | 'large';

@@ -2,10 +2,10 @@ import { lazy } from 'react';
 
 import Paths from 'enums/paths';
 
-import ConditionalRoute from './ConditionalRoute';
+import AuthForm from 'components/AuthForm';
+import Layout from 'components/Layout';
 
-const AuthForm = lazy(() => import('components/AuthForm'));
-const Layout = lazy(() => import('components/Layout'));
+import ConditionalRoute from './ConditionalRoute';
 
 const GraphiqlPage = lazy(() => import('pages/GraphiqlPage'));
 const MainPage = lazy(() => import('pages/MainPage'));
