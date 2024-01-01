@@ -2,13 +2,13 @@ import { lazy } from 'react';
 
 import Paths from 'enums/paths';
 
-import AuthForm from 'components/AuthForm';
 import Layout from 'components/Layout';
 
 import ConditionalRoute from './ConditionalRoute';
 
-const GraphiqlPage = lazy(() => import('pages/GraphiqlPage'));
 const MainPage = lazy(() => import('pages/MainPage'));
+const GraphiqlPage = lazy(() => import('pages/GraphiqlPage'));
+const AuthPage = lazy(() => import('pages/AuthPage'));
 const NotFoundPage = lazy(() => import('pages/NotFoundPage'));
 
 export default function Routes() {
@@ -31,7 +31,7 @@ export default function Routes() {
         path: Paths.Auth,
         element: (
           <ConditionalRoute requireAuth={false} redirectTo={Paths.Main}>
-            <AuthForm />
+            <AuthPage />
           </ConditionalRoute>
         ),
       },

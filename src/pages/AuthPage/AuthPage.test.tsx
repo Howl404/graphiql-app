@@ -4,16 +4,16 @@ import { beforeEach, describe, expect, it } from 'vitest';
 
 import LangContextProvider from 'context/LangContext';
 
-import AuthForm from './index';
+import AuthPage from './index';
 
 import '@testing-library/jest-dom';
 
-describe('Tests for AuthForm component', () => {
+describe('Tests for Auth page', () => {
   beforeEach(() => {
     render(
       <MemoryRouter>
         <LangContextProvider>
-          <AuthForm />
+          <AuthPage />
         </LangContextProvider>
       </MemoryRouter>
     );
