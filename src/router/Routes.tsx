@@ -4,12 +4,13 @@ import Paths from 'enums/paths';
 
 import Layout from 'components/Layout';
 
+import MainPage from 'pages/MainPage';
+import NotFoundPage from 'pages/NotFoundPage';
+
 import ConditionalRoute from './ConditionalRoute';
 
-const MainPage = lazy(() => import('pages/MainPage'));
 const GraphiqlPage = lazy(() => import('pages/GraphiqlPage'));
 const AuthPage = lazy(() => import('pages/AuthPage'));
-const NotFoundPage = lazy(() => import('pages/NotFoundPage'));
 
 export default function Routes() {
   return {
