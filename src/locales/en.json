@@ -28,7 +28,7 @@
   "AuthPage.email": "E-mail",
   "AuthPage.password": "Password",
   "AuthPage.passwordConfirm": "Confirm password",
-  "AuthPage.google": "Continue with google",
+  "AuthPage.google": "Continue with Google",
   "AuthPage.emailRequired": "Email is required",
   "AuthPage.emailInvalid": "Please enter valid email address",
   "AuthPage.passwordError": "Password is required",

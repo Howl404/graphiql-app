@@ -10,7 +10,7 @@ import { AuthFormInputs } from 'src/types';
 
 import AuthService from 'services/AuthService';
 
-import useTranslation from 'hooks/useTranslation.ts';
+import useTranslation from 'hooks/useTranslation';
 
 import GoogleIcon from 'components/UI/GoogleIcon';
 import InputPassword from 'components/UI/InputPassword';
