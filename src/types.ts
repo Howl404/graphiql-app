@@ -72,9 +72,3 @@ export type SchemaStackItem = {
   args?: SchemaArg[];
   text: string | null;
 };
-
-export type FetchQueryParams = {
-  api: string;
-  headers?: Record<string, string>;
-  query: string;
-};

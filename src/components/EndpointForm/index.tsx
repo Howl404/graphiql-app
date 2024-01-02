@@ -1,3 +1,4 @@
+import RefreshIcon from '@mui/icons-material/Refresh';
 import { Button } from '@mui/material';
 import { FormEvent, useContext } from 'react';
 
@@ -41,7 +42,7 @@ export default function EndpointForm({
         variant="contained"
         data-testid="endpoint-btn"
       >
-        Update
+        <RefreshIcon />
       </Button>
     </form>
   );

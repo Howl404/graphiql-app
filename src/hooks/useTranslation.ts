@@ -12,12 +12,10 @@ const translations = {
   RU,
 };
 
-export const useTranslation = () => {
+export default function useTranslation() {
   const { lang } = useContext(LangContext);
 
-  const translation = (key: TranslationKeys): string => {
+  return (key: TranslationKeys): string => {
     return translations[lang][key];
   };
-
-  return translation;
-};
+}

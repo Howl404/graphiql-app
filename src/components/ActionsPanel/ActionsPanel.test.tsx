@@ -3,6 +3,8 @@ import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import '@testing-library/jest-dom';
+
+import LangContextProvider from 'context/LangContext';
 import AppThemeProvider from 'context/ThemeContext';
 
 import ActionsPanel from './index';
@@ -14,14 +16,16 @@ describe('ActionsPanel', () => {
 
   beforeEach(() => {
     render(
-      <AppThemeProvider>
-        <ActionsPanel
-          query="test query"
-          sendQuery={clickRun}
-          toggleDocs={clickToggle}
-          setPrettifiedQuery={clickPrettify}
-        />
-      </AppThemeProvider>
+      <LangContextProvider>
+        <AppThemeProvider>
+          <ActionsPanel
+            query="test query"
+            sendQuery={clickRun}
+            toggleDocs={clickToggle}
+            setPrettifiedQuery={clickPrettify}
+          />
+        </AppThemeProvider>
+      </LangContextProvider>
     );
   });
 

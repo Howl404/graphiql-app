@@ -1,10 +1,11 @@
+import { DEFAULT_API } from 'constants/api';
+import { INTROSPECTION_QUERY } from 'constants/introspectionQuery';
+
 import { useEffect, useState } from 'react';
-import { DEFAULT_API } from 'src/constants/api';
-import { INTROSPECTION_QUERY } from 'src/constants/introspectionQuery';
 
 import { SchemaResponse, SchemaRoot } from 'src/types';
 
-import { fetchQuery } from 'utils/fetchQuery';
+import fetchQuery from 'utils/fetchQuery';
 
 const cache: Record<string, SchemaRoot> = {};
 

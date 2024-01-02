@@ -15,19 +15,49 @@
 .editorWrapper {
   width: 100%;
   position: relative;
+  overflow: auto;
 }
 
-.jsonViewer {
-  width: 100%;
+.additionalFeatures {
+  display: flex;
+  gap: 10px;
+
+  .feature {
+    width: 50%;
+
+    p {
+      margin: 0;
+    }
+
+    button {
+      color: var(--accent);
+    }
+  }
+
+  svg {
+    transition: 300ms;
+  }
+
+  .rotate {
+    transform: rotate(180deg);
+    transition: transform 300ms;
+  }
 }
 
 @media (max-width: 800px) {
+  .additionalFeatures {
+    flex-wrap: wrap;
+
+    .feature {
+      width: 100%;
+    }
+  }
+
   .sandboxWrapper {
     flex-wrap: wrap;
   }
 
-  .editorWrapper,
-  .jsonViewer {
+  .editorWrapper {
     max-width: 600px;
   }
 }

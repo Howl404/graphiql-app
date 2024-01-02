@@ -34,7 +34,13 @@ export default function Layout() {
       <div className={styles.wrapper}>
         <Header />
         <div className={styles.content}>
-          <Suspense fallback={<Loader />}>
+          <Suspense
+            fallback={
+              <div className={styles.loaderContainer}>
+                <Loader />
+              </div>
+            }
+          >
             <Outlet />
           </Suspense>
         </div>

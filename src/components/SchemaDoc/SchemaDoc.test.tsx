@@ -1,10 +1,15 @@
+import { DEFAULT_API } from 'constants/api';
+
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
-import useSchema from 'src/hooks/useSchema';
 import schema from 'src/mocks/schema';
 import { describe, expect, it, vi } from 'vitest';
 
 import '@testing-library/jest-dom';
 import { SchemaRoot } from 'src/types';
+
+import LangContextProvider from 'context/LangContext';
+
+import useSchema from 'hooks/useSchema';
 
 import SchemaDoc from './index';
 
@@ -19,7 +24,11 @@ describe('Tests for SchemaDoc component', () => {
       schema: null,
       error: false,
     });
-    render(<SchemaDoc />);
+    render(
+      <LangContextProvider>
+        <SchemaDoc api={DEFAULT_API} isDocsOpen={true} />
+      </LangContextProvider>
+    );
 
     await waitFor(() => {
       const loader = screen.getByTestId('loader');
@@ -35,10 +44,14 @@ describe('Tests for SchemaDoc component', () => {
       schema: null,
     });
 
-    render(<SchemaDoc />);
+    render(
+      <LangContextProvider>
+        <SchemaDoc api={DEFAULT_API} isDocsOpen={true} />
+      </LangContextProvider>
+    );
 
     await waitFor(() => {
-      const error = screen.getByText('Unexpected error occurred');
+      const error = screen.getByText('Sorry, something went wrong...');
 
       expect(error).toBeInTheDocument();
     });
@@ -50,7 +63,11 @@ describe('Tests for SchemaDoc component', () => {
       error: false,
       isLoading: false,
     });
-    render(<SchemaDoc />);
+    render(
+      <LangContextProvider>
+        <SchemaDoc api={DEFAULT_API} isDocsOpen={true} />
+      </LangContextProvider>
+    );
 
     await waitFor(() => {
       const query = screen.getByText('Query');
@@ -69,7 +86,11 @@ describe('Tests for SchemaDoc component', () => {
       error: false,
       isLoading: false,
     });
-    render(<SchemaDoc />);
+    render(
+      <LangContextProvider>
+        <SchemaDoc api={DEFAULT_API} isDocsOpen={true} />
+      </LangContextProvider>
+    );
 
     const query = screen.getByText('Query');
     fireEvent.click(query);

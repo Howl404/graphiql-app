@@ -1,25 +1,19 @@
 import { render, screen } from '@testing-library/react';
-import { createMemoryRouter, RouterProvider } from 'react-router-dom';
-import LangContextProvider from 'src/context/LangContext.tsx';
-import Routes from 'src/router/Routes.tsx';
 import { describe, expect, it } from 'vitest';
 
 import '@testing-library/jest-dom';
 
+import LangContextProvider from 'context/LangContext';
 import AppThemeProvider from 'context/ThemeContext';
 
-import { NOT_FOUND_TEXT } from 'pages/NotFoundPage';
+import NotFoundPage from 'pages/NotFoundPage';
 
 describe('Not Found page', () => {
-  it('Renders Not Found on bad route', () => {
-    const router = createMemoryRouter([Routes()], {
-      initialEntries: ['/bad-route'],
-    });
-
+  it('Correctly renders Not Found Page', () => {
     render(
       <AppThemeProvider>
         <LangContextProvider>
-          <RouterProvider router={router} />
+          <NotFoundPage />
         </LangContextProvider>
       </AppThemeProvider>
     );
@@ -27,6 +21,8 @@ describe('Not Found page', () => {
     const notFoundText = screen.getByTestId('not-found-text');
 
     expect(notFoundText).toBeInTheDocument();
-    expect(notFoundText.textContent).toBe(NOT_FOUND_TEXT);
+    expect(notFoundText.textContent).toBe(
+      'Opps.. Looks like you are lost in Space'
+    );
   });
 });

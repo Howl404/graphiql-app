@@ -31,6 +31,8 @@ describe('Editor', () => {
           editorMode={EditorMode.JSON}
           value={data}
           setValue={handleChange}
+          isReadonly
+          size="large"
         />
       </AppThemeProvider>
     );

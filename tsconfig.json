@@ -50,6 +50,9 @@
       "assets/*": [
         "./src/assets/*"
       ],
+      "constants/*": [
+        "./src/constants/*"
+      ],
       "locales/*": [
         "./src/locales/*"
       ],

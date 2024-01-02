@@ -7,6 +7,7 @@ import { SchemaField, SchemaStackItem } from 'src/types';
 import cls from 'utils/classnames';
 
 import useSchema from 'hooks/useSchema';
+import useTranslation from 'hooks/useTranslation';
 
 import SchemaBreadcrumbs from 'components/SchemaBreadcrumbs';
 import SchemaItemsList from 'components/SchemaItemsList';
@@ -21,6 +22,8 @@ type SchemaDocType = {
 
 export default function SchemaDoc({ api, isDocsOpen }: SchemaDocType) {
   const [typeNameStack, setTypeNameStack] = useState<SchemaStackItem[]>([]);
+
+  const translation = useTranslation();
 
   const { schema, error, isLoading } = useSchema(api);
 
@@ -52,9 +55,12 @@ export default function SchemaDoc({ api, isDocsOpen }: SchemaDocType) {
     if (!currentType) return;
 
     const items = [
-      { data: currentArgs, title: 'Arguments' },
-      { data: currentType?.fields, title: 'Fields' },
-      { data: currentType?.inputFields, title: 'Input Fields' },
+      { data: currentArgs, title: translation('GraphQLPage.arguments') },
+      { data: currentType?.fields, title: translation('GraphQLPage.fields') },
+      {
+        data: currentType?.inputFields,
+        title: translation('GraphQLPage.inputFields'),
+      },
     ].filter(({ data }) => data?.length);
 
     return (
@@ -110,9 +116,18 @@ export default function SchemaDoc({ api, isDocsOpen }: SchemaDocType) {
     const { queryType, mutationType, subscriptionType } = schema;
 
     const rootItems = [
-      { type: { name: queryType?.name }, name: 'query' },
-      { type: { name: mutationType?.name }, name: 'mutation' },
-      { type: { name: subscriptionType?.name }, name: 'subscription' },
+      {
+        type: { name: queryType?.name },
+        name: translation('GraphQLPage.query'),
+      },
+      {
+        type: { name: mutationType?.name },
+        name: translation('GraphQLPage.mutation'),
+      },
+      {
+        type: { name: subscriptionType?.name },
+        name: translation('GraphQLPage.subscription'),
+      },
     ].filter((field) => field.type.name) as SchemaField[];
 
     return (
@@ -130,7 +145,7 @@ export default function SchemaDoc({ api, isDocsOpen }: SchemaDocType) {
       case isLoading:
         return <Loader />;
       case error || !schema:
-        return <p>Unexpected error occurred</p>;
+        return <p>{translation('GraphQLPage.unknownError')}</p>;
       case typeNameStack.length > 0:
         return renderFields();
       default:
@@ -140,7 +155,7 @@ export default function SchemaDoc({ api, isDocsOpen }: SchemaDocType) {
 
   return (
     <div className={cls(style.container, isDocsOpen && style.docsVisible)}>
-      <h1>Documentation</h1>
+      <h1>{translation('GraphQLPage.documentation')}</h1>
       <Divider />
       <SchemaBreadcrumbs
         items={typeNameStack}

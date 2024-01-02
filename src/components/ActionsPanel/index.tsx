@@ -4,6 +4,8 @@ import cls from 'utils/classnames';
 
 import { AppThemeContext } from 'context/ThemeContext';
 
+import useTranslation from 'hooks/useTranslation';
+
 import copyIcon from 'assets/copy-icon.svg';
 import docsIcon from 'assets/docs-icon.svg';
 import prettifyIcon from 'assets/prettify-icon.svg';
@@ -26,6 +28,8 @@ export default function ActionsPanel({
   toggleDocs,
   setPrettifiedQuery,
 }: ActionsPanelType) {
+  const translation = useTranslation();
+
   const { isDarkTheme } = useContext(AppThemeContext);
 
   const icons = [
@@ -33,28 +37,28 @@ export default function ActionsPanel({
       onClick: sendQuery,
       src: runIcon,
       alt: 'Run',
-      title: 'Send query',
+      title: translation('GraphQLPage.sendQuery'),
       width: 35,
     },
     {
       onClick: toggleDocs,
       src: docsIcon,
       alt: 'Docs',
-      title: 'Documentation',
+      title: translation('GraphQLPage.documentation'),
       width: 26,
     },
     {
       onClick: setPrettifiedQuery,
       src: prettifyIcon,
       alt: 'Prettify',
-      title: 'Prettify query',
+      title: translation('GraphQLPage.prettifyQuery'),
       width: 30,
     },
     {
       onClick: () => copyToClipboard(query),
       src: copyIcon,
       alt: 'Copy',
-      title: 'Copy query',
+      title: translation('GraphQLPage.copyQuery'),
       width: 26,
     },
   ];

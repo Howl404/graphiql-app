@@ -4,12 +4,13 @@ import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { CSSTransition, SwitchTransition } from 'react-transition-group';
 
-import AuthMode from 'enums/authMode';
 import Paths from 'enums/paths';
 
 import { AuthFormInputs } from 'src/types';
 
 import AuthService from 'services/AuthService';
+
+import useTranslation from 'hooks/useTranslation';
 
 import GoogleIcon from 'components/UI/GoogleIcon';
 import InputPassword from 'components/UI/InputPassword';
@@ -19,10 +20,13 @@ import passwordValidation from './utils/passwordValidation';
 
 import styles from './AuthPage.module.scss';
 
+type AuthMode = 'SignIn' | 'SignUp' | 'SignOut';
+
 export default function AuthPage() {
-  const [mode, setMode] = useState<keyof typeof AuthMode>('SignIn');
+  const [mode, setMode] = useState<AuthMode>('SignIn');
   const formRef = useRef<HTMLFormElement | null>(null);
 
+  const translation = useTranslation();
   const navigate = useNavigate();
 
   const {
@@ -61,7 +65,7 @@ export default function AuthPage() {
           variant={mode === 'SignIn' ? 'outlined' : 'text'}
           data-testid="mode-sign-in"
         >
-          {AuthMode.SignIn}
+          {translation(`Shared.SignIn`)}
         </Button>
         <Button
           onClick={() => {
@@ -71,7 +75,7 @@ export default function AuthPage() {
           variant={mode === 'SignUp' ? 'outlined' : 'text'}
           data-testid="mode-sign-up"
         >
-          {AuthMode.SignUp}
+          {translation(`Shared.SignUp`)}
         </Button>
       </div>
       <SwitchTransition>
@@ -95,17 +99,17 @@ export default function AuthPage() {
               name="email"
               control={control}
               rules={{
-                required: 'Email is required',
+                required: translation('AuthPage.emailRequired'),
                 pattern: {
                   value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                  message: 'Please enter valid email address',
+                  message: translation('AuthPage.emailInvalid'),
                 },
               }}
               render={({ field }) => (
                 <TextField
                   {...field}
                   id="email"
-                  label="E-mail"
+                  label={translation('AuthPage.email')}
                   variant="outlined"
                   error={!!errors.email}
                   helperText={errors.email?.message}
@@ -116,7 +120,7 @@ export default function AuthPage() {
               name="password"
               control={control}
               rules={{
-                required: 'Password is required',
+                required: translation('AuthPage.passwordError'),
                 validate: passwordValidation,
               }}
               render={({ field }) => (
@@ -124,7 +128,7 @@ export default function AuthPage() {
                   field={field}
                   error={errors.password}
                   id="password"
-                  label="Password"
+                  label={translation('AuthPage.password')}
                 />
               )}
             />
@@ -133,7 +137,7 @@ export default function AuthPage() {
                 name="confirmPassword"
                 control={control}
                 rules={{
-                  required: 'Confirmation of password is required',
+                  required: translation('AuthPage.passwordConfirmError'),
                   validate: confirmPasswordValidation,
                 }}
                 render={({ field }) => (
@@ -141,20 +145,22 @@ export default function AuthPage() {
                     field={field}
                     error={errors.confirmPassword}
                     id="confirm-password"
-                    label="Confirm password"
+                    label={translation('AuthPage.passwordConfirm')}
                   />
                 )}
               />
             )}
             <Button type="submit" variant="contained" data-testid="submit-btn">
-              {AuthMode[mode]}
+              {translation(`Shared.${mode}`)}
             </Button>
-            <Divider textAlign="center">or</Divider>
+            <Divider textAlign="center">
+              {translation(`AuthPage.divider`)}
+            </Divider>
             <Button
               startIcon={<GoogleIcon />}
               onClick={AuthService.signInWithGoogle}
             >
-              Continue with google
+              {translation(`AuthPage.google`)}
             </Button>
           </form>
         </CSSTransition>

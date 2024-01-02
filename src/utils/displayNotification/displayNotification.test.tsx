@@ -3,7 +3,7 @@ import { describe, expect, it } from 'vitest';
 
 import '@testing-library/jest-dom';
 
-import displayNotification from './index.ts';
+import displayNotification from './index';
 
 describe('displayNotification', () => {
   it('should display a toast on button click', async () => {

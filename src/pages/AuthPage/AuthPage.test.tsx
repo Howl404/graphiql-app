@@ -2,14 +2,19 @@ import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { beforeEach, describe, expect, it } from 'vitest';
 
+import LangContextProvider from 'context/LangContext';
+
 import AuthPage from './index';
+
 import '@testing-library/jest-dom';
 
 describe('Tests for Auth page', () => {
   beforeEach(() => {
     render(
       <MemoryRouter>
-        <AuthPage />
+        <LangContextProvider>
+          <AuthPage />
+        </LangContextProvider>
       </MemoryRouter>
     );
   });
