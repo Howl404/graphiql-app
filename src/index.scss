@@ -44,6 +44,19 @@ button.MuiToggleButton-root.Mui-selected {
   border-color: var(--accent) !important;
 }
 
+::-webkit-scrollbar {
+  width: 0.7em;
+}
+
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: gray;
+  border-radius: 4px;
+}
+
 @media (max-width: 400px) {
   .MuiDivider-root,
   .MuiButtonBase-root,

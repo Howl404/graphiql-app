@@ -9,6 +9,8 @@ import { useCallback, useContext } from 'react';
 
 import EditorMode from 'enums/editorMode';
 
+import cls from 'utils/classnames';
+
 import { AppThemeContext } from 'context/ThemeContext';
 
 import styles from './Editor.module.scss';
@@ -59,7 +61,10 @@ export default function Editor({
       readOnly={isReadonly}
       value={value}
       theme={editorTheme}
-      className={styles.editor}
+      className={cls(
+        styles.editor,
+        editorMode === EditorMode.Query && styles.queryEditor
+      )}
       width="100%"
       height={size === 'large' ? '55vh' : '20vh'}
       extensions={[lineNumbers(), editorLanguage]}

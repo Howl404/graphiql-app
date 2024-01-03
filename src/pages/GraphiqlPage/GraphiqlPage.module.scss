@@ -14,14 +14,13 @@
 .sandboxWrapper {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   gap: 10px;
 }
 
 .editorWrapper {
-  width: 100%;
-  position: relative;
-  overflow: auto;
+  width: 50%;
+  display: flex;
 }
 
 .additionalFeatures {
@@ -67,5 +66,9 @@
 
   .sandboxWrapper {
     flex-wrap: wrap;
+  }
+
+  .editorWrapper {
+    width: 100%;
   }
 }
