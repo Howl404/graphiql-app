@@ -15,9 +15,11 @@ import {
   ListItemText,
   ListSubheader,
 } from '@mui/material';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 
 import { SchemaArg, SchemaField, SchemaStackItem, SchemaType } from 'src/types';
+
+import { AppThemeContext } from 'context/ThemeContext';
 
 import style from './style.module.scss';
 
@@ -36,6 +38,7 @@ export default function SchemaItemsList({
 }: Props) {
   const [open, setOpen] = useState(true);
   const [sortOrder, setSortOrder] = useState<'az' | 'za'>('az');
+  const { isDarkTheme } = useContext(AppThemeContext);
 
   if (!disableSort)
     data.sort((a, b) =>
@@ -69,7 +72,16 @@ export default function SchemaItemsList({
 
   return (
     <>
-      <ListSubheader disableGutters component="div">
+      <ListSubheader
+        sx={{
+          backgroundColor: isDarkTheme
+            ? 'var(--header)'
+            : 'var(--header-light)',
+          position: 'static',
+        }}
+        disableGutters
+        component="div"
+      >
         <ListItemButton
           onClick={() => setOpen(!open)}
           classes={{ root: style.subHeader }}

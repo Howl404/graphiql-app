@@ -13,15 +13,14 @@
     line-height: 28px;
   }
 
-  // TODO: font size and line height vars
-
   p {
     font-size: 18px;
     line-height: 28px;
   }
 
   h1 {
-    font-size: 40px;
+    text-align: center;
+    font-size: 2.5em;
     line-height: 56px;
   }
 }
@@ -31,4 +30,32 @@
   align-items: center;
   justify-content: center;
   min-height: calc(100vh - 120px);
+}
+
+.aboutUs {
+  display: flex;
+  gap: 10px;
+}
+
+.features {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+@media (max-width: 800px) {
+  .aboutUs {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .features {
+    flex-direction: column-reverse;
+  }
+}
+
+@media (max-width: 450px) {
+  .graphiqlImg {
+    width: 300px;
+  }
 }

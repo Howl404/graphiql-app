@@ -1,18 +1,26 @@
 import Button from '@mui/material/Button';
+import { useContext } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { Link } from 'react-router-dom';
 import { auth } from 'src/firebase';
 
 import Paths from 'enums/paths';
 
+import { AppThemeContext } from 'context/ThemeContext';
+
 import useTranslation from 'hooks/useTranslation';
 
 import Loader from 'components/UI/Loader';
+
+import astronaut from 'assets/astronaut.png';
+import dark from 'assets/dark-graphiql.png';
+import light from 'assets/light-graphiql.png';
 
 import styles from './MainPage.module.scss';
 
 export default function MainPage() {
   const [user, loading] = useAuthState(auth);
+  const { isDarkTheme } = useContext(AppThemeContext);
 
   const translation = useTranslation();
 
@@ -61,14 +69,27 @@ export default function MainPage() {
         <h1>{translation('MainPage.heading')}</h1>
         <p>{translation('MainPage.shortDescription')}</p>
 
-        <ul>
-          <li>{translation('MainPage.firstFeature')}</li>
-          <li>{translation('MainPage.secondFeature')}</li>
-          <li>{translation('MainPage.thirdFeature')}</li>
-        </ul>
+        <div className={styles.features}>
+          <ul>
+            <li>{translation('MainPage.firstFeature')}</li>
+            <li>{translation('MainPage.secondFeature')}</li>
+            <li>{translation('MainPage.thirdFeature')}</li>
+          </ul>
+          <img
+            className={styles.graphiqlImg}
+            src={isDarkTheme ? dark : light}
+            alt="Graphql page"
+            width={400}
+          />
+        </div>
 
-        <h2>{translation('MainPage.aboutUsHeading')}</h2>
-        <p>{translation('MainPage.aboutUsText')}</p>
+        <div className={styles.aboutUs}>
+          <img src={astronaut} alt="Our team" width={300} />
+          <div>
+            <h2>{translation('MainPage.aboutUsHeading')}</h2>
+            <p>{translation('MainPage.aboutUsText')}</p>
+          </div>
+        </div>
 
         <h2>{translation('MainPage.aboutCourseHeading')}</h2>
         <p>{translation('MainPage.aboutCourseText')}</p>

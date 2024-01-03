@@ -1,8 +1,14 @@
 .wrapper {
   display: flex;
+  gap: 20px;
+}
+
+.queryWrapper {
+  display: flex;
   flex-direction: column;
   gap: 10px;
   margin-top: 10px;
+  width: 100%;
 }
 
 .sandboxWrapper {
@@ -44,6 +50,12 @@
   }
 }
 
+@media (max-width: 1370px) {
+  .wrapper {
+    flex-direction: column;
+  }
+}
+
 @media (max-width: 800px) {
   .additionalFeatures {
     flex-wrap: wrap;
@@ -55,9 +67,5 @@
 
   .sandboxWrapper {
     flex-wrap: wrap;
-  }
-
-  .editorWrapper {
-    max-width: 600px;
   }
 }

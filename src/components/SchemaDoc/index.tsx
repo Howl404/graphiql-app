@@ -155,7 +155,9 @@ export default function SchemaDoc({ api, isDocsOpen }: SchemaDocType) {
 
   return (
     <div className={cls(style.container, isDocsOpen && style.docsVisible)}>
-      <h1>{translation('GraphQLPage.documentation')}</h1>
+      <h1 className={style.heading}>
+        {translation('GraphQLPage.documentation')}
+      </h1>
       <Divider />
       <SchemaBreadcrumbs
         items={typeNameStack}

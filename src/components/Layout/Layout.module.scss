@@ -4,7 +4,7 @@
 }
 
 .content {
-  min-height: calc(100vh - 219px);
+  min-height: calc(100vh - 227px);
   padding: 24px;
 }
 
@@ -13,4 +13,10 @@
   align-items: center;
   justify-content: center;
   min-height: calc(100vh - 120px);
+}
+
+@media (max-width: 400px) {
+  .content {
+    padding: 24px 10px;
+  }
 }

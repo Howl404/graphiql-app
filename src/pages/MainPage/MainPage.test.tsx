@@ -6,6 +6,7 @@ import { describe, expect, it, Mock, vi } from 'vitest';
 import '@testing-library/jest-dom';
 
 import LangContextProvider from 'context/LangContext';
+import AppThemeProvider from 'context/ThemeContext';
 
 import MainPage from 'pages/MainPage';
 
@@ -17,9 +18,11 @@ describe('Tests for Auth page', () => {
 
     render(
       <MemoryRouter>
-        <LangContextProvider>
-          <MainPage />
-        </LangContextProvider>
+        <AppThemeProvider>
+          <LangContextProvider>
+            <MainPage />
+          </LangContextProvider>
+        </AppThemeProvider>
       </MemoryRouter>
     );
 
@@ -31,9 +34,11 @@ describe('Tests for Auth page', () => {
 
     render(
       <MemoryRouter>
-        <LangContextProvider>
-          <MainPage />
-        </LangContextProvider>
+        <AppThemeProvider>
+          <LangContextProvider>
+            <MainPage />
+          </LangContextProvider>
+        </AppThemeProvider>
       </MemoryRouter>
     );
 
@@ -46,9 +51,11 @@ describe('Tests for Auth page', () => {
 
     render(
       <MemoryRouter>
-        <LangContextProvider>
-          <MainPage />
-        </LangContextProvider>
+        <AppThemeProvider>
+          <LangContextProvider>
+            <MainPage />
+          </LangContextProvider>
+        </AppThemeProvider>
       </MemoryRouter>
     );
 

@@ -95,88 +95,92 @@ export default function GraphiqlPage() {
 
   return (
     <div className={styles.wrapper}>
-      <EndpointForm
-        inputValue={inputValue}
-        handleChangeEndpoint={handleChangeEndpoint}
-        handleChangeInput={handleChangeInput}
-      />
-      <div className={styles.sandboxWrapper}>
-        <div className={styles.editorWrapper}>
-          <Editor
-            editorMode={EditorMode.Query}
-            value={query}
-            setValue={handleChangeQuery}
-            size="large"
-          />
-          <ActionsPanel
-            query={query}
-            sendQuery={sendQuery}
-            toggleDocs={toggleDocs}
-            setPrettifiedQuery={setPrettifiedQuery}
-          />
-        </div>
-        <div className={styles.editorWrapper}>
-          <Editor
-            editorMode={EditorMode.JSON}
-            isReadonly
-            value={viewerValue}
-            setValue={handleChangeViewer}
-            size="large"
-          />
-        </div>
-      </div>
-      <div className={styles.additionalFeatures}>
-        <div className={styles.feature}>
-          <p>
-            {translation('GraphQLPage.headers')}
-            <IconButton
-              onClick={() => setIsHeadersOpen(!isHeadersOpen)}
-              aria-expanded={isHeadersOpen}
-              aria-label="show more"
-              className={styles.collapseButton}
-            >
-              <ExpandMoreIcon className={cls(isHeadersOpen && styles.rotate)} />
-            </IconButton>
-          </p>
-          <Collapse in={isHeadersOpen}>
-            <Editor
-              editorMode={EditorMode.JSON}
-              value={headers}
-              setValue={(value) => setHeaders(value)}
-              size="small"
-            />
-          </Collapse>
-        </div>
-        <div className={styles.feature}>
-          <p>
-            {translation('GraphQLPage.variables')}
-            <IconButton
-              onClick={() => setIsVariablesOpen(!isVariablesOpen)}
-              aria-expanded={isVariablesOpen}
-              aria-label="show more"
-              className={styles.collapseButton}
-            >
-              <ExpandMoreIcon
-                className={cls(isVariablesOpen && styles.rotate)}
-              />
-            </IconButton>
-          </p>
-          <Collapse in={isVariablesOpen}>
-            <Editor
-              editorMode={EditorMode.JSON}
-              value={variables}
-              setValue={(value) => setVariables(value)}
-              size="small"
-            />
-          </Collapse>
-        </div>
-      </div>
       <SchemaDoc api={currentEndpoint} isDocsOpen={isDocsOpen} />
-      {isJsonLoading && (
-        <Dimming>
-          <Loader />
-        </Dimming>
-      )}
+      <div className={styles.queryWrapper}>
+        <EndpointForm
+          inputValue={inputValue}
+          handleChangeEndpoint={handleChangeEndpoint}
+          handleChangeInput={handleChangeInput}
+        />
+        <div className={styles.sandboxWrapper}>
+          <div className={styles.editorWrapper}>
+            <Editor
+              editorMode={EditorMode.Query}
+              value={query}
+              setValue={handleChangeQuery}
+              size="large"
+            />
+            <ActionsPanel
+              query={query}
+              sendQuery={sendQuery}
+              toggleDocs={toggleDocs}
+              setPrettifiedQuery={setPrettifiedQuery}
+            />
+          </div>
+          <div className={styles.editorWrapper}>
+            <Editor
+              editorMode={EditorMode.JSON}
+              isReadonly
+              value={viewerValue}
+              setValue={handleChangeViewer}
+              size="large"
+            />
+          </div>
+        </div>
+        <div className={styles.additionalFeatures}>
+          <div className={styles.feature}>
+            <p>
+              {translation('GraphQLPage.headers')}
+              <IconButton
+                onClick={() => setIsHeadersOpen(!isHeadersOpen)}
+                aria-expanded={isHeadersOpen}
+                aria-label="show more"
+                className={styles.collapseButton}
+              >
+                <ExpandMoreIcon
+                  className={cls(isHeadersOpen && styles.rotate)}
+                />
+              </IconButton>
+            </p>
+            <Collapse in={isHeadersOpen}>
+              <Editor
+                editorMode={EditorMode.JSON}
+                value={headers}
+                setValue={(value) => setHeaders(value)}
+                size="small"
+              />
+            </Collapse>
+          </div>
+          <div className={styles.feature}>
+            <p>
+              {translation('GraphQLPage.variables')}
+              <IconButton
+                onClick={() => setIsVariablesOpen(!isVariablesOpen)}
+                aria-expanded={isVariablesOpen}
+                aria-label="show more"
+                className={styles.collapseButton}
+              >
+                <ExpandMoreIcon
+                  className={cls(isVariablesOpen && styles.rotate)}
+                />
+              </IconButton>
+            </p>
+            <Collapse in={isVariablesOpen}>
+              <Editor
+                editorMode={EditorMode.JSON}
+                value={variables}
+                setValue={(value) => setVariables(value)}
+                size="small"
+              />
+            </Collapse>
+          </div>
+        </div>
+        {isJsonLoading && (
+          <Dimming>
+            <Loader />
+          </Dimming>
+        )}
+      </div>
     </div>
   );
 }
