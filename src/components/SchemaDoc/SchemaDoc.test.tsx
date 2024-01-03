@@ -8,6 +8,7 @@ import '@testing-library/jest-dom';
 import { SchemaRoot } from 'src/types';
 
 import LangContextProvider from 'context/LangContext';
+import AppThemeProvider from 'context/ThemeContext';
 
 import useSchema from 'hooks/useSchema';
 
@@ -64,9 +65,11 @@ describe('Tests for SchemaDoc component', () => {
       isLoading: false,
     });
     render(
-      <LangContextProvider>
-        <SchemaDoc api={DEFAULT_API} isDocsOpen={true} />
-      </LangContextProvider>
+      <AppThemeProvider>
+        <LangContextProvider>
+          <SchemaDoc api={DEFAULT_API} isDocsOpen={true} />
+        </LangContextProvider>
+      </AppThemeProvider>
     );
 
     await waitFor(() => {
@@ -87,9 +90,11 @@ describe('Tests for SchemaDoc component', () => {
       isLoading: false,
     });
     render(
-      <LangContextProvider>
-        <SchemaDoc api={DEFAULT_API} isDocsOpen={true} />
-      </LangContextProvider>
+      <AppThemeProvider>
+        <LangContextProvider>
+          <SchemaDoc api={DEFAULT_API} isDocsOpen={true} />
+        </LangContextProvider>
+      </AppThemeProvider>
     );
 
     const query = screen.getByText('Query');
