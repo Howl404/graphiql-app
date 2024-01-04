@@ -122,7 +122,8 @@ export default function AuthPage() {
               control={control}
               rules={{
                 required: translation('AuthPage.passwordError'),
-                validate: passwordValidation,
+                validate: (password) =>
+                  passwordValidation(password, translation),
               }}
               render={({ field }) => (
                 <InputPassword
@@ -139,7 +140,8 @@ export default function AuthPage() {
                 control={control}
                 rules={{
                   required: translation('AuthPage.passwordConfirmError'),
-                  validate: confirmPasswordValidation,
+                  validate: (confirm, password) =>
+                    confirmPasswordValidation(confirm, password, translation),
                 }}
                 render={({ field }) => (
                   <InputPassword

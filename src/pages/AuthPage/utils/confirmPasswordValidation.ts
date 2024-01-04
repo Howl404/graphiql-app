@@ -1,8 +1,13 @@
 import { AuthFormInputs } from 'src/types';
 
+import { TranslationKeys } from 'hooks/useTranslation.ts';
+
 export default function confirmPasswordValidation(
   confirmPassword: string | undefined,
-  { password }: AuthFormInputs
+  { password }: AuthFormInputs,
+  translation: (key: TranslationKeys) => string
 ): boolean | string {
-  return password === confirmPassword || 'Passwords do not match';
+  return (
+    password === confirmPassword || translation('AuthPage.passwordDontMatch')
+  );
 }

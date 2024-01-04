@@ -5,7 +5,7 @@ import RU from 'locales/ru.json';
 
 import { LangContext } from 'context/LangContext';
 
-type TranslationKeys = keyof typeof EN;
+export type TranslationKeys = keyof typeof EN;
 
 const translations = {
   EN,

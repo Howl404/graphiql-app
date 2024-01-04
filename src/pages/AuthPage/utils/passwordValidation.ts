@@ -1,15 +1,20 @@
-export default function passwordValidation(password: string) {
+import { TranslationKeys } from 'hooks/useTranslation.ts';
+
+export default function passwordValidation(
+  password: string,
+  translation: (key: TranslationKeys) => string
+) {
   switch (true) {
     case !/\p{Lu}/u.test(password):
-      return 'At least one uppercase letter';
+      return translation('AuthPage.passwordUpperLetter');
     case !/\p{Ll}/u.test(password):
-      return 'At least one lowercase letter';
+      return translation('AuthPage.passwordLowerLetter');
     case !/\p{N}/u.test(password):
-      return 'At least one number';
+      return translation('AuthPage.passwordOneNumber');
     case !/["#$%&'()*+,-./:;<=>!?@[\]^_`{|}~]/u.test(password):
-      return 'At least one special character';
+      return translation('AuthPage.passwordSpecialCharacter');
     case password.length < 8:
-      return 'At least 8 characters';
+      return translation('AuthPage.passwordEightCharacters');
     default:
       return true;
   }
