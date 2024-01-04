@@ -57,6 +57,7 @@ export default function MainPage() {
             <Button
               component={Link}
               to={Paths.Auth}
+              state={{ mode: 'SignUp' }}
               variant={'outlined'}
               data-testid="signup"
             >

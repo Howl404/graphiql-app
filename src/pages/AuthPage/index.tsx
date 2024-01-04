@@ -1,7 +1,7 @@
 import { Button, Divider, TextField } from '@mui/material';
 import { useRef, useState } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { CSSTransition, SwitchTransition } from 'react-transition-group';
 
 import Paths from 'enums/paths';
@@ -23,11 +23,12 @@ import styles from './AuthPage.module.scss';
 type AuthMode = 'SignIn' | 'SignUp' | 'SignOut';
 
 export default function AuthPage() {
-  const [mode, setMode] = useState<AuthMode>('SignIn');
-  const formRef = useRef<HTMLFormElement | null>(null);
-
   const translation = useTranslation();
   const navigate = useNavigate();
+  const initMode = useLocation().state?.mode as AuthMode | undefined;
+
+  const [mode, setMode] = useState<AuthMode>(initMode ?? 'SignIn');
+  const formRef = useRef<HTMLFormElement | null>(null);
 
   const {
     control,
