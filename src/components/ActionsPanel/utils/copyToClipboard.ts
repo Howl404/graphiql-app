@@ -1,10 +1,15 @@
 import displayNotification from 'utils/displayNotification';
 
-export default async function copyToClipboard(value: string) {
+import { TranslationKeys } from 'hooks/useTranslation.ts';
+
+export default async function copyToClipboard(
+  value: string,
+  translation: (key: TranslationKeys) => string
+) {
   try {
     await navigator.clipboard.writeText(value);
-    displayNotification('Copied!', 'success');
+    displayNotification(translation('GraphQLPage.copySuccess'), 'success');
   } catch {
-    displayNotification('Failed to copy!', 'error');
+    displayNotification(translation('GraphQLPage.copyError'), 'error');
   }
 }

@@ -10,6 +10,8 @@ import Header from 'components/Header';
 
 import EndpointForm from './index';
 
+const mockTranslation = (str: string) => str;
+
 describe('EndpointForm', () => {
   const changeEndpoint = vi.fn();
   const changeInput = vi.fn();
@@ -21,6 +23,7 @@ describe('EndpointForm', () => {
           inputValue=""
           handleChangeEndpoint={changeEndpoint}
           handleChangeInput={changeInput}
+          translation={mockTranslation}
         />
       </AppThemeProvider>
     );
@@ -53,6 +56,7 @@ describe('EndpointForm', () => {
               inputValue=""
               handleChangeEndpoint={changeEndpoint}
               handleChangeInput={changeInput}
+              translation={mockTranslation}
             />
           </LangContextProvider>
         </AppThemeProvider>

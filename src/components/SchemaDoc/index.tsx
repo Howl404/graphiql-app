@@ -17,10 +17,9 @@ import style from './style.module.scss';
 
 type SchemaDocType = {
   api: string;
-  isDocsOpen: boolean;
 };
 
-export default function SchemaDoc({ api, isDocsOpen }: SchemaDocType) {
+export default function SchemaDoc({ api }: SchemaDocType) {
   const [typeNameStack, setTypeNameStack] = useState<SchemaStackItem[]>([]);
 
   const translation = useTranslation();
@@ -154,7 +153,7 @@ export default function SchemaDoc({ api, isDocsOpen }: SchemaDocType) {
   };
 
   return (
-    <div className={cls(style.container, isDocsOpen && style.docsVisible)}>
+    <div className={cls(style.container, style.docsVisible)}>
       <h1 className={style.heading}>
         {translation('GraphQLPage.documentation')}
       </h1>

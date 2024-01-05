@@ -55,7 +55,7 @@ export default function ActionsPanel({
       width: 30,
     },
     {
-      onClick: () => copyToClipboard(query),
+      onClick: () => copyToClipboard(query, translation),
       src: copyIcon,
       alt: 'Copy',
       title: translation('GraphQLPage.copyQuery'),

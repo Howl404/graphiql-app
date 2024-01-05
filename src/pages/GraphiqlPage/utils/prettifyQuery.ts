@@ -1,22 +1,24 @@
 import displayNotification from 'utils/displayNotification';
 
+import { TranslationKeys } from 'hooks/useTranslation.ts';
+
 const OPENING_BRACE = '{';
 const CLOSING_BRACE = '}';
 const NEW_LINE = '\n';
 const SINGLE_SPACE = ' ';
 
-export default function prettifyQuery(fullQuery: string) {
+export default function prettifyQuery(
+  fullQuery: string,
+  translation: (key: TranslationKeys) => string
+) {
   const queryArr = fullQuery.split('fragment');
   const resultArr = queryArr.map((query) => {
     if (checkBrackets(query)) {
-      const unformattedQuery = clearFormat(query);
-      const formattedQuery = formatQuery(unformattedQuery);
+      const clearedQuery = clearFormat(query);
+      const formattedQuery = formatQuery(clearedQuery);
       return addIndents(formattedQuery);
     } else {
-      displayNotification(
-        `Please check your query's brackets and run again`,
-        'error'
-      );
+      displayNotification(translation('GraphQLPage.prettifyError'), 'error');
       return query;
     }
   });

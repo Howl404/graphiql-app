@@ -7,7 +7,7 @@ import {
 
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { Collapse, IconButton } from '@mui/material';
-import { FormEvent, useState } from 'react';
+import { FormEvent, lazy, Suspense, useState } from 'react';
 
 import EditorMode from 'enums/editorMode';
 
@@ -21,7 +21,6 @@ import useTranslation from 'hooks/useTranslation';
 import ActionsPanel from 'components/ActionsPanel';
 import Editor from 'components/Editor';
 import EndpointForm from 'components/EndpointForm';
-import SchemaDoc from 'components/SchemaDoc';
 import Dimming from 'components/UI/Dimming';
 import Loader from 'components/UI/Loader';
 
@@ -29,6 +28,8 @@ import prettifyQuery from './utils/prettifyQuery';
 import safeJsonParse from './utils/safeJsonParse';
 
 import styles from './GraphiqlPage.module.scss';
+
+const SchemaDoc = lazy(() => import('components/SchemaDoc'));
 
 export default function GraphiqlPage() {
   const translation = useTranslation();
@@ -90,17 +91,33 @@ export default function GraphiqlPage() {
   };
 
   const setPrettifiedQuery = () => {
-    setQuery(prettifyQuery(query));
+    setQuery(prettifyQuery(query, translation));
   };
 
   return (
     <div className={styles.wrapper}>
-      <SchemaDoc api={currentEndpoint} isDocsOpen={isDocsOpen} />
+      {isJsonLoading && (
+        <Dimming>
+          <Loader />
+        </Dimming>
+      )}
+      {isDocsOpen && (
+        <Suspense
+          fallback={
+            <Dimming>
+              <Loader />
+            </Dimming>
+          }
+        >
+          <SchemaDoc api={currentEndpoint} />
+        </Suspense>
+      )}
       <div className={styles.queryWrapper}>
         <EndpointForm
           inputValue={inputValue}
           handleChangeEndpoint={handleChangeEndpoint}
           handleChangeInput={handleChangeInput}
+          translation={translation}
         />
         <div className={styles.sandboxWrapper}>
           <div className={styles.editorWrapper}>
@@ -175,11 +192,6 @@ export default function GraphiqlPage() {
             </Collapse>
           </div>
         </div>
-        {isJsonLoading && (
-          <Dimming>
-            <Loader />
-          </Dimming>
-        )}
       </div>
     </div>
   );

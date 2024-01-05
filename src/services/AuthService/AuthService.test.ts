@@ -37,6 +37,8 @@ vi.mock('services/authErrorHandler', () => ({
   authErrorHandler: vi.fn(),
 }));
 
+const mockTranslation = (str: string) => str;
+
 describe('Auth Service methods successful requests returns true', () => {
   it('Should return true after successful sign in with Google', async () => {
     vi.mocked(GoogleAuthProvider).mockImplementation(
@@ -50,7 +52,7 @@ describe('Auth Service methods successful requests returns true', () => {
     vi.mocked(addDoc as Mock).mockResolvedValue({});
     vi.mocked(collection as Mock).mockReturnValue({});
 
-    const result = await AuthService.signInWithGoogle();
+    const result = await AuthService.signInWithGoogle(vi.fn());
     expect(result).toBe(true);
   });
 
@@ -61,7 +63,8 @@ describe('Auth Service methods successful requests returns true', () => {
 
     const result = await AuthService.logInWithEmailAndPassword(
       'test@example.com',
-      'password123'
+      'password123',
+      mockTranslation
     );
     expect(result).toBe(true);
   });
@@ -75,7 +78,8 @@ describe('Auth Service methods successful requests returns true', () => {
 
     const result = await AuthService.registerWithEmailAndPassword(
       'test@example.com',
-      'password123'
+      'password123',
+      mockTranslation
     );
     expect(result).toBe(true);
   });
@@ -106,7 +110,7 @@ describe('If something go wrong, Auth Service methods calls authErrorHandler', (
     vi.mocked(addDoc as Mock).mockResolvedValue({});
     vi.mocked(collection as Mock).mockReturnValue({});
 
-    const result = await AuthService.signInWithGoogle();
+    const result = await AuthService.signInWithGoogle(mockTranslation);
     expect(result).toBe(false);
   });
 
@@ -119,7 +123,8 @@ describe('If something go wrong, Auth Service methods calls authErrorHandler', (
 
     const result = await AuthService.registerWithEmailAndPassword(
       'test@example.com',
-      'password123'
+      'password123',
+      mockTranslation
     );
     expect(result).toBe(false);
   });
@@ -131,7 +136,8 @@ describe('If something go wrong, Auth Service methods calls authErrorHandler', (
 
     const result = await AuthService.logInWithEmailAndPassword(
       'test@example.com',
-      'password123'
+      'password123',
+      mockTranslation
     );
     expect(result).toBe(false);
   });

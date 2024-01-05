@@ -8,6 +8,8 @@ import prettifyQuery, {
   formatTitle,
 } from './prettifyQuery';
 
+const mockTranslation = (str: string) => str;
+
 describe('function checkBrackets', () => {
   it('should return false if there is an unclosed pair of braces', () => {
     const query = 'query UnclosedPair {unclosed {pair}';
@@ -105,7 +107,7 @@ fragment comparisonFields on Character {
   country
 }`;
     const query = `query ExampleQuery ( $first : Int=3) {rockets {company}}fragment comparisonFields on Character {name country}`;
-    const result = prettifyQuery(query);
+    const result = prettifyQuery(query, mockTranslation);
     expect(result).toBe(rightResult);
   });
 
@@ -117,7 +119,7 @@ fragment comparisonFields on Character {
   country
 }`;
     const query = `query ExampleQuery ( $first : Int=3) {rockets {company}fragment comparisonFields on Character {name country}`;
-    const result = prettifyQuery(query);
+    const result = prettifyQuery(query, mockTranslation);
     expect(result).toBe(rightResult);
   });
 });

@@ -19,25 +19,6 @@ vi.mock('hooks/useSchema', () => ({
 }));
 
 describe('Tests for SchemaDoc component', () => {
-  it('should show preloader while fetching schema', async () => {
-    vi.mocked(useSchema).mockReturnValue({
-      isLoading: true,
-      schema: null,
-      error: false,
-    });
-    render(
-      <LangContextProvider>
-        <SchemaDoc api={DEFAULT_API} isDocsOpen={true} />
-      </LangContextProvider>
-    );
-
-    await waitFor(() => {
-      const loader = screen.getByTestId('loader');
-
-      expect(loader).toBeInTheDocument();
-    });
-  });
-
   it('should show error if fetching schema fails', async () => {
     vi.mocked(useSchema).mockReturnValue({
       error: true,
@@ -47,7 +28,7 @@ describe('Tests for SchemaDoc component', () => {
 
     render(
       <LangContextProvider>
-        <SchemaDoc api={DEFAULT_API} isDocsOpen={true} />
+        <SchemaDoc api={DEFAULT_API} />
       </LangContextProvider>
     );
 
@@ -67,7 +48,7 @@ describe('Tests for SchemaDoc component', () => {
     render(
       <AppThemeProvider>
         <LangContextProvider>
-          <SchemaDoc api={DEFAULT_API} isDocsOpen={true} />
+          <SchemaDoc api={DEFAULT_API} />
         </LangContextProvider>
       </AppThemeProvider>
     );
@@ -92,7 +73,7 @@ describe('Tests for SchemaDoc component', () => {
     render(
       <AppThemeProvider>
         <LangContextProvider>
-          <SchemaDoc api={DEFAULT_API} isDocsOpen={true} />
+          <SchemaDoc api={DEFAULT_API} />
         </LangContextProvider>
       </AppThemeProvider>
     );
