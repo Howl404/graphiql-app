@@ -8,7 +8,7 @@ import '@testing-library/jest-dom';
 import LangContextProvider from 'context/LangContext';
 import AppThemeProvider from 'context/ThemeContext';
 
-import MainPage from 'pages/MainPage';
+import WelcomePage from 'pages/WelcomePage';
 
 vi.mock('react-firebase-hooks/auth');
 
@@ -20,7 +20,7 @@ describe('Tests for Auth page', () => {
       <MemoryRouter>
         <AppThemeProvider>
           <LangContextProvider>
-            <MainPage />
+            <WelcomePage />
           </LangContextProvider>
         </AppThemeProvider>
       </MemoryRouter>
@@ -36,7 +36,7 @@ describe('Tests for Auth page', () => {
       <MemoryRouter>
         <AppThemeProvider>
           <LangContextProvider>
-            <MainPage />
+            <WelcomePage />
           </LangContextProvider>
         </AppThemeProvider>
       </MemoryRouter>
@@ -53,7 +53,7 @@ describe('Tests for Auth page', () => {
       <MemoryRouter>
         <AppThemeProvider>
           <LangContextProvider>
-            <MainPage />
+            <WelcomePage />
           </LangContextProvider>
         </AppThemeProvider>
       </MemoryRouter>

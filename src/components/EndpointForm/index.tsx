@@ -36,7 +36,7 @@ export default function EndpointForm({
         onChange={(event) => handleChangeInput(event.target.value)}
         onBlur={handleChangeEndpoint}
         type="text"
-        placeholder={translation('GraphQLPage.endpointPlaceholder')}
+        placeholder={translation('MainPage.endpointPlaceholder')}
         data-testid="endpoint-input"
       />
       <Button

@@ -126,6 +126,7 @@ export default function AuthPage() {
                   variant="outlined"
                   error={!!errors.email}
                   helperText={errors.email?.message}
+                  autoComplete={'email'}
                 />
               )}
             />
@@ -143,6 +144,9 @@ export default function AuthPage() {
                   error={errors.password}
                   id="password"
                   label={translation('AuthPage.password')}
+                  autocomplete={
+                    mode === 'SignUp' ? 'new-password' : 'current-password'
+                  }
                 />
               )}
             />
@@ -161,6 +165,7 @@ export default function AuthPage() {
                     error={errors.confirmPassword}
                     id="confirm-password"
                     label={translation('AuthPage.passwordConfirm')}
+                    autocomplete="new-password"
                   />
                 )}
               />

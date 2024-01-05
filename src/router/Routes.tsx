@@ -4,12 +4,12 @@ import Paths from 'enums/paths';
 
 import Layout from 'components/Layout';
 
-import MainPage from 'pages/MainPage';
 import NotFoundPage from 'pages/NotFoundPage';
+import WelcomePage from 'pages/WelcomePage';
 
 import ConditionalRoute from './ConditionalRoute';
 
-const GraphiqlPage = lazy(() => import('pages/GraphiqlPage'));
+const MainPage = lazy(() => import('pages/MainPage'));
 const AuthPage = lazy(() => import('pages/AuthPage'));
 
 export default function Routes() {
@@ -17,14 +17,14 @@ export default function Routes() {
     element: <Layout />,
     children: [
       {
-        path: Paths.Main,
-        element: <MainPage />,
+        path: Paths.Welcome,
+        element: <WelcomePage />,
       },
       {
-        path: Paths.Graphiql,
+        path: Paths.Main,
         element: (
           <ConditionalRoute requireAuth={true} redirectTo={Paths.Auth}>
-            <GraphiqlPage />
+            <MainPage />
           </ConditionalRoute>
         ),
       },

@@ -91,7 +91,7 @@ export default function Header() {
               component="div"
             >
               <div className={styles.wrapper}>
-                <Link to={Paths.Main} className={styles.logoWrapper}>
+                <Link to={Paths.Welcome} className={styles.logoWrapper}>
                   <img
                     src={logo}
                     alt="Logo"

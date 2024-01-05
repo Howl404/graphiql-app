@@ -54,11 +54,11 @@ export default function SchemaDoc({ api }: SchemaDocType) {
     if (!currentType) return;
 
     const items = [
-      { data: currentArgs, title: translation('GraphQLPage.arguments') },
-      { data: currentType?.fields, title: translation('GraphQLPage.fields') },
+      { data: currentArgs, title: translation('MainPage.arguments') },
+      { data: currentType?.fields, title: translation('MainPage.fields') },
       {
         data: currentType?.inputFields,
-        title: translation('GraphQLPage.inputFields'),
+        title: translation('MainPage.inputFields'),
       },
     ].filter(({ data }) => data?.length);
 
@@ -117,15 +117,15 @@ export default function SchemaDoc({ api }: SchemaDocType) {
     const rootItems = [
       {
         type: { name: queryType?.name },
-        name: translation('GraphQLPage.query'),
+        name: translation('MainPage.query'),
       },
       {
         type: { name: mutationType?.name },
-        name: translation('GraphQLPage.mutation'),
+        name: translation('MainPage.mutation'),
       },
       {
         type: { name: subscriptionType?.name },
-        name: translation('GraphQLPage.subscription'),
+        name: translation('MainPage.subscription'),
       },
     ].filter((field) => field.type.name) as SchemaField[];
 
@@ -144,7 +144,7 @@ export default function SchemaDoc({ api }: SchemaDocType) {
       case isLoading:
         return <Loader />;
       case error || !schema:
-        return <p>{translation('GraphQLPage.unknownError')}</p>;
+        return <p>{translation('MainPage.unknownError')}</p>;
       case typeNameStack.length > 0:
         return renderFields();
       default:
@@ -154,9 +154,7 @@ export default function SchemaDoc({ api }: SchemaDocType) {
 
   return (
     <div className={cls(style.container, style.docsVisible)}>
-      <h1 className={style.heading}>
-        {translation('GraphQLPage.documentation')}
-      </h1>
+      <h1 className={style.heading}>{translation('MainPage.documentation')}</h1>
       <Divider />
       <SchemaBreadcrumbs
         items={typeNameStack}

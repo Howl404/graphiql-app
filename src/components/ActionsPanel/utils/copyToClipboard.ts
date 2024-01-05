@@ -8,8 +8,8 @@ export default async function copyToClipboard(
 ) {
   try {
     await navigator.clipboard.writeText(value);
-    displayNotification(translation('GraphQLPage.copySuccess'), 'success');
+    displayNotification(translation('MainPage.copySuccess'), 'success');
   } catch {
-    displayNotification(translation('GraphQLPage.copyError'), 'error');
+    displayNotification(translation('MainPage.copyError'), 'error');
   }
 }

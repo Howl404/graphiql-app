@@ -17,6 +17,7 @@ describe('InputPassword Component', () => {
       error: { message: 'test-error' } as FieldError,
       id: 'password',
       label: 'Password',
+      autocomplete: '',
     };
 
     render(<InputPassword {...props} />);
