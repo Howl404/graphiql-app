@@ -1,4 +1,4 @@
-import { TranslationKeys } from 'hooks/useTranslation.ts';
+import { TranslationKeys } from 'hooks/useTranslation';
 
 export default function passwordValidation(
   password: string,

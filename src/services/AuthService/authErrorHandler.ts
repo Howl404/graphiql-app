@@ -2,7 +2,7 @@ import { FirebaseError } from 'firebase/app';
 
 import displayNotification from 'utils/displayNotification';
 
-import { TranslationKeys } from 'hooks/useTranslation.ts';
+import { TranslationKeys } from 'hooks/useTranslation';
 
 export const knownFirebaseErrors = [
   'auth/invalid-credential',

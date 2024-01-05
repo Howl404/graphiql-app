@@ -6,7 +6,7 @@ import cls from 'utils/classnames';
 
 import { AppThemeContext } from 'context/ThemeContext';
 
-import { TranslationKeys } from 'hooks/useTranslation.ts';
+import { TranslationKeys } from 'hooks/useTranslation';
 
 import styles from './EndpointForm.module.scss';
 

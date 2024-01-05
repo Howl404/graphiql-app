@@ -1,6 +1,6 @@
 import displayNotification from 'utils/displayNotification';
 
-import { TranslationKeys } from 'hooks/useTranslation.ts';
+import { TranslationKeys } from 'hooks/useTranslation';
 
 const OPENING_BRACE = '{';
 const CLOSING_BRACE = '}';

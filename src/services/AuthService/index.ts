@@ -10,7 +10,7 @@ import { auth, db } from 'src/firebase';
 
 import authErrorHandler from 'services/AuthService/authErrorHandler';
 
-import { TranslationKeys } from 'hooks/useTranslation.ts';
+import { TranslationKeys } from 'hooks/useTranslation';
 
 const PATH_TO_USERS_COLLECTION = 'users';
 

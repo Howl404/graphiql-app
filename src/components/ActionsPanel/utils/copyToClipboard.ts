@@ -1,6 +1,6 @@
 import displayNotification from 'utils/displayNotification';
 
-import { TranslationKeys } from 'hooks/useTranslation.ts';
+import { TranslationKeys } from 'hooks/useTranslation';
 
 export default async function copyToClipboard(
   value: string,
