@@ -44,14 +44,26 @@ export default function AuthPage() {
     },
   });
 
+  const handleGoogle = () => {
+    AuthService.signInWithGoogle(translation);
+  };
+
   const onSubmit: SubmitHandler<AuthFormInputs> = async ({
     email,
     password,
   }) => {
     const response =
       mode === 'SignIn'
-        ? await AuthService.logInWithEmailAndPassword(email, password)
-        : await AuthService.registerWithEmailAndPassword(email, password);
+        ? await AuthService.logInWithEmailAndPassword(
+            email,
+            password,
+            translation
+          )
+        : await AuthService.registerWithEmailAndPassword(
+            email,
+            password,
+            translation
+          );
     response && navigate(Paths.Main);
   };
 
@@ -159,10 +171,7 @@ export default function AuthPage() {
             <Divider textAlign="center">
               {translation(`AuthPage.divider`)}
             </Divider>
-            <Button
-              startIcon={<GoogleIcon />}
-              onClick={AuthService.signInWithGoogle}
-            >
+            <Button startIcon={<GoogleIcon />} onClick={handleGoogle}>
               {translation(`AuthPage.google`)}
             </Button>
           </form>
