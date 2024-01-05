@@ -146,8 +146,8 @@ export default function MainPage() {
         </div>
         <div className={styles.additionalFeatures}>
           <div className={styles.feature}>
-            <p>
-              {translation('MainPage.headers')}
+            <div className={styles.featureHeader}>
+              <p>{translation('MainPage.headers')}</p>
               <IconButton
                 onClick={() => setIsHeadersOpen(!isHeadersOpen)}
                 aria-expanded={isHeadersOpen}
@@ -158,7 +158,8 @@ export default function MainPage() {
                   className={cls(isHeadersOpen && styles.rotate)}
                 />
               </IconButton>
-            </p>
+            </div>
+
             <Collapse in={isHeadersOpen}>
               <Editor
                 editorMode={EditorMode.JSON}
@@ -169,8 +170,8 @@ export default function MainPage() {
             </Collapse>
           </div>
           <div className={styles.feature}>
-            <p>
-              {translation('MainPage.variables')}
+            <div className={styles.featureHeader}>
+              <p>{translation('MainPage.variables')}</p>
               <IconButton
                 onClick={() => setIsVariablesOpen(!isVariablesOpen)}
                 aria-expanded={isVariablesOpen}
@@ -181,7 +182,8 @@ export default function MainPage() {
                   className={cls(isVariablesOpen && styles.rotate)}
                 />
               </IconButton>
-            </p>
+            </div>
+
             <Collapse in={isVariablesOpen}>
               <Editor
                 editorMode={EditorMode.JSON}
