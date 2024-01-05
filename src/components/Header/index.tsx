@@ -106,6 +106,7 @@ export default function Header() {
                     sx={{ ml: 1 }}
                     onClick={toggleTheme}
                     color="primary"
+                    data-testid="theme-icon"
                   >
                     {isDarkTheme ? <BrightnessMedium /> : <Brightness7 />}
                   </IconButton>
