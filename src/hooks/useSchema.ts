@@ -7,7 +7,7 @@ import { SchemaResponse, SchemaRoot } from 'src/types';
 
 import fetchQuery from 'utils/fetchQuery';
 
-const cache: Record<string, SchemaRoot> = {};
+export const cache: Record<string, SchemaRoot> = {};
 
 export default function useSchema(api = DEFAULT_API) {
   const [schema, setSchema] = useState<SchemaRoot | null>(null);

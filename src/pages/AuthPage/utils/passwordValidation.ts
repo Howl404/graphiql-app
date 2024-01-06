@@ -1,15 +1,20 @@
-export default function passwordValidation(password: string) {
+import { TranslationKeys } from 'hooks/useTranslation';
+
+export default function passwordValidation(
+  password: string,
+  translation: (key: TranslationKeys) => string
+) {
   switch (true) {
-    case !/[A-Z]/.test(password):
-      return 'At least one uppercase letter';
-    case !/[a-z]/.test(password):
-      return 'At least one lowercase letter';
-    case !/[0-9]/.test(password):
-      return 'At least one number';
-    case !/[^A-Za-z0-9]/.test(password):
-      return 'At least one special character';
+    case !/\p{Lu}/u.test(password):
+      return translation('AuthPage.passwordUpperLetter');
+    case !/\p{Ll}/u.test(password):
+      return translation('AuthPage.passwordLowerLetter');
+    case !/\p{N}/u.test(password):
+      return translation('AuthPage.passwordOneNumber');
+    case !/["#$%&'()*+,-./:;<=>!?@[\]^_`{|}~]/u.test(password):
+      return translation('AuthPage.passwordSpecialCharacter');
     case password.length < 8:
-      return 'At least 8 characters';
+      return translation('AuthPage.passwordEightCharacters');
     default:
       return true;
   }

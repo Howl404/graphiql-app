@@ -22,7 +22,7 @@ export default function Layout() {
       if (user) {
         setWasAuthenticated(true);
       } else if (wasAuthenticated) {
-        navigate(Paths.Main);
+        navigate(Paths.Welcome);
       }
     });
 

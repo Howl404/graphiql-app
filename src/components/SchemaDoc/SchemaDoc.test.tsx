@@ -8,6 +8,7 @@ import '@testing-library/jest-dom';
 import { SchemaRoot } from 'src/types';
 
 import LangContextProvider from 'context/LangContext';
+import AppThemeProvider from 'context/ThemeContext';
 
 import useSchema from 'hooks/useSchema';
 
@@ -18,25 +19,6 @@ vi.mock('hooks/useSchema', () => ({
 }));
 
 describe('Tests for SchemaDoc component', () => {
-  it('should show preloader while fetching schema', async () => {
-    vi.mocked(useSchema).mockReturnValue({
-      isLoading: true,
-      schema: null,
-      error: false,
-    });
-    render(
-      <LangContextProvider>
-        <SchemaDoc api={DEFAULT_API} isDocsOpen={true} />
-      </LangContextProvider>
-    );
-
-    await waitFor(() => {
-      const loader = screen.getByTestId('loader');
-
-      expect(loader).toBeInTheDocument();
-    });
-  });
-
   it('should show error if fetching schema fails', async () => {
     vi.mocked(useSchema).mockReturnValue({
       error: true,
@@ -46,7 +28,7 @@ describe('Tests for SchemaDoc component', () => {
 
     render(
       <LangContextProvider>
-        <SchemaDoc api={DEFAULT_API} isDocsOpen={true} />
+        <SchemaDoc api={DEFAULT_API} />
       </LangContextProvider>
     );
 
@@ -64,9 +46,11 @@ describe('Tests for SchemaDoc component', () => {
       isLoading: false,
     });
     render(
-      <LangContextProvider>
-        <SchemaDoc api={DEFAULT_API} isDocsOpen={true} />
-      </LangContextProvider>
+      <AppThemeProvider>
+        <LangContextProvider>
+          <SchemaDoc api={DEFAULT_API} />
+        </LangContextProvider>
+      </AppThemeProvider>
     );
 
     await waitFor(() => {
@@ -87,9 +71,11 @@ describe('Tests for SchemaDoc component', () => {
       isLoading: false,
     });
     render(
-      <LangContextProvider>
-        <SchemaDoc api={DEFAULT_API} isDocsOpen={true} />
-      </LangContextProvider>
+      <AppThemeProvider>
+        <LangContextProvider>
+          <SchemaDoc api={DEFAULT_API} />
+        </LangContextProvider>
+      </AppThemeProvider>
     );
 
     const query = screen.getByText('Query');

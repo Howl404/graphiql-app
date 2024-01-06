@@ -91,7 +91,7 @@ export default function Header() {
               component="div"
             >
               <div className={styles.wrapper}>
-                <Link to={Paths.Main} className={styles.logoWrapper}>
+                <Link to={Paths.Welcome} className={styles.logoWrapper}>
                   <img
                     src={logo}
                     alt="Logo"
@@ -106,6 +106,7 @@ export default function Header() {
                     sx={{ ml: 1 }}
                     onClick={toggleTheme}
                     color="primary"
+                    data-testid="theme-icon"
                   >
                     {isDarkTheme ? <BrightnessMedium /> : <Brightness7 />}
                   </IconButton>

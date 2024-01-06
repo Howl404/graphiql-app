@@ -25,6 +25,11 @@ ul {
   padding: 0;
 }
 
+h1 {
+  margin: 0;
+  padding-bottom: 10px;
+}
+
 .MuiFormHelperText-root {
   height: 0;
 }
@@ -37,4 +42,35 @@ button.MuiToggleButton-root {
 button.MuiToggleButton-root.Mui-selected {
   color: var(--accent) !important;
   border-color: var(--accent) !important;
+}
+
+::-webkit-scrollbar {
+  width: 0.7em;
+  height: 0.7em;
+}
+
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: gray;
+  border-radius: 4px;
+}
+
+@media (max-width: 400px) {
+  .MuiDivider-root,
+  .MuiButtonBase-root,
+  .MuiListSubheader-root,
+  .MuiListItem-root,
+  .MuiBreadcrumbs-ol,
+  .MuiList-root,
+  .MuiCollapse-root {
+    max-width: 250px;
+  }
+
+  .MuiButtonBase-root {
+    height: fit-content;
+    padding: 5px !important;
+  }
 }

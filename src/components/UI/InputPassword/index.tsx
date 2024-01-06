@@ -13,12 +13,13 @@ type InputPasswordProps<T extends FieldValues, K extends Path<T>> = {
   error: FieldError | undefined;
   id: string;
   label: string;
+  autocomplete: string;
 };
 
 export default function InputPassword<
   T extends FieldValues,
   K extends Path<T>,
->({ field, error, id, label }: InputPasswordProps<T, K>) {
+>({ field, error, id, label, autocomplete }: InputPasswordProps<T, K>) {
   const [showPassword, setShowPassword] = useState(false);
 
   const type = showPassword ? 'text' : 'password';
@@ -35,6 +36,7 @@ export default function InputPassword<
       label={label}
       error={!!error}
       helperText={error?.message}
+      autoComplete={autocomplete}
       InputProps={{
         endAdornment: (
           <InputAdornment position="end">

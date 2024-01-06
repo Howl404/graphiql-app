@@ -1,7 +1,7 @@
 enum Paths {
-  Main = '/',
+  Welcome = '/',
+  Main = '/main',
   Auth = '/auth',
-  Graphiql = '/graphiql',
   NotFound = '*',
 }
 

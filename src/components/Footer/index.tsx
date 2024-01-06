@@ -23,6 +23,7 @@ export default function Footer() {
         styles.wrapper,
         isDarkTheme ? styles.wrapperDark : styles.wrapperLight
       )}
+      data-testid="footer-wrapper"
     >
       <ul className={styles.githubList}>
         {developers.map((developer) => (

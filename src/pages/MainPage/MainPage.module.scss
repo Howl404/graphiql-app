@@ -1,34 +1,74 @@
-.buttonsContainer {
+.wrapper {
   display: flex;
-  justify-content: flex-end;
+  gap: 20px;
+}
+
+.queryWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 10px;
+  width: 100%;
+}
+
+.sandboxWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   gap: 10px;
 }
 
-.textContainer {
-  margin: 0 auto;
-  max-width: 870px;
+.editorWrapper {
+  width: 50%;
+  display: flex;
+}
 
-  li {
-    margin: 5px 0;
-    line-height: 28px;
+.additionalFeatures {
+  display: flex;
+  gap: 10px;
+
+  .feature {
+    width: 50%;
+
+    p {
+      margin: 0;
+    }
+
+    button {
+      color: var(--accent);
+    }
   }
 
-  // TODO: font size and line height vars
-
-  p {
-    font-size: 18px;
-    line-height: 28px;
+  svg {
+    transition: 300ms;
   }
 
-  h1 {
-    font-size: 40px;
-    line-height: 56px;
+  .rotate {
+    transform: rotate(180deg);
+    transition: transform 300ms;
   }
 }
 
-.loaderContainer {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: calc(100vh - 120px);
+@media (max-width: 1370px) {
+  .wrapper {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 800px) {
+  .additionalFeatures {
+    flex-wrap: wrap;
+
+    .feature {
+      width: 100%;
+    }
+  }
+
+  .sandboxWrapper {
+    flex-wrap: wrap;
+  }
+
+  .editorWrapper {
+    width: 100%;
+  }
 }

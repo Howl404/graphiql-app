@@ -15,9 +15,13 @@ import {
   ListItemText,
   ListSubheader,
 } from '@mui/material';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 
 import { SchemaArg, SchemaField, SchemaStackItem, SchemaType } from 'src/types';
+
+import { AppThemeContext } from 'context/ThemeContext';
+
+import useOpen from 'hooks/useOpen';
 
 import style from './style.module.scss';
 
@@ -34,8 +38,9 @@ export default function SchemaItemsList({
   handleFieldClick,
   disableSort,
 }: Props) {
-  const [open, setOpen] = useState(true);
+  const { isOpen, setIsOpen } = useOpen(true);
   const [sortOrder, setSortOrder] = useState<'az' | 'za'>('az');
+  const { isDarkTheme } = useContext(AppThemeContext);
 
   if (!disableSort)
     data.sort((a, b) =>
@@ -69,18 +74,27 @@ export default function SchemaItemsList({
 
   return (
     <>
-      <ListSubheader disableGutters component="div">
+      <ListSubheader
+        sx={{
+          backgroundColor: isDarkTheme
+            ? 'var(--header)'
+            : 'var(--header-light)',
+          position: 'static',
+        }}
+        disableGutters
+        component="div"
+      >
         <ListItemButton
-          onClick={() => setOpen(!open)}
+          onClick={() => setIsOpen(!isOpen)}
           classes={{ root: style.subHeader }}
         >
           <span className={style.listTitle}>{title}</span>
           <ListItemIcon classes={{ root: style.collapseIcon }}>
-            {open ? <ExpandLess /> : <ExpandMore />}
+            {isOpen ? <ExpandLess /> : <ExpandMore />}
           </ListItemIcon>
         </ListItemButton>
       </ListSubheader>
-      <Collapse in={open}>
+      <Collapse in={isOpen}>
         {!disableSort && data.length > 1 && (
           <IconButton onClick={handleChangeSort} data-testid="sort-btn">
             <AbcIcon fontSize="large" color="primary" />

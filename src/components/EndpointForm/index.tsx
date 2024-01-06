@@ -6,18 +6,22 @@ import cls from 'utils/classnames';
 
 import { AppThemeContext } from 'context/ThemeContext';
 
+import { TranslationKeys } from 'hooks/useTranslation';
+
 import styles from './EndpointForm.module.scss';
 
 type EndpointFormType = {
   inputValue: string;
   handleChangeEndpoint: (event: FormEvent) => void;
   handleChangeInput: (value: string) => void;
+  translation: (key: TranslationKeys) => string;
 };
 
 export default function EndpointForm({
   inputValue,
   handleChangeEndpoint,
   handleChangeInput,
+  translation,
 }: EndpointFormType) {
   const { isDarkTheme } = useContext(AppThemeContext);
 
@@ -32,7 +36,7 @@ export default function EndpointForm({
         onChange={(event) => handleChangeInput(event.target.value)}
         onBlur={handleChangeEndpoint}
         type="text"
-        placeholder="Enter endpoint"
+        placeholder={translation('MainPage.endpointPlaceholder')}
         data-testid="endpoint-input"
       />
       <Button

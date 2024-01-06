@@ -1,7 +1,7 @@
 import { Button, Divider, TextField } from '@mui/material';
 import { useRef, useState } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { CSSTransition, SwitchTransition } from 'react-transition-group';
 
 import Paths from 'enums/paths';
@@ -23,11 +23,12 @@ import styles from './AuthPage.module.scss';
 type AuthMode = 'SignIn' | 'SignUp' | 'SignOut';
 
 export default function AuthPage() {
-  const [mode, setMode] = useState<AuthMode>('SignIn');
-  const formRef = useRef<HTMLFormElement | null>(null);
-
   const translation = useTranslation();
   const navigate = useNavigate();
+  const initMode = useLocation().state?.mode as AuthMode | undefined;
+
+  const [mode, setMode] = useState<AuthMode>(initMode ?? 'SignIn');
+  const formRef = useRef<HTMLFormElement | null>(null);
 
   const {
     control,
@@ -43,14 +44,26 @@ export default function AuthPage() {
     },
   });
 
+  const handleGoogle = () => {
+    AuthService.signInWithGoogle(translation);
+  };
+
   const onSubmit: SubmitHandler<AuthFormInputs> = async ({
     email,
     password,
   }) => {
     const response =
       mode === 'SignIn'
-        ? await AuthService.logInWithEmailAndPassword(email, password)
-        : await AuthService.registerWithEmailAndPassword(email, password);
+        ? await AuthService.logInWithEmailAndPassword(
+            email,
+            password,
+            translation
+          )
+        : await AuthService.registerWithEmailAndPassword(
+            email,
+            password,
+            translation
+          );
     response && navigate(Paths.Main);
   };
 
@@ -113,6 +126,7 @@ export default function AuthPage() {
                   variant="outlined"
                   error={!!errors.email}
                   helperText={errors.email?.message}
+                  autoComplete={'email'}
                 />
               )}
             />
@@ -121,7 +135,8 @@ export default function AuthPage() {
               control={control}
               rules={{
                 required: translation('AuthPage.passwordError'),
-                validate: passwordValidation,
+                validate: (password) =>
+                  passwordValidation(password, translation),
               }}
               render={({ field }) => (
                 <InputPassword
@@ -129,6 +144,9 @@ export default function AuthPage() {
                   error={errors.password}
                   id="password"
                   label={translation('AuthPage.password')}
+                  autocomplete={
+                    mode === 'SignUp' ? 'new-password' : 'current-password'
+                  }
                 />
               )}
             />
@@ -138,7 +156,8 @@ export default function AuthPage() {
                 control={control}
                 rules={{
                   required: translation('AuthPage.passwordConfirmError'),
-                  validate: confirmPasswordValidation,
+                  validate: (confirm, password) =>
+                    confirmPasswordValidation(confirm, password, translation),
                 }}
                 render={({ field }) => (
                   <InputPassword
@@ -146,6 +165,7 @@ export default function AuthPage() {
                     error={errors.confirmPassword}
                     id="confirm-password"
                     label={translation('AuthPage.passwordConfirm')}
+                    autocomplete="new-password"
                   />
                 )}
               />
@@ -156,10 +176,7 @@ export default function AuthPage() {
             <Divider textAlign="center">
               {translation(`AuthPage.divider`)}
             </Divider>
-            <Button
-              startIcon={<GoogleIcon />}
-              onClick={AuthService.signInWithGoogle}
-            >
+            <Button startIcon={<GoogleIcon />} onClick={handleGoogle}>
               {translation(`AuthPage.google`)}
             </Button>
           </form>

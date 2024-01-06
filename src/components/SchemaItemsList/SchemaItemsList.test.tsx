@@ -1,6 +1,8 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
 
+import AppThemeProvider from 'context/ThemeContext';
+
 import SchemaItemsList from './index';
 import '@testing-library/jest-dom';
 
@@ -33,7 +35,11 @@ describe('Tests for SchemaItemsList component', () => {
   };
 
   it('renders all items', async () => {
-    render(<SchemaItemsList {...props} />);
+    render(
+      <AppThemeProvider>
+        <SchemaItemsList {...props} />
+      </AppThemeProvider>
+    );
 
     const listItems = screen.getAllByRole('listitem');
     const title = screen.getByText(props.title);
@@ -43,7 +49,11 @@ describe('Tests for SchemaItemsList component', () => {
   });
 
   it('should handle sorting', async () => {
-    render(<SchemaItemsList {...props} />);
+    render(
+      <AppThemeProvider>
+        <SchemaItemsList {...props} />
+      </AppThemeProvider>
+    );
 
     const listItems = screen.getAllByRole('listitem');
 
