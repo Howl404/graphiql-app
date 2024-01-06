@@ -146,19 +146,15 @@ export default function MainPage() {
         </div>
         <div className={styles.additionalFeatures}>
           <div className={styles.feature}>
-            <div className={styles.featureHeader}>
-              <p>{translation('MainPage.headers')}</p>
-              <IconButton
-                onClick={() => setIsHeadersOpen(!isHeadersOpen)}
-                aria-expanded={isHeadersOpen}
-                aria-label="show more"
-                className={styles.collapseButton}
-              >
-                <ExpandMoreIcon
-                  className={cls(isHeadersOpen && styles.rotate)}
-                />
-              </IconButton>
-            </div>
+            <span>{translation('MainPage.headers')}</span>
+            <IconButton
+              onClick={() => setIsHeadersOpen(!isHeadersOpen)}
+              aria-expanded={isHeadersOpen}
+              aria-label="show more"
+              className={styles.collapseButton}
+            >
+              <ExpandMoreIcon className={cls(isHeadersOpen && styles.rotate)} />
+            </IconButton>
 
             <Collapse in={isHeadersOpen}>
               <Editor
@@ -170,19 +166,17 @@ export default function MainPage() {
             </Collapse>
           </div>
           <div className={styles.feature}>
-            <div className={styles.featureHeader}>
-              <p>{translation('MainPage.variables')}</p>
-              <IconButton
-                onClick={() => setIsVariablesOpen(!isVariablesOpen)}
-                aria-expanded={isVariablesOpen}
-                aria-label="show more"
-                className={styles.collapseButton}
-              >
-                <ExpandMoreIcon
-                  className={cls(isVariablesOpen && styles.rotate)}
-                />
-              </IconButton>
-            </div>
+            <span>{translation('MainPage.variables')}</span>
+            <IconButton
+              onClick={() => setIsVariablesOpen(!isVariablesOpen)}
+              aria-expanded={isVariablesOpen}
+              aria-label="show more"
+              className={styles.collapseButton}
+            >
+              <ExpandMoreIcon
+                className={cls(isVariablesOpen && styles.rotate)}
+              />
+            </IconButton>
 
             <Collapse in={isVariablesOpen}>
               <Editor
