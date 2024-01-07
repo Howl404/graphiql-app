@@ -174,7 +174,7 @@ export default function AuthPage() {
               {translation(`AuthPage.divider`)}
             </Divider>
             <Button
-              startIcon={<img src={googleIcon} alt={'Google'} />}
+              startIcon={<img src={googleIcon} alt="Google" />}
               onClick={handleGoogle}
             >
               {translation(`AuthPage.google`)}
