@@ -1,6 +1,7 @@
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
-import Languages from 'src/enums/languages';
+
+import Languages from 'enums/languages';
 
 type ToggleProps = {
   optionsName: string;
