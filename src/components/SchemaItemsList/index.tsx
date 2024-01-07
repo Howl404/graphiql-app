@@ -85,11 +85,11 @@ export default function SchemaItemsList({
         component="div"
       >
         <ListItemButton
+          sx={{ justifyContent: 'space-between', padding: '0 16px' }}
           onClick={() => (isOpen ? handleClose() : handleOpen())}
-          classes={{ root: style.subHeader }}
         >
           <span className={style.listTitle}>{title}</span>
-          <ListItemIcon classes={{ root: style.collapseIcon }}>
+          <ListItemIcon sx={{ minWidth: '0' }}>
             {isOpen ? <ExpandLess /> : <ExpandMore />}
           </ListItemIcon>
         </ListItemButton>
