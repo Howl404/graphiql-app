@@ -1,0 +1,27 @@
+.handlerEndpoint {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.inputEndpoint {
+  width: 80%;
+  padding: 7px;
+  border: none;
+  border-radius: 4px;
+}
+
+.inputDark {
+  background-color: var(--header);
+  color: var(--secondary-dark);
+}
+
+.inputLight {
+  background-color: var(--header-light);
+  color: var(--header);
+}
+
+.updateBtn {
+  width: 20%;
+}

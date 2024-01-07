@@ -1,0 +1,41 @@
+.authContainer {
+  margin: auto;
+  width: fit-content;
+  padding: 20px;
+
+  @media (max-width: 822px) {
+    overflow-x: hidden;
+  }
+}
+
+.authSwitch {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 25px;
+}
+
+.authForm {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  width: fit-content;
+  transition: 0.2s ease-in;
+
+  &-enter-active,
+  &-exit {
+    opacity: 1;
+    transform: translateX(0%);
+  }
+
+  &--SignIn-enter,
+  &--SignIn-exit-active {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+
+  &--SignUp-enter,
+  &--SignUp-exit-active {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+}

@@ -1,0 +1,37 @@
+.container {
+  display: none;
+  padding: 20px 5px;
+  width: 300px;
+  height: 100vh;
+}
+
+.listTitle {
+  padding-left: 1rem;
+  font-weight: 600;
+}
+
+.itemType {
+  opacity: 0.7;
+}
+
+.docsVisible {
+  display: block;
+  min-width: 300px;
+  max-height: 86vh;
+  overflow: auto;
+}
+
+@media (max-width: 1370px) {
+  .docsVisible {
+    width: 100%;
+    min-width: 200px;
+    height: auto;
+    max-height: 40vh;
+  }
+}
+
+@media (max-width: 400px) {
+  .heading {
+    font-size: 26px;
+  }
+}

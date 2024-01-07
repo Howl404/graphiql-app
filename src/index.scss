@@ -1,0 +1,64 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+:root {
+  --primary-dark: #070310;
+  --secondary-dark: #fff;
+  --secondary-light: #000;
+  --accent: #e10098;
+  --header: #21202e;
+  --header-light: #f2f1f8;
+  --border: #232a2f;
+  --dimming: #00000099;
+}
+
+#root {
+  font-family: Montserrat, Arial, Helvetica, sans-serif;
+}
+
+body {
+  margin: 0;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+h1 {
+  margin: 0;
+  padding-bottom: 10px;
+}
+
+.MuiFormHelperText-root {
+  height: 0;
+}
+
+::-webkit-scrollbar {
+  width: 0.7em;
+  height: 0.7em;
+}
+
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: gray;
+  border-radius: 4px;
+}
+
+@media (max-width: 400px) {
+  .MuiDivider-root,
+  .MuiListSubheader-root,
+  .MuiListItem-root,
+  .MuiBreadcrumbs-ol,
+  .MuiList-root,
+  .MuiCollapse-root {
+    max-width: 250px;
+  }
+
+  .MuiButtonBase-root {
+    padding: 5px !important;
+  }
+}

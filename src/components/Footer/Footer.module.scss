@@ -1,0 +1,48 @@
+.wrapper {
+  min-height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px;
+
+  .githubList,
+  .rsBlock {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .rsBlock {
+    align-items: center;
+  }
+
+  .link {
+    display: flex;
+    gap: 10px;
+    font-size: 14px;
+    text-decoration: none;
+    transition: all 0.3s;
+
+    &:hover {
+      color: var(--accent);
+    }
+  }
+}
+
+.wrapperDark {
+  background-color: var(--primary-dark);
+  border-top: 1px solid var(--border);
+}
+
+.wrapperLight {
+  background-color: var(--header-light);
+}
+
+.linkDark {
+  color: var(--secondary-dark);
+}
+
+.linkLight {
+  color: var(--secondary-light);
+}
