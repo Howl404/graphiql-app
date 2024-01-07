@@ -10,7 +10,7 @@ import {
 
 type InputPasswordProps<T extends FieldValues, K extends Path<T>> = {
   field: ControllerRenderProps<T, K>;
-  error: FieldError | undefined;
+  error?: FieldError;
   id: string;
   label: string;
   autocomplete: string;

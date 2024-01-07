@@ -34,16 +34,6 @@ h1 {
   height: 0;
 }
 
-button.MuiToggleButton-root {
-  color: gray;
-  border: none;
-}
-
-button.MuiToggleButton-root.Mui-selected {
-  color: var(--accent) !important;
-  border-color: var(--accent) !important;
-}
-
 ::-webkit-scrollbar {
   width: 0.7em;
   height: 0.7em;
@@ -60,7 +50,6 @@ button.MuiToggleButton-root.Mui-selected {
 
 @media (max-width: 400px) {
   .MuiDivider-root,
-  .MuiButtonBase-root,
   .MuiListSubheader-root,
   .MuiListItem-root,
   .MuiBreadcrumbs-ol,
@@ -70,7 +59,6 @@ button.MuiToggleButton-root.Mui-selected {
   }
 
   .MuiButtonBase-root {
-    height: fit-content;
     padding: 5px !important;
   }
 }

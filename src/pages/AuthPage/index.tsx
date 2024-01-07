@@ -1,10 +1,8 @@
 import { Button, Divider, TextField } from '@mui/material';
 import { useRef, useState } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { CSSTransition, SwitchTransition } from 'react-transition-group';
-
-import Paths from 'enums/paths';
 
 import { AuthFormInputs } from 'src/types';
 
@@ -12,23 +10,26 @@ import AuthService from 'services/AuthService';
 
 import useTranslation from 'hooks/useTranslation';
 
-import GoogleIcon from 'components/UI/GoogleIcon';
 import InputPassword from 'components/UI/InputPassword';
+
+import googleIcon from 'assets/google.svg';
 
 import confirmPasswordValidation from './utils/confirmPasswordValidation';
 import passwordValidation from './utils/passwordValidation';
 
 import styles from './AuthPage.module.scss';
 
-type AuthMode = 'SignIn' | 'SignUp' | 'SignOut';
+type AuthMode = 'SignIn' | 'SignUp';
 
 export default function AuthPage() {
   const translation = useTranslation();
-  const navigate = useNavigate();
+
   const initMode = useLocation().state?.mode as AuthMode | undefined;
 
   const [mode, setMode] = useState<AuthMode>(initMode ?? 'SignIn');
   const formRef = useRef<HTMLFormElement | null>(null);
+
+  const isSignIn = mode === 'SignIn';
 
   const {
     control,
@@ -52,19 +53,17 @@ export default function AuthPage() {
     email,
     password,
   }) => {
-    const response =
-      mode === 'SignIn'
-        ? await AuthService.logInWithEmailAndPassword(
-            email,
-            password,
-            translation
-          )
-        : await AuthService.registerWithEmailAndPassword(
-            email,
-            password,
-            translation
-          );
-    response && navigate(Paths.Main);
+    isSignIn
+      ? await AuthService.logInWithEmailAndPassword(
+          email,
+          password,
+          translation
+        )
+      : await AuthService.registerWithEmailAndPassword(
+          email,
+          password,
+          translation
+        );
   };
 
   return (
@@ -75,7 +74,7 @@ export default function AuthPage() {
             setMode('SignIn');
           }}
           size="large"
-          variant={mode === 'SignIn' ? 'outlined' : 'text'}
+          variant={isSignIn ? 'outlined' : 'text'}
           data-testid="mode-sign-in"
         >
           {translation(`Shared.SignIn`)}
@@ -85,7 +84,7 @@ export default function AuthPage() {
             setMode('SignUp');
           }}
           size="large"
-          variant={mode === 'SignUp' ? 'outlined' : 'text'}
+          variant={isSignIn ? 'outlined' : 'text'}
           data-testid="mode-sign-up"
         >
           {translation(`Shared.SignUp`)}
@@ -144,13 +143,11 @@ export default function AuthPage() {
                   error={errors.password}
                   id="password"
                   label={translation('AuthPage.password')}
-                  autocomplete={
-                    mode === 'SignUp' ? 'new-password' : 'current-password'
-                  }
+                  autocomplete={isSignIn ? 'current-password' : 'new-password'}
                 />
               )}
             />
-            {mode === 'SignUp' && (
+            {!isSignIn && (
               <Controller
                 name="confirmPassword"
                 control={control}
@@ -176,7 +173,10 @@ export default function AuthPage() {
             <Divider textAlign="center">
               {translation(`AuthPage.divider`)}
             </Divider>
-            <Button startIcon={<GoogleIcon />} onClick={handleGoogle}>
+            <Button
+              startIcon={<img src={googleIcon} alt="Google" />}
+              onClick={handleGoogle}
+            >
               {translation(`AuthPage.google`)}
             </Button>
           </form>

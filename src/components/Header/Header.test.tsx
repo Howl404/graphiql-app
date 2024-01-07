@@ -6,7 +6,7 @@ import LangContextProvider from 'context/LangContext';
 import AppThemeProvider from 'context/ThemeContext';
 
 import '@testing-library/jest-dom';
-import Header from '.';
+import Header from './index';
 
 describe('Header', () => {
   beforeEach(() => {

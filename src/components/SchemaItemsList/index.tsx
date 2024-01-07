@@ -38,7 +38,7 @@ export default function SchemaItemsList({
   handleFieldClick,
   disableSort,
 }: Props) {
-  const { isOpen, setIsOpen } = useOpen(true);
+  const { isOpen, handleOpen, handleClose } = useOpen(true);
   const [sortOrder, setSortOrder] = useState<'az' | 'za'>('az');
   const { isDarkTheme } = useContext(AppThemeContext);
 
@@ -85,11 +85,11 @@ export default function SchemaItemsList({
         component="div"
       >
         <ListItemButton
-          onClick={() => setIsOpen(!isOpen)}
-          classes={{ root: style.subHeader }}
+          sx={{ justifyContent: 'space-between', padding: '0 16px' }}
+          onClick={() => (isOpen ? handleClose() : handleOpen())}
         >
           <span className={style.listTitle}>{title}</span>
-          <ListItemIcon classes={{ root: style.collapseIcon }}>
+          <ListItemIcon sx={{ minWidth: '0' }}>
             {isOpen ? <ExpandLess /> : <ExpandMore />}
           </ListItemIcon>
         </ListItemButton>

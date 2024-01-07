@@ -21,8 +21,8 @@ import useTranslation from 'hooks/useTranslation';
 import ActionsPanel from 'components/ActionsPanel';
 import Editor from 'components/Editor';
 import EndpointForm from 'components/EndpointForm';
-import Dimming from 'components/UI/Dimming';
 import Loader from 'components/UI/Loader';
+import Overlay from 'components/UI/Overlay';
 
 import prettifyQuery from './utils/prettifyQuery';
 import safeJsonParse from './utils/safeJsonParse';
@@ -46,9 +46,21 @@ export default function MainPage() {
     currentEndpoint === DEFAULT_API ? DEFAULT_VARIABLES : ''
   );
 
-  const { isOpen: isVariablesOpen, setIsOpen: setIsVariablesOpen } = useOpen();
-  const { isOpen: isHeadersOpen, setIsOpen: setIsHeadersOpen } = useOpen();
-  const { isOpen: isDocsOpen, setIsOpen: setIsDocsOpen } = useOpen();
+  const {
+    isOpen: isVariablesOpen,
+    handleOpen: handleVariablesOpen,
+    handleClose: handleVariablesClose,
+  } = useOpen();
+  const {
+    isOpen: isHeadersOpen,
+    handleOpen: handleHeadersOpen,
+    handleClose: handleHeadersClose,
+  } = useOpen();
+  const {
+    isOpen: isDocsOpen,
+    handleOpen: handleDocsOpen,
+    handleClose: handleDocsClose,
+  } = useOpen();
 
   const [viewerValue, setViewerValue] = useState('');
   const [isJsonLoading, setIsJsonLoading] = useState(false);
@@ -86,10 +98,6 @@ export default function MainPage() {
       });
   };
 
-  const toggleDocs = () => {
-    setIsDocsOpen((prev) => !prev);
-  };
-
   const setPrettifiedQuery = () => {
     setQuery(prettifyQuery(query, translation));
   };
@@ -97,16 +105,16 @@ export default function MainPage() {
   return (
     <div className={styles.wrapper}>
       {isJsonLoading && (
-        <Dimming>
+        <Overlay>
           <Loader />
-        </Dimming>
+        </Overlay>
       )}
       {isDocsOpen && (
         <Suspense
           fallback={
-            <Dimming>
+            <Overlay>
               <Loader />
-            </Dimming>
+            </Overlay>
           }
         >
           <SchemaDoc api={currentEndpoint} />
@@ -130,7 +138,9 @@ export default function MainPage() {
             <ActionsPanel
               query={query}
               sendQuery={sendQuery}
-              toggleDocs={toggleDocs}
+              toggleDocs={() =>
+                isDocsOpen ? handleDocsClose() : handleDocsOpen()
+              }
               setPrettifiedQuery={setPrettifiedQuery}
             />
           </div>
@@ -148,7 +158,9 @@ export default function MainPage() {
           <div className={styles.feature}>
             <span>{translation('MainPage.headers')}</span>
             <IconButton
-              onClick={() => setIsHeadersOpen(!isHeadersOpen)}
+              onClick={() =>
+                isHeadersOpen ? handleHeadersClose() : handleHeadersOpen()
+              }
               aria-expanded={isHeadersOpen}
               aria-label="show more"
               className={styles.collapseButton}
@@ -168,7 +180,9 @@ export default function MainPage() {
           <div className={styles.feature}>
             <span>{translation('MainPage.variables')}</span>
             <IconButton
-              onClick={() => setIsVariablesOpen(!isVariablesOpen)}
+              onClick={() =>
+                isVariablesOpen ? handleVariablesClose() : handleVariablesOpen()
+              }
               aria-expanded={isVariablesOpen}
               aria-label="show more"
               className={styles.collapseButton}

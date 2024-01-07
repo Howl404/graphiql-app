@@ -10,13 +10,13 @@ describe('useOpen custom hook', () => {
     expect(result.current.isOpen).toBe(false);
 
     act(() => {
-      result.current.setIsOpen(true);
+      result.current.handleOpen();
     });
 
     expect(result.current.isOpen).toBe(true);
 
     act(() => {
-      result.current.setIsOpen(false);
+      result.current.handleClose();
     });
 
     expect(result.current.isOpen).toBe(false);

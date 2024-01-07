@@ -1,10 +1,10 @@
 import { PropsWithChildren } from 'react';
 
-import styles from './Dimming.module.scss';
+import styles from './Overlay.module.scss';
 
-export default function Dimming({ children }: PropsWithChildren) {
+export default function Overlay({ children }: PropsWithChildren) {
   return (
-    <div className={styles.dimming} data-testid="dimming">
+    <div className={styles.overlay} data-testid="overlay">
       <div className={styles.content} data-testid="content">
         {children}
       </div>

@@ -1,6 +1,6 @@
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { Divider, IconButton } from '@mui/material';
-import { useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 
 import { SchemaField, SchemaStackItem } from 'src/types';
 
@@ -26,19 +26,22 @@ export default function SchemaDoc({ api }: SchemaDocType) {
 
   const { schema, error, isLoading } = useSchema(api);
 
-  const handleFieldClick = (stackItem: SchemaStackItem) => {
-    setTypeNameStack([...typeNameStack, stackItem]);
-  };
+  const handleFieldClick = useCallback(
+    (stackItem: SchemaStackItem) => {
+      setTypeNameStack([...typeNameStack, stackItem]);
+    },
+    [typeNameStack]
+  );
 
-  const handleBackClick = () => {
+  const handleBackClick = useCallback(() => {
     setTypeNameStack(typeNameStack.slice(0, -1));
-  };
+  }, [typeNameStack]);
 
   const handleBreadcrumbClick = (i: number) => {
     setTypeNameStack(typeNameStack.slice(0, i));
   };
 
-  const renderFields = () => {
+  const renderFields = useMemo(() => {
     const {
       type: currentTypeName,
       name: currentName,
@@ -51,7 +54,7 @@ export default function SchemaDoc({ api }: SchemaDocType) {
 
     const currentType = getCurrentType(currentTypeName);
 
-    if (!currentType) return;
+    if (!currentType) return null;
 
     const items = [
       { data: currentArgs, title: translation('MainPage.arguments') },
@@ -65,6 +68,7 @@ export default function SchemaDoc({ api }: SchemaDocType) {
     return (
       <>
         <IconButton
+          sx={{ mb: '2px' }}
           size="small"
           onClick={handleBackClick}
           aria-label="back"
@@ -93,7 +97,7 @@ export default function SchemaDoc({ api }: SchemaDocType) {
             <h3>Implementations</h3>
             {currentType.possibleTypes.map(({ name }) => {
               const typeLink = getCurrentType(name);
-              if (!typeLink) return;
+              if (!typeLink) return null;
 
               return (
                 <SchemaItemsList
@@ -108,10 +112,16 @@ export default function SchemaDoc({ api }: SchemaDocType) {
         )}
       </>
     );
-  };
+  }, [
+    typeNameStack,
+    translation,
+    handleBackClick,
+    schema?.types,
+    handleFieldClick,
+  ]);
 
-  const renderRoot = () => {
-    if (!schema) return;
+  const renderRoot = useMemo(() => {
+    if (!schema) return null;
     const { queryType, mutationType, subscriptionType } = schema;
 
     const rootItems = [
@@ -131,13 +141,13 @@ export default function SchemaDoc({ api }: SchemaDocType) {
 
     return (
       <SchemaItemsList
-        title="Root types"
+        title={translation('MainPage.rootTypes')}
         data={rootItems}
         handleFieldClick={handleFieldClick}
         disableSort
       />
     );
-  };
+  }, [handleFieldClick, schema, translation]);
 
   const renderContent = () => {
     switch (true) {
@@ -146,9 +156,9 @@ export default function SchemaDoc({ api }: SchemaDocType) {
       case error || !schema:
         return <p>{translation('MainPage.unknownError')}</p>;
       case typeNameStack.length > 0:
-        return renderFields();
+        return renderFields;
       default:
-        return renderRoot();
+        return renderRoot;
     }
   };
 
@@ -159,6 +169,7 @@ export default function SchemaDoc({ api }: SchemaDocType) {
       <SchemaBreadcrumbs
         items={typeNameStack}
         handleClick={handleBreadcrumbClick}
+        translation={translation}
       />
       {renderContent()}
     </div>
