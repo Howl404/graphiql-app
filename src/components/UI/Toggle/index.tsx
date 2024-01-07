@@ -1,5 +1,6 @@
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
+import { MouseEvent } from 'react';
 
 import Languages from 'enums/languages';
 
@@ -18,10 +19,7 @@ export default function ToggleButtons({
   value,
   setValue,
 }: ToggleProps) {
-  const handleOption = (
-    event: React.MouseEvent<HTMLElement>,
-    newLang: Languages
-  ) => {
+  const handleOption = (event: MouseEvent<HTMLElement>, newLang: Languages) => {
     setValue(newLang);
   };
 

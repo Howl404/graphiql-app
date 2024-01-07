@@ -10,8 +10,9 @@ import AuthService from 'services/AuthService';
 
 import useTranslation from 'hooks/useTranslation';
 
-import GoogleIcon from 'components/UI/GoogleIcon';
 import InputPassword from 'components/UI/InputPassword';
+
+import googleIcon from 'assets/google.svg';
 
 import confirmPasswordValidation from './utils/confirmPasswordValidation';
 import passwordValidation from './utils/passwordValidation';
@@ -172,7 +173,10 @@ export default function AuthPage() {
             <Divider textAlign="center">
               {translation(`AuthPage.divider`)}
             </Divider>
-            <Button startIcon={<GoogleIcon />} onClick={handleGoogle}>
+            <Button
+              startIcon={<img src={googleIcon} alt={'Google'} />}
+              onClick={handleGoogle}
+            >
               {translation(`AuthPage.google`)}
             </Button>
           </form>
