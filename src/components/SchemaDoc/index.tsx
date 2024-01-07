@@ -51,7 +51,7 @@ export default function SchemaDoc({ api }: SchemaDocType) {
 
     const currentType = getCurrentType(currentTypeName);
 
-    if (!currentType) return;
+    if (!currentType) return null;
 
     const items = [
       { data: currentArgs, title: translation('MainPage.arguments') },
@@ -93,7 +93,7 @@ export default function SchemaDoc({ api }: SchemaDocType) {
             <h3>Implementations</h3>
             {currentType.possibleTypes.map(({ name }) => {
               const typeLink = getCurrentType(name);
-              if (!typeLink) return;
+              if (!typeLink) return null;
 
               return (
                 <SchemaItemsList
@@ -111,7 +111,7 @@ export default function SchemaDoc({ api }: SchemaDocType) {
   };
 
   const renderRoot = () => {
-    if (!schema) return;
+    if (!schema) return null;
     const { queryType, mutationType, subscriptionType } = schema;
 
     const rootItems = [
@@ -131,7 +131,7 @@ export default function SchemaDoc({ api }: SchemaDocType) {
 
     return (
       <SchemaItemsList
-        title="Root types"
+        title={translation('MainPage.rootTypes')}
         data={rootItems}
         handleFieldClick={handleFieldClick}
         disableSort
@@ -159,6 +159,7 @@ export default function SchemaDoc({ api }: SchemaDocType) {
       <SchemaBreadcrumbs
         items={typeNameStack}
         handleClick={handleBreadcrumbClick}
+        translation={translation}
       />
       {renderContent()}
     </div>

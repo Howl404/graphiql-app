@@ -8,6 +8,8 @@ import SchemaBreadcrumbs from './index';
 
 import '@testing-library/jest-dom';
 
+const mockTranslation = (str: string) => str;
+
 describe('Tests for SchemaBreadcrumbs component', () => {
   const onClick = vi.fn();
 
@@ -15,7 +17,11 @@ describe('Tests for SchemaBreadcrumbs component', () => {
     render(
       <MemoryRouter>
         <LangContextProvider>
-          <SchemaBreadcrumbs items={[]} handleClick={onClick} />
+          <SchemaBreadcrumbs
+            items={[]}
+            handleClick={onClick}
+            translation={mockTranslation}
+          />
         </LangContextProvider>
       </MemoryRouter>
     );
@@ -23,7 +29,7 @@ describe('Tests for SchemaBreadcrumbs component', () => {
     const breadcrumbs = screen.getAllByRole('button');
 
     expect(breadcrumbs.length).toBe(1);
-    expect(breadcrumbs[0]).toHaveTextContent('Root');
+    expect(breadcrumbs[0]).toHaveTextContent('MainPage.root');
     expect(breadcrumbs[0]).toBeDisabled();
   });
 
@@ -44,7 +50,11 @@ describe('Tests for SchemaBreadcrumbs component', () => {
     render(
       <MemoryRouter>
         <LangContextProvider>
-          <SchemaBreadcrumbs items={items} handleClick={onClick} />
+          <SchemaBreadcrumbs
+            items={items}
+            handleClick={onClick}
+            translation={mockTranslation}
+          />
         </LangContextProvider>
       </MemoryRouter>
     );
@@ -72,7 +82,11 @@ describe('Tests for SchemaBreadcrumbs component', () => {
     render(
       <MemoryRouter>
         <LangContextProvider>
-          <SchemaBreadcrumbs items={items} handleClick={onClick} />
+          <SchemaBreadcrumbs
+            items={items}
+            handleClick={onClick}
+            translation={mockTranslation}
+          />
         </LangContextProvider>
       </MemoryRouter>
     );

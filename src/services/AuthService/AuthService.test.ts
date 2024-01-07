@@ -9,6 +9,7 @@ import { addDoc, collection, getDocs, query } from 'firebase/firestore';
 import { describe, expect, it, Mock, vi } from 'vitest';
 
 import AuthService from 'services/AuthService';
+import authErrorHandler from 'services/AuthService/authErrorHandler.ts';
 
 vi.mock('firebase/auth', () => ({
   signInWithEmailAndPassword: vi.fn(),
@@ -33,8 +34,8 @@ vi.mock('src/firebase', () => ({
   db: 'Database object',
 }));
 
-vi.mock('services/authErrorHandler', () => ({
-  authErrorHandler: vi.fn(),
+vi.mock('services/AuthService/authErrorHandler', () => ({
+  default: vi.fn(),
 }));
 
 const mockTranslation = (str: string) => str;
@@ -96,7 +97,7 @@ describe('Auth Service methods successful requests returns true', () => {
 });
 
 describe('If something go wrong, Auth Service methods calls authErrorHandler', () => {
-  it('Should return false and call authErrorHandler after unsuccessful sign in with Google', async () => {
+  it('Should call authErrorHandler after unsuccessful sign in with Google', async () => {
     vi.mocked(GoogleAuthProvider).mockImplementation(
       () => ({}) as GoogleAuthProvider
     );
@@ -110,35 +111,38 @@ describe('If something go wrong, Auth Service methods calls authErrorHandler', (
     vi.mocked(addDoc as Mock).mockResolvedValue({});
     vi.mocked(collection as Mock).mockReturnValue({});
 
-    const result = await AuthService.signInWithGoogle(mockTranslation);
-    expect(result).toBe(false);
+    await AuthService.signInWithGoogle(mockTranslation);
+
+    expect(authErrorHandler).toHaveBeenCalled();
   });
 
-  it('Should return false and call authErrorHandler after unsuccessful log in', async () => {
+  it('Should call authErrorHandler after unsuccessful log in', async () => {
     vi.mocked(createUserWithEmailAndPassword as Mock).mockImplementationOnce(
       () => {
         throw new Error('Test error');
       }
     );
 
-    const result = await AuthService.registerWithEmailAndPassword(
+    await AuthService.registerWithEmailAndPassword(
       'test@example.com',
       'password123',
       mockTranslation
     );
-    expect(result).toBe(false);
+
+    expect(authErrorHandler).toHaveBeenCalled();
   });
 
-  it('Should return false and call authErrorHandler after unsuccessful log in', async () => {
+  it('Should call authErrorHandler after unsuccessful log in', async () => {
     vi.mocked(signInWithEmailAndPassword as Mock).mockImplementationOnce(() => {
       throw new Error('Test error');
     });
 
-    const result = await AuthService.logInWithEmailAndPassword(
+    await AuthService.logInWithEmailAndPassword(
       'test@example.com',
       'password123',
       mockTranslation
     );
-    expect(result).toBe(false);
+
+    expect(authErrorHandler).toHaveBeenCalled();
   });
 });

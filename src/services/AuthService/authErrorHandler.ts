@@ -21,9 +21,8 @@ export default function authErrorHandler(
         : error.code,
       'error'
     );
-  } else {
-    displayNotification(translation('AuthPage.auth/unknown'), 'error');
+    return;
   }
 
-  return false;
+  displayNotification(translation('AuthPage.auth/unknown'), 'error');
 }

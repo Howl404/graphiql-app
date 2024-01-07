@@ -3,14 +3,21 @@ import { Breadcrumbs, Button } from '@mui/material';
 
 import { SchemaStackItem } from 'src/types';
 
+import { TranslationKeys } from 'hooks/useTranslation.ts';
+
 import style from './style.module.scss';
 
 type Props = {
   items: SchemaStackItem[];
   handleClick: (i: number) => void;
+  translation: (key: TranslationKeys) => string;
 };
 
-export default function SchemaBreadcrumbs({ items, handleClick }: Props) {
+export default function SchemaBreadcrumbs({
+  items,
+  handleClick,
+  translation,
+}: Props) {
   return (
     <Breadcrumbs
       aria-label="breadcrumb"
@@ -27,7 +34,7 @@ export default function SchemaBreadcrumbs({ items, handleClick }: Props) {
         disabled={!items.length}
         classes={{ root: style.breadcrumbBtn }}
       >
-        Root
+        {translation('MainPage.root')}
       </Button>
       {items.map(({ type, name }, i) => (
         <Button

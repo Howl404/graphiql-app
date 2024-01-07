@@ -6,7 +6,7 @@ export default function getBrowserTheme() {
     window.matchMedia('(prefers-color-scheme:dark)').matches
   ) {
     return Themes.Dark;
-  } else {
-    return Themes.Light;
   }
+
+  return Themes.Light;
 }

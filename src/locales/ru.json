@@ -16,6 +16,8 @@
   "MainPage.documentation": "Документация",
   "MainPage.prettifyQuery": "Форматировать запрос",
   "MainPage.copyQuery": "Скопировать запрос",
+  "MainPage.root": "Корень",
+  "MainPage.rootTypes": "Корневые типы",
   "MainPage.arguments": "Аргументы",
   "MainPage.fields": "Поля",
   "MainPage.inputFields": "Входные поля",

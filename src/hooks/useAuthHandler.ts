@@ -13,7 +13,10 @@ export default function useAuthHandler() {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         setWasAuthenticated(true);
-      } else if (wasAuthenticated) {
+        return;
+      }
+
+      if (wasAuthenticated) {
         navigate(Paths.Welcome);
       }
     });

@@ -22,18 +22,14 @@ const AppThemeProvider = ({ children }: PropsWithChildren) => {
     Themes.Dark;
   const [themeType, setThemeType] = useState<Themes>(initialTheme);
 
+  const isDarkTheme = themeType === Themes.Dark;
+
   const toggleTheme = () => {
-    setThemeType((prevTheme) =>
-      prevTheme === Themes.Light ? Themes.Dark : Themes.Light
-    );
-    localStorage.setItem(
-      'theme',
-      themeType === Themes.Light ? Themes.Dark : Themes.Light
-    );
+    setThemeType(() => (isDarkTheme ? Themes.Light : Themes.Dark));
+    localStorage.setItem('theme', isDarkTheme ? Themes.Light : Themes.Dark);
   };
 
-  const theme = createTheme(themeType === Themes.Dark ? darkTheme : lightTheme);
-  const isDarkTheme = themeType === Themes.Dark;
+  const theme = createTheme(isDarkTheme ? darkTheme : lightTheme);
 
   return (
     <AppThemeContext.Provider value={{ themeType, toggleTheme, isDarkTheme }}>
