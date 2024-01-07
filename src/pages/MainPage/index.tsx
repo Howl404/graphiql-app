@@ -21,8 +21,8 @@ import useTranslation from 'hooks/useTranslation';
 import ActionsPanel from 'components/ActionsPanel';
 import Editor from 'components/Editor';
 import EndpointForm from 'components/EndpointForm';
-import Dimming from 'components/UI/Dimming';
 import Loader from 'components/UI/Loader';
+import Overlay from 'components/UI/Overlay';
 
 import prettifyQuery from './utils/prettifyQuery';
 import safeJsonParse from './utils/safeJsonParse';
@@ -105,16 +105,16 @@ export default function MainPage() {
   return (
     <div className={styles.wrapper}>
       {isJsonLoading && (
-        <Dimming>
+        <Overlay>
           <Loader />
-        </Dimming>
+        </Overlay>
       )}
       {isDocsOpen && (
         <Suspense
           fallback={
-            <Dimming>
+            <Overlay>
               <Loader />
-            </Dimming>
+            </Overlay>
           }
         >
           <SchemaDoc api={currentEndpoint} />

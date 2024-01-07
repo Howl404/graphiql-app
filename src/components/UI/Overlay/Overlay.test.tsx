@@ -4,21 +4,21 @@ import { describe, expect, it } from 'vitest';
 import '@testing-library/jest-dom';
 import Loader from 'components/UI/Loader';
 
-import Dimming from './index';
+import Overlay from './index';
 
-describe('Dimming', () => {
-  it('should contain dimming and inner content', () => {
+describe('Overlay', () => {
+  it('should contain overlay and inner content', () => {
     render(
-      <Dimming>
+      <Overlay>
         <Loader />
-      </Dimming>
+      </Overlay>
     );
 
-    const dimming = screen.getByTestId('dimming');
+    const overlay = screen.getByTestId('overlay');
     const contentElement = screen.getByTestId('content');
     const loader = screen.getByTestId('loader');
 
-    expect(dimming).toBeInTheDocument();
+    expect(overlay).toBeInTheDocument();
     expect(contentElement).toBeInTheDocument();
     expect(loader).toBeInTheDocument();
   });

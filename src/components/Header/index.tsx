@@ -4,14 +4,12 @@ import AppBar from '@mui/material/AppBar';
 import CssBaseline from '@mui/material/CssBaseline';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import useScrollTrigger from '@mui/material/useScrollTrigger';
-import { cloneElement, ReactElement, useContext } from 'react';
+import { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { auth } from 'src/firebase';
 
 import Languages from 'enums/languages';
 import Paths from 'enums/paths';
-import Themes from 'enums/themes';
 
 import { LangContext } from 'context/LangContext';
 import { AppThemeContext } from 'context/ThemeContext';
@@ -24,41 +22,8 @@ import ToggleButtons from 'components/UI/Toggle';
 
 import logo from 'assets/graphql-icon.svg';
 
+import ElevationScroll from './ElevationScroll';
 import styles from './Header.module.scss';
-
-type PropsType = {
-  children: ReactElement;
-  theme: Themes;
-};
-
-function ElevationScroll({ children, theme }: PropsType) {
-  const trigger = useScrollTrigger({
-    disableHysteresis: true,
-    threshold: 0,
-  });
-
-  return cloneElement(children, {
-    sx: trigger
-      ? {
-          bgcolor:
-            theme === Themes.Dark
-              ? 'var(--primary-dark)'
-              : 'var(--secondary-dark)',
-          borderBottom:
-            theme === Themes.Dark ? 'none' : '1px solid var(--header-light)',
-          transitionDuration: '500ms',
-          transitionProperty: 'padding-top, padding-bottom, background-color',
-          transitionTimingFunction: 'ease-in-out',
-        }
-      : {
-          pt: 1.1,
-          pb: 1.1,
-          bgcolor:
-            theme === Themes.Dark ? 'var(--header)' : 'var(--header-light)',
-        },
-    elevation: trigger ? 4 : 0,
-  });
-}
 
 export default function Header() {
   const navigate = useNavigate();
@@ -71,9 +36,8 @@ export default function Header() {
   function handleAuthClick() {
     if (isAuth) {
       AuthService.signOutUser();
-    } else {
-      navigate(Paths.Auth);
     }
+    navigate(Paths.Auth);
   }
 
   return (
