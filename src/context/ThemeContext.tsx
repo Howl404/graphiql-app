@@ -25,7 +25,7 @@ const AppThemeProvider = ({ children }: PropsWithChildren) => {
   const isDarkTheme = themeType === Themes.Dark;
 
   const toggleTheme = () => {
-    setThemeType(() => (isDarkTheme ? Themes.Light : Themes.Dark));
+    setThemeType(isDarkTheme ? Themes.Light : Themes.Dark);
     localStorage.setItem('theme', isDarkTheme ? Themes.Light : Themes.Dark);
   };
 
