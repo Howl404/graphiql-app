@@ -13,6 +13,15 @@ type Props = {
   translation: (key: TranslationKeys) => string;
 };
 
+const btnStyle = {
+  textTransform: 'none',
+  minWidth: 'fit-content',
+  padding: 0,
+  '&:disabled': {
+    color: 'var(--accent)',
+  },
+};
+
 export default function SchemaBreadcrumbs({
   items,
   handleClick,
@@ -20,29 +29,29 @@ export default function SchemaBreadcrumbs({
 }: Props) {
   return (
     <Breadcrumbs
+      sx={{ margin: '12px 0' }}
       aria-label="breadcrumb"
       classes={{
-        root: style.breadcrumbs,
         separator: style.separator,
       }}
       separator={<ChevronRight fontSize="small" />}
     >
       <Button
+        sx={btnStyle}
         variant="text"
         size="small"
         onClick={() => handleClick(0)}
         disabled={!items.length}
-        classes={{ root: style.breadcrumbBtn }}
       >
         {translation('MainPage.root')}
       </Button>
       {items.map(({ type, name }, i) => (
         <Button
+          sx={btnStyle}
           variant="text"
           key={type}
           onClick={() => handleClick(i + 1)}
           disabled={i + 1 === items.length}
-          classes={{ root: style.breadcrumbBtn }}
         >
           {name ?? type}{' '}
         </Button>

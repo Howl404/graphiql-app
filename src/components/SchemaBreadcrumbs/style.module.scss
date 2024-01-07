@@ -1,17 +1,3 @@
 .separator {
   margin: 0;
 }
-
-.breadcrumbs {
-  margin-bottom: 16px !important;
-}
-
-.breadcrumbBtn {
-  text-transform: none !important;
-  min-width: fit-content !important;
-  padding: 0 !important;
-
-  &:disabled {
-    color: var(--accent) !important;
-  }
-}

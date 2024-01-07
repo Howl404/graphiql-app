@@ -68,6 +68,7 @@ export default function SchemaDoc({ api }: SchemaDocType) {
     return (
       <>
         <IconButton
+          sx={{ mb: '2px' }}
           size="small"
           onClick={handleBackClick}
           aria-label="back"
