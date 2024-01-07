@@ -1,6 +1,6 @@
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { Divider, IconButton } from '@mui/material';
-import { useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 
 import { SchemaField, SchemaStackItem } from 'src/types';
 
@@ -26,19 +26,22 @@ export default function SchemaDoc({ api }: SchemaDocType) {
 
   const { schema, error, isLoading } = useSchema(api);
 
-  const handleFieldClick = (stackItem: SchemaStackItem) => {
-    setTypeNameStack([...typeNameStack, stackItem]);
-  };
+  const handleFieldClick = useCallback(
+    (stackItem: SchemaStackItem) => {
+      setTypeNameStack([...typeNameStack, stackItem]);
+    },
+    [typeNameStack]
+  );
 
-  const handleBackClick = () => {
+  const handleBackClick = useCallback(() => {
     setTypeNameStack(typeNameStack.slice(0, -1));
-  };
+  }, [typeNameStack]);
 
   const handleBreadcrumbClick = (i: number) => {
     setTypeNameStack(typeNameStack.slice(0, i));
   };
 
-  const renderFields = () => {
+  const renderFields = useMemo(() => {
     const {
       type: currentTypeName,
       name: currentName,
@@ -108,9 +111,15 @@ export default function SchemaDoc({ api }: SchemaDocType) {
         )}
       </>
     );
-  };
+  }, [
+    typeNameStack,
+    translation,
+    handleBackClick,
+    schema?.types,
+    handleFieldClick,
+  ]);
 
-  const renderRoot = () => {
+  const renderRoot = useMemo(() => {
     if (!schema) return null;
     const { queryType, mutationType, subscriptionType } = schema;
 
@@ -137,7 +146,7 @@ export default function SchemaDoc({ api }: SchemaDocType) {
         disableSort
       />
     );
-  };
+  }, [handleFieldClick, schema, translation]);
 
   const renderContent = () => {
     switch (true) {
@@ -146,9 +155,9 @@ export default function SchemaDoc({ api }: SchemaDocType) {
       case error || !schema:
         return <p>{translation('MainPage.unknownError')}</p>;
       case typeNameStack.length > 0:
-        return renderFields();
+        return renderFields;
       default:
-        return renderRoot();
+        return renderRoot;
     }
   };
 
