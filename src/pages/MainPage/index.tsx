@@ -46,9 +46,21 @@ export default function MainPage() {
     currentEndpoint === DEFAULT_API ? DEFAULT_VARIABLES : ''
   );
 
-  const { isOpen: isVariablesOpen, setIsOpen: setIsVariablesOpen } = useOpen();
-  const { isOpen: isHeadersOpen, setIsOpen: setIsHeadersOpen } = useOpen();
-  const { isOpen: isDocsOpen, setIsOpen: setIsDocsOpen } = useOpen();
+  const {
+    isOpen: isVariablesOpen,
+    handleOpen: handleVariablesOpen,
+    handleClose: handleVariablesClose,
+  } = useOpen();
+  const {
+    isOpen: isHeadersOpen,
+    handleOpen: handleHeadersOpen,
+    handleClose: handleHeadersClose,
+  } = useOpen();
+  const {
+    isOpen: isDocsOpen,
+    handleOpen: handleDocsOpen,
+    handleClose: handleDocsClose,
+  } = useOpen();
 
   const [viewerValue, setViewerValue] = useState('');
   const [isJsonLoading, setIsJsonLoading] = useState(false);
@@ -84,10 +96,6 @@ export default function MainPage() {
       .finally(() => {
         setIsJsonLoading(false);
       });
-  };
-
-  const toggleDocs = () => {
-    setIsDocsOpen((prev) => !prev);
   };
 
   const setPrettifiedQuery = () => {
@@ -130,7 +138,9 @@ export default function MainPage() {
             <ActionsPanel
               query={query}
               sendQuery={sendQuery}
-              toggleDocs={toggleDocs}
+              toggleDocs={() =>
+                isDocsOpen ? handleDocsClose() : handleDocsOpen()
+              }
               setPrettifiedQuery={setPrettifiedQuery}
             />
           </div>
@@ -148,7 +158,9 @@ export default function MainPage() {
           <div className={styles.feature}>
             <span>{translation('MainPage.headers')}</span>
             <IconButton
-              onClick={() => setIsHeadersOpen(!isHeadersOpen)}
+              onClick={() =>
+                isHeadersOpen ? handleHeadersClose() : handleHeadersOpen()
+              }
               aria-expanded={isHeadersOpen}
               aria-label="show more"
               className={styles.collapseButton}
@@ -168,7 +180,9 @@ export default function MainPage() {
           <div className={styles.feature}>
             <span>{translation('MainPage.variables')}</span>
             <IconButton
-              onClick={() => setIsVariablesOpen(!isVariablesOpen)}
+              onClick={() =>
+                isVariablesOpen ? handleVariablesClose() : handleVariablesOpen()
+              }
               aria-expanded={isVariablesOpen}
               aria-label="show more"
               className={styles.collapseButton}

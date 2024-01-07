@@ -23,7 +23,7 @@ export default function Routes() {
       {
         path: Paths.Main,
         element: (
-          <ConditionalRoute requireAuth={true} redirectTo={Paths.Auth}>
+          <ConditionalRoute requireAuth redirectTo={Paths.Auth}>
             <MainPage />
           </ConditionalRoute>
         ),

@@ -17,7 +17,7 @@ describe('ConditionalRoute', () => {
     act(() => {
       render(
         <BrowserRouter>
-          <ConditionalRoute requireAuth={true} redirectTo={Paths.Auth}>
+          <ConditionalRoute requireAuth redirectTo={Paths.Auth}>
             <h1>Editor</h1>
           </ConditionalRoute>
         </BrowserRouter>
@@ -62,7 +62,7 @@ describe('ConditionalRoute', () => {
 
     render(
       <BrowserRouter>
-        <ConditionalRoute requireAuth={true} redirectTo={Paths.Main}>
+        <ConditionalRoute requireAuth redirectTo={Paths.Main}>
           <h1>Test</h1>
         </ConditionalRoute>
       </BrowserRouter>
